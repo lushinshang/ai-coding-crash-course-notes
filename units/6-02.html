@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>設定你的 issue tracker － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-6.html">← 回第6章 把功能出貨</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/6-02-hero-portrait.png">
+      <img src="../assets/images/6-02-hero-landscape.png" alt="設定你的 issue tracker 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第6章 把功能出貨 · 6-02</div>
+      <h1>設定你的 issue tracker</h1>
+      <blockquote class="summary">把 spec 和 ticket 都搬出本機、放進 GitHub issue，讓人和 agent 共用同一份任務清單。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">1,200</div><div class="label">已關閉的 issue 數</div></div>
+      <div class="statcard"><div class="num">28</div><div class="label">仍開著的 issue 數</div></div>
+    </div>
+    <article class="body">
+      <p>這堂課回答一個很實際的問題：spec 和 ticket 這些文件到底該放哪裡。Matt 的答案很明確——不要放在 repo 裡的本機檔案，而是放進 repo 外部的 issue tracker。<strong>理由也很直白：issue tracker 本來就是團隊之間協調工作用的東西，而 agent 現在可以透過 CLI 直接讀寫同一份 issue，等於把 AI 也變成團隊裡能收派工單的一員。</strong>他自己的主力 repo 就是這樣運作的，1200 個 issue 關閉、只剩 28 個開著，可見這套機制他是真的每天在用來排程自己的工作，不是課程裡臨時包裝出來的示範流程。</p>
+      <p>課程選 GitHub 純粹是因為好裝、免費、多數人本來就有帳號，但他也講得很清楚，這一整套概念換成 Jira、Linear、Todoist 都成立，<strong>重點是「issue tracker 是 agent 和人共用的介面」這個原則，不是綁死在特定工具上。</strong>要跟 agent 溝通，本機端要先裝好 GitHub CLI，這是 agent 從你的機器連到 GitHub 抓 issue 的橋樑。</p>
+      <p>操作上他要你先 fork 他的課程 repo（用 `npx ai-hero-cli fork`），原因也很實在：如果大家都在同一個 repo 開 issue，那彼此的測試 issue 會全部混在一起，變成一場災難。fork 出自己的私有 repo 之後，再用 `npm run reset` 拉一個叫「set up MacPoco skills」的 skill 進來，跑起來後它會探索 repo 現況，問你要用哪個 issue tracker，選 GitHub 之後，它會在 `agents.md` 裡加一個導航指標，告訴 agent「issue 和 PRD 都在 GitHub issue 裡，用 GitHub CLI 管理」。這個小小的設定動作，就是接下來整章工作流程能運作的地基——沒有這一步，spec 和 ticket 就無處安放。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-6.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
