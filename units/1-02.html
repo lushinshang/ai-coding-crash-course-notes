@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>選方案與選模型 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-1.html">← 回第1章 開課前準備</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/1-02-hero-portrait.png">
+      <img src="../assets/images/1-02-hero-landscape.png" alt="選方案與選模型 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第1章 開課前準備 · 1-02</div>
+      <h1>選方案與選模型</h1>
+      <blockquote class="summary">免費方案撐不過第一次認真的 agentic session，訂閱制比 API 計費便宜二十到五十倍。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">US$3,400</div><div class="label">Theo 實付訂閱費</div></div>
+      <div class="statcard"><div class="num">US$50,000</div><div class="label">換到的 token 算力</div></div>
+      <div class="statcard"><div class="num">20~50倍</div><div class="label">訂閱制比按量計費划算</div></div>
+    </div>
+    <article class="body">
+      <p>有個開發者這個月的 token 帳單，如果照牌價算，會逼近五萬美元。但他實際付出去的錢，只有三千四百美元——三千兩百美元的 Claude 訂閱，加兩百美元的 Codex 訂閱。同一份工作量，中間這個十幾倍的落差，不是誰算錯了，是<strong>訂閱制跟按量計費之間結構性的差距，划算程度可以到二十到五十倍</strong>，差距大小取決於你訂的檔次、以及你有沒有本事把額度用滿。</p>
+      <p>先把醜話說在前頭：免費方案完成不了這門課。這不是行銷話術，是能被驗證的事實——主要模型供應商的免費額度，設計出發點從來不是給這種吃 token 吃得很兇的 agentic 工作用的，你會在第一次認真跑一個 session 時就直接撞牆。這句話放在整門課第二堂就講，用意很明顯：與其讓你上到一半才發現額度燒光、體驗被硬生生打斷，不如現在就把期望值校正好。</p>
+      <p>具體該選哪一檔，答案其實不複雜。Anthropic 這邊，Pro 是起跳點，剛好夠應付課程需求；如果要專業使用，往上跳到 Max，Max 又分 5X 和 20X 兩檔——這門課錄製時用的是 20X，但坦白講，真正需要的頂多是 5X。OpenAI 那邊架構長得幾乎一樣，Plus 對應 Pro 的定位，額度不夠用了再往 Pro 升。這種近乎對稱的分層設計不是巧合，各家訂閱制邏輯本來就大同小異，一旦看懂一家，其他家不用重新學一次。</p>
+      <p>真正值得停下來想的，是訂閱制跟按量計費之間那個差距背後的心理機制。按量付費會製造一種很像家裡裝了電表的感覺——你會下意識地不想多用，這種心態一旦滲進工作方式，人會開始做出偏離理性的選擇：明明這個任務該上最強的模型，卻為了把數字壓低，硬是切成便宜模型將就，結果賠掉的是輸出品質，省下的只是幾塊錢。訂閱制把這個心理負擔整個拿掉，因為費用一開始就是固定的、上限是已知的，你才有餘裕把注意力放在「怎麼把這件事做好」而不是「這次又花了多少」。</p>
+      <p>所以最後的建議很直接：如果對用哪個 harness沒有特別偏好，Claude Code 配 Pro 是一個安全的起點；真的想走專業路線，就直接上 Max。而且不管哪一檔，都建議用訂閱方案內建的預設模型就好——如果你用的是入門檔次，卻硬要跑最頂級的模型，額度會被榨乾得特別快，這種組合注定撐不了多久。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-1.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
