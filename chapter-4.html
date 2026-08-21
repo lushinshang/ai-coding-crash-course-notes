@@ -241,16 +241,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">4-02</span>
           <span class="head-text">
             <span class="title">砍掉 context 肥肉</span>
-            <div class="summary">打開 request logger 逐項檢查 system prompt、工具定義與 MCP，親眼看清楚哪裡在浪費 token。</div>
+            <div class="summary">打開 request logger 逐項檢查 system prompt、工具定義與 MCP,親眼看清楚哪裡在浪費 token。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>上一堂只是讓你看到「總數」少了 17K，這一堂要你自己動手去挖，那 17K（或者你自己環境裡對應的數字）到底藏在哪裡。工具是這門課一直在用的 request logger：跑 `npm run request-logger`，另開一個終端機接上 Claude，清掉舊 log，隨便打一句 hello，然後回頭看實際送給模型供應商的完整 payload——這是最誠實的視角，因為它就是 model 真正看到的東西，不是 harness 呈現給你看的簡化版。</p>
-        <p>Matt 給的檢查清單很具體：先找 `&lt;system_prompt&gt;` 這個 XML tag，重點看 environment 段落、context management 段落，用 Claude Code 的話還會看到最近幾筆 commit 訊息；接著看每個工具的定義，注意有些工具（比如 artifact tool）帶的說明文字大到誇張，甚至內建了「怎麼寫 commit message」「怎麼編輯 PR body」這種和當下任務完全無關的指示；最後找所有帶 `mcp__` 前綴的東西，這代表每次請求都會夾帶哪些 MCP 工具定義。</p>
-        <p>這堂課的核心態度是「噁心感」——看完這些之後你應該對那些不相關的 context 感到反感，或者反過來慶幸自己的 harness沒有塞這麼多。這其實是在訓練一種新的閱讀能力：以後看到自己或別人的 agent 設定，能一眼判斷「這東西不應該在這裡」。</p>
-        <p>這堂課本身留白讓學員自己探索，解答會在下一集揭曉具體怎麼關掉這些 bloat。它跟 4-01 的關係很清楚：4-01 讓你看到問題的規模，4-02 教你看懂問題的成因，兩堂合起來才構成「context 減肥」的完整動作——先量體重，再照 X 光找出脂肪長在哪裡。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-02.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
