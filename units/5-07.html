@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>剪枝 pruning － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-07-hero-portrait.png">
+      <img src="../assets/images/5-07-hero-landscape.png" alt="剪枝 pruning 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 · 5-07</div>
+      <h1>剪枝 pruning</h1>
+      <blockquote class="summary">三個檢驗工具（重複、沉積物、no-op）教你如何定期修剪只會愈長愈大的 steering 檔案。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">3</div><div class="label">剪枝稽核清單的檢驗項目數(重複、沉積物、no-op)</div></div>
+    </div>
+    <article class="body">
+      <p>這集處理一個幾乎每個團隊共用的 agents.md 都會踩到的問題：這種檔案「只會長大，幾乎不會變小」。<strong>Matt 解釋這背後是心理因素而非技術因素——加一條規則感覺很便宜也很安全，尤其是在一份大家共同編輯的團隊檔案裡；但刪掉一條規則卻讓人有種「我在否定這條規則的價值、在別人的貢獻上踩一腳」的感覺。</strong>結果就是檔案從五行長到五百行、五千行，他直接斷言：幾乎所有他在真實世界看過的 agents.md 都太大太大太大了。</p>
+      <p>針對這個問題，他給出一套具體的三件式剪枝工具。第一是單一事實來源（single source of truth）：任何 agent 需要知道的事實，應該只活在一個權威的地方。<strong>重複會造成三種成本——維護成本（改動要改好幾處）、context load（更多 token 講同一件事）、以及最隱蔽的一種：重複的資訊會因為出現次數多而被 agent 賦予不成比例的高權重,反而把真正重要但只出現一次的資訊給淹沒。</strong>第二是沉積物（sediment）,這本質上是心理問題的具體化：因為「加比刪安全」的心態，規則一層層堆積,曾經正確、或曾經在某個情境下正確、但現在已經不適用或不是普遍適用的規則,會一直躺在檔案裡持續消耗 context load,讓整份 agents.md 對越來越多工變得不相關——這正是 5-01 提過的信用卡巧克力蛋糕問題的根源。第三、也是他認為最陰險、最容易加進去卻最難被發現該刪掉的：no-op,也就是那些實際上什麼都沒改變輸出的指令。他舉的例子很實際：如果你的 implement skill 裡寫著「寫詳細的 commit message」,這條指令真的有必要嗎？刪掉它,模型會不會照樣寫出好的 commit message？多半會——那就是在為一個模型本來就會做的事情付 context load 的錢。<strong>檢驗 no-op 的方法很簡單：刪掉它，看行為有沒有變,沒變就說明它本來就是廢話。</strong></p>
+      <p>這三個檢驗（重複、沉積物、no-op）構成一套可以套用在任何 steering 檔案上的稽核清單,任何過不了這三關的內容,就是在白白吃掉 context load 卻沒有任何產出,應該被剪掉。這集是純方法論講解，緊接著下一集就會真槍實彈地拿一份 agent 自動生成的巨型 agents.md 來實測這套工具。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-5.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
