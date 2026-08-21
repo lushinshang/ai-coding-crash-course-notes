@@ -241,15 +241,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">3-02</span>
           <span class="head-text">
             <span class="title">管理 Claude Code session</span>
-            <div class="summary">從啟動、terminal setup 到 /usage、/context、/clear,建立 session 生命週期的基本操作感。</div>
+            <div class="summary">/usage、/context、/clear 三個指令,決定你什麼時候會沒額度可用、什麼時候該重新開始。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 從最土法煉鋼的地方開始:在 VS Code 的整合終端機裡直接打 `claude` 啟動。第一件要求觀眾做的事,是輸入 `/terminal-setup` 並按 enter——這一步在設定 shift+enter 這個關鍵按鍵組合,少了它,你之後打多行 prompt 時會遇到怪異的鍵位行為。他特別提醒,這個指令執行完成後會變成紫色(lilac),沒變色就代表沒設定成功,這個視覺回饋看似瑣碎,但確實是課程裡少數會讓新手卡關很久的地方。</p>
-        <p>接著是這堂課真正的重點:三個管理 session 的指令。`/usage` 顯示的是目前這個 session、本週,甚至(如果你有訂閱 Fable 方案)本週搭配 Fable 的額度用量——Matt 提到他自己開的是 20x max,但課程只建議用 5x max 甚至 pro 方案就夠用,這裡其實也是在暗示:額度不是越高越好,夠用就好。`/context` 則是拿來看目前 context window 裡裝了什麼——system prompt、系統工具、skills、以及這次對話累積的訊息各佔多少 token,還會告訴你目前模型的總 context window 上限(例如 Opus 4.5 是一百萬 token)。這個指令的價值不在於現在你懂多少,而在於它是後面章節「管理 context」的除錯工具,先認識它,後面談 context 工程時才有畫面可以對照。</p>
-        <p>最後是清空與中斷。`/clear` 會把整個對話歷史砍掉重來,Matt 示範清空前後用 `/context` 對照,清空後 context 只剩 137 個 token(基本上是系統提示的底噪),這是在具象化「模型是無狀態的」這個概念——每次對話都要重新把上下文喂進去,清空就是把這份記憶砍成一張白紙。另一種清空方式是連按兩次 Ctrl+C 直接離開再重開一個全新 session。至於中斷正在跑的任務,按一次 Escape 就能打斷 Claude 手上的工作,並在對話裡插入一句「interrupted, what should Claude do instead」讓你接著下指示——Matt 老實承認自己常常不小心誤觸,這也算是給觀眾打預防針:按錯不用慌,繼續講下去就好。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/3-02.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理 Claude Code session － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-3.html">← 回第3章 認識 Claude Code</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/3-02-hero-portrait.png">
+      <img src="../assets/images/3-02-hero-landscape.png" alt="管理 Claude Code session 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第3章 認識 Claude Code · 3-02</div>
+      <h1>管理 Claude Code session</h1>
+      <blockquote class="summary">/usage、/context、/clear 三個指令,決定你什麼時候會沒額度可用、什麼時候該重新開始。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">9K → 6.6K</div><div class="label">/clear 前後的 context token 用量</div></div>
+      <div class="statcard"><div class="num">137</div><div class="label">/clear 後訊息 token 數,基本上是空的</div></div>
+      <div class="statcard"><div class="num">5x</div><div class="label">課程建議額度方案(示範時開的是 20x)</div></div>
+    </div>
+    <article class="body">
+      <p>啟動 Claude Code 之後,第一件該做的事不是打字下指令,而是輸入 `/terminal-setup` 並按 enter。這一步在設定 shift+enter 這個按鍵組合,少了它,之後想打多行 prompt 就會遇到莫名其妙的換行錯亂。<strong>執行完成後輸入框會變成一種淡紫色(lilac),沒變色就代表沒設定成功</strong>——這是個小細節,但確實是新手最容易卡關、卻最不會想到回頭檢查的地方。</p>
+      <p>接下來三個指令,決定了你能不能撐過一整個工作階段而不出狀況。`/usage` 顯示的是這個 session、本週、甚至搭配訂閱方案的額度剩餘量;它的價值不是「現在看一眼」,而是提醒你額度是會見底的——見底之前用完,見底之後就得等重置。這裡藏著一個容易被忽略的判斷:<strong>額度等級不是開越高越好,夠用就好</strong>,課程建議的方案比示範用的低了整整四級,多數時候根本用不到那麼高的上限。`/context` 則是拆解目前對話裡裝了什麼——system prompt、系統工具、skills、以及這輪對話累積的訊息,各自佔了多少 token,同時告訴你目前模型的 context window 總上限有多大。這個指令現在看起來像個花俏的儀表板,但後面談 context 管理的章節,幾乎每一招省 token 的技巧都要靠它才能驗證有沒有生效。</p>
+      <p>最後是清空與中斷,這兩件事處理的是完全不同的問題。`/clear` 把整段對話歷史砍掉重來——清空前 context 裡累積了將近 9K token,清空後只剩 137 個訊息 token、整體落回 6.6K 的底噪,這個數字對照具體示範了一件事:<strong>模型本身是無狀態的,所謂的「記憶」全部裝在這個會被清空的 context 裡,砍掉就是砍掉,沒有任何東西被悄悄留下</strong>。另一種清空方式是連按兩次 Ctrl+C 直接離開再重開一個全新 session,效果相同。至於中斷正在執行的任務,按一次 Escape 就能打斷,對話裡會自動插入一句「interrupted, what should Claude do instead」讓你接著下指示;再按一次 Escape 可以繼續中斷。誤觸也沒關係,大不了打一句「carry on」接回去,不必因為按錯就重開。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-3.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
