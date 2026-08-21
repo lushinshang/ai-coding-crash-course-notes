@@ -272,10 +272,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>上一堂看 log 的時候，Matt 刻意沒用一個大家都很熟的詞——這堂課把它補上：那一大坨系統提示、工具定義、歷史對話，全部合起來就叫做 agent 的 context（上下文）。這不是修辭上的補充，而是把「turn」和「context」接起來的關鍵一步：模型每次要預測下一個 token，靠的就是把這整包 context 轉成 token 丟進去做運算，你在 arena.ai 排行榜上看到的「context window 一百萬 token」那個數字，講的正是這包東西能塞多大。但這個數字是廠商依照自家模型和基礎設施「大概能撐多少」去訂出來的一個相對武斷的上限——超過就直接失敗，一個輸出 token 都拿不到。</p>
-        <p>這堂課還有個容易被忽略但很重要的提醒：context window 從來不是從零開始的。你一啟動 harness，它就已經預先塞了一堆東西進去——工具清單、角色設定、行為規範，這一整包叫做 system prompt（系統提示）。Matt 直接讀了 Claude Code 系統提示的片段給你看：「你是 Claude Code，Anthropic 的官方 CLI……協助已授權的安全測試……拒絕破壞性技術、阻斷服務攻擊」——這些話你從沒打過，但每一次對話都幫你先墊在最底下。這說明了為什麼「選 harness」本身就是一個影響很大的決定：不同 harness 塞進去的起始文字量差很多，起跑點就不一樣。</p>
-        <p>最後才是這堂課真正要交付的字：session（會話）。多個 turn 疊加起來、context 不斷累積的整個過程，就叫一個 session。Matt 舉了個具體結構：第一個 turn 有五次 model provider request，第二個三次，第三個四次，最後一次請求送出去的，就是「目前為止全部的對話歷史」。這個詞之所以重要，是因為它馬上會變成一個可操作的單位——你可以清空 context 開新的 session，可以做 compact（壓縮），也可以切到別的 session 之後再回來。這正是下一堂「聰明區與笨蛋區」的伏筆：session 裡塞的東西越多，會發生什麼事？答案不會是好事。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-04.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">

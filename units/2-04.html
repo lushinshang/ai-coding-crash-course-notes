@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>session 與 context － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-2.html">← 回第2章 核心概念</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/2-04-hero-portrait.png">
+      <img src="../assets/images/2-04-hero-landscape.png" alt="session 與 context 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第2章 核心概念 · 2-04</div>
+      <h1>session 與 context</h1>
+      <blockquote class="summary">幫上一堂看到的巨量文字取名叫 context，並定義了「session」這個之後要一直拿來操作的單位。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">1.1M tokens</div><div class="label">GPT 5.6 Sol context window</div></div>
+      <div class="statcard"><div class="num">1M tokens</div><div class="label">Gemini 3 Pro context window</div></div>
+      <div class="statcard"><div class="num">128K tokens</div><div class="label">GPT 5.2 chat latest context window</div></div>
+    </div>
+    <article class="body">
+      <p>上一堂翻 log 時刻意迴避了一個大家都很熟的詞，這堂課把它補上：那一大坨系統提示、工具定義、歷史對話，全部合起來就叫做 agent 的 <strong>context（上下文）</strong>。這不是修辭補充，是把「turn」跟「這包文字」正式接起來——模型每次預測下一個 token，靠的就是把整包 context 轉成 token 丟進去運算，排行榜上「context window 一百萬 token」那個數字，講的正是這包東西能塞多大。但這個數字是廠商依照自家模型和基礎設施「大概能撐多少」訂出來的相對武斷上限——超過就直接失敗，一個輸出 token 都拿不到。</p>
+      <p><strong>context window 從來不是從零開始的</strong>，這是容易被忽略但很重要的一點。一啟動 harness，它就已經預先塞了一堆東西進去——工具清單、角色設定、行為規範，這一整包叫做 system prompt（系統提示）。像 Claude Code 的系統提示片段會寫著：「你是 Claude Code，Anthropic 的官方 CLI……協助已授權的安全測試……拒絕破壞性技術、阻斷服務攻擊」——這些話從沒被使用者打過，卻在每一次對話裡先墊在最底下。這說明了為什麼「選 harness」本身就是一個影響很大的決定：不同 harness 塞進去的起始文字量差很多，起跑點根本不一樣。</p>
+      <p>真正要交付的字，是 <strong>session（會話）</strong>。多個 turn 疊加起來、context 不斷累積的整個過程，就叫一個 session——第一個 turn 有五次 model provider request，第二個三次，第三個四次，最後一次請求送出去的，就是目前為止全部的對話歷史。這個詞之所以重要，是因為它馬上會變成一個可操作的單位：可以清空 context 開新的 session，可以做 compact（壓縮），也可以切到別的 session 之後再回來。<strong>session 裡塞的東西越多，會發生什麼事？答案不會是好事</strong>——這正是下一堂要拆解的東西。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-2.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
