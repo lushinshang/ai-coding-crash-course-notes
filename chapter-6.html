@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第6章 把功能出貨 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="">總覽</a>
+      <a href="chapter-1.html" class="">01 開課前準備</a>
+<a href="chapter-2.html" class="">02 核心概念</a>
+<a href="chapter-3.html" class="">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="">05 引導技巧</a>
+<a href="chapter-6.html" class="current">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<div class="chapter-head">
+  <div class="num">CHAPTER 06</div>
+  <h1>把功能出貨</h1>
+  <div class="en">Shipping · 11 個單元</div>
+  <a class="backlink" href="index.html">← 回課程總覽</a>
+</div>
+<div class="unitlist">
+      <details class="unit placeholder">
+        <summary class="unit-head">
+          <span class="code">6-01</span>
+          <span class="head-text">
+            <span class="title">如何應付龐大任務<span class="badge">候補</span></span>
+            <div class="summary">把龐大任務拆成一個個 session 扛得動的階段，並判斷何時該開新 session。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課本地缺逐字稿，只能根據官網公開的課程簡介寫候補摘要。官網簡介是這樣寫的：&quot;Decomposing complex work into session-sized chunks — how to break down big projects into phases your agent can execute one at a time, and how (and when) to create a new session.&quot;</p>
+        <p>換句話說，這堂課要處理的問題是：一個大專案不可能塞進單一個 agent session 裡一次做完，你得先學會把它切成一階段一階段、每階段份量剛好落在一個 session 能負荷的範圍內。同時也會談到判斷時機的問題——什麼徵兆代表該收尾、開一個全新的 session 繼續下去，而不是硬撐著在同一個對話裡把 context 塞爆。</p>
+        <p>這是整章「從 issue 到出貨」流程的起手式，後面 6-02 到 6-05 講的 issue tracker、spec、ticket、implement，基本上都是在具體回答這堂課丟出的問題：怎麼拆、拆到哪個顆粒度、什麼時候換一個乾淨的 context 重新開始。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-02</span>
+          <span class="head-text">
+            <span class="title">設定你的 issue tracker</span>
+            <div class="summary">把 spec 和 ticket 都搬出本機、放進 GitHub issue，讓人和 agent 共用同一份任務清單。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課回答一個很實際的問題：spec 和 ticket 這些文件到底該放哪裡。Matt 的答案很明確——不要放在 repo 裡的本機檔案，而是放進 repo 外部的 issue tracker。理由也很直白：issue tracker 本來就是團隊之間協調工作用的東西，而 agent 現在可以透過 CLI 直接讀寫同一份 issue，等於把 AI 也變成團隊裡能收派工單的一員。他自己的主力 repo 就是這樣運作的，1200 個 issue 關閉、只剩 28 個開著，可見這套機制他是真的每天在用來排程自己的工作，不是課程裡臨時包裝出來的示範流程。</p>
+        <p>課程選 GitHub 純粹是因為好裝、免費、多數人本來就有帳號，但他也講得很清楚，這一整套概念換成 Jira、Linear、Todoist 都成立，重點是「issue tracker 是 agent 和人共用的介面」這個原則，不是綁死在特定工具上。要跟 agent 溝通，本機端要先裝好 GitHub CLI，這是 agent 從你的機器連到 GitHub 抓 issue 的橋樑。</p>
+        <p>操作上他要你先 fork 他的課程 repo（用 `npx ai-hero-cli fork`），原因也很實在：如果大家都在同一個 repo 開 issue，那彼此的測試 issue 會全部混在一起，變成一場災難。fork 出自己的私有 repo 之後，再用 `npm run reset` 拉一個叫「set up MacPoco skills」的 skill 進來，跑起來後它會探索 repo 現況，問你要用哪個 issue tracker，選 GitHub 之後，它會在 `agents.md` 裡加一個導航指標，告訴 agent「issue 和 PRD 都在 GitHub issue 裡，用 GitHub CLI 管理」。這個小小的設定動作，就是接下來整章工作流程能運作的地基——沒有這一步，spec 和 ticket 就無處安放。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-03</span>
+          <span class="head-text">
+            <span class="title">用這個 skill 寫出好 spec</span>
+            <div class="summary">spec 是目的地文件，用 to-spec skill 把已經聊過的內容濃縮成一份完整規格。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課銜接的是前面已經建立好的概念：spec 是一份目的地文件，能幫你在多個 session 之間管理 context，也給了你一個明確瞄準的方向。既然知道為什麼要有 spec，接下來自然的問題就是怎麼生出來——答案是用 `npm run reset` 拉進來的 to-spec skill。</p>
+        <p>這個 skill 的設計哲學值得注意：它不會反過來質問你一堆問題，而是預設「已經有過一輪充分的討論」，直接把當下對話裡累積的理解和程式碼探索結果，濃縮成一份 spec。也就是說，前面已經有過的「grilling session」（跟 AI 對齊想法的討論過程）才是原料，to-spec 只是把原料萃取、定型。這也點出整章的五步驟骨架：先 grill 對齊想法，再產出 spec 定目的地，再拆成 ticket，一張張實作，最後回頭跟 spec 對照做審查。</p>
+        <p>spec 本身用一個固定模板產生，內容包含問題陳述、解決方案、以及一批 user story——這是很經典的軟體開發手法，目的是讓拿到這份文件的實作端 agent，能得到足夠紮實的資訊去把工作做完，不需要再回頭問你太多細節。這一步是整條流程裡承先啟後的關鍵：往前銜接的是已經發生過的討論，往後銜接的是 6-04 要教的 ticket 拆解。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-04</span>
+          <span class="head-text">
+            <span class="title">用 ticket 把功能切進多個 context window</span>
+            <div class="summary">用「垂直切片」而非「水平切片」拆 ticket，讓每個 session 都能跨層驗證可行性。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>有了 spec 這個目的地，接下來要解決的是「怎麼走到那裡」的問題——也就是把它拆成一張張 ticket，對應到一個個獨立的 session。但 Matt 在動手拆之前先丟出一個警告：拆法有好壞之分，拆錯了會是個陷阱。</p>
+        <p>他用應用程式的分層結構來說明：資料庫、API、前端是一種分層，前端內部元件之間又還有更細的分層。當 agent 面對這種多層結構去拆工作時，很自然會傾向「水平切片」——第一階段只做資料庫、第二階段接上 service、第三階段才接前端。這種拆法表面上看起來組織得很整齊，但陷阱在於：第一階段寫的程式碼，要等到很後面的階段才會知道它到底能不能用、設計得好不好，回饋來得太晚了。</p>
+        <p>正確做法是「垂直切片」：從第一階段開始就跨越所有層——同時碰資料庫、碰 API、碰前端，先做出一個最小可行的實作，再往上疊。這樣做的好處是每個階段從一開始就能拿到關於設計是否可行、各層是否整合得起來的回饋，後面的階段建立在已知整合沒問題的基礎上，自然就輕鬆很多。Matt 特別提到用「vertical slices」這個詞本身就很有效，因為這是《The Pragmatic Programmer》裡「tracer bullet」的老概念，agent 對這個詞已經有正確的語意聯想，等於是精準地戳中它的 latent space。</p>
+        <p>實際拆票要用 two-tickets skill，一樣是 `npm run reset` 拉進來，在跟 to-spec 同一個對話裡接著跑。這裡他也帶出一個判斷框架——每次收工要問自己：能不能繼續（context 夠不夠）、context 還相不相關、需不需要交接、任務能不能無人看管（AFK）完成。他自己在示範裡因為還在 64K token、context 高度相關、不需要交接、又需要人工審查，所以選擇直接繼續而不是 compact。跑出 ticket 之後，他要你檢查兩件事：這批票是水平切還是垂直切、以及票會不會咬太大口——畢竟每個 session 只有一個「smart zone」可以用。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-05</span>
+          <span class="head-text">
+            <span class="title">執行你的 ticket</span>
+            <div class="summary">implement skill 串起 TDD 和 code review 兩個子技能，一張票一個乾淨的 session。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>spec 定了目的地、ticket 拆好了路線，這堂課終於要動手把票實作出來。負責這件事的是 implement skill，但它本身其實很單薄，大部分工作都委派給另外兩個 skill：TDD 和 code review。</p>
+        <p>TDD 這塊他講得很直白：agent 表現最好的時候，就是拿到最多回饋的時候。所以實作新功能時，先寫單元測試、再實作，這個順序本身就是在給 agent 製造回饋迴路。TDD skill 裡面還帶了不少細節——什麼叫好測試、怎麼用 mock、只在「約定好的接縫」（pre-agreed seams）上測試、什麼叫「同義反覆」（tautological）的爛測試——但他說你不需要背熟這些，這個 skill 本身就是提升程式碼品質的一記重拳，接住就是了。</p>
+        <p>code review 這塊更值得細看。它做的是兩軸審查：一個子 agent 對照一組標準去檢查，另一個子 agent 對照原始 spec 去檢查，藉由拆成子 agent 分頭進行，Matt 說這種自動化審查大幅提升了輸出品質，而且常常會直接把明顯的爛東西修掉，你只需要「審查那份審查結果」就好。至於這道審查要放在每張票做完之後、還是全部票做完再一次做，他坦言是個可以討論的取捨；示範裡選擇每張票做完就審一次。</p>
+        <p>實作流程上，他把每張 ticket 的連結複製給 implement 指令，做完一張就照 6-04 那套判斷框架決定 clear、compact 還是繼續，並且把 issue 關掉——這是個好習慣，因為關掉第一張票，被它擋住的第二張票才會解鎖。值得注意的是，他在規劃完（spec、ticket 都定案）之後選擇直接 clear 掉整個對話進實作階段，理由是規劃階段的討論內容已經被編碼進 spec 和 ticket 這兩份「context 之外」的文件裡了，留著反而是更囉唆版本的重複資訊，不如清乾淨、把整個 smart zone 讓給接下來的實作。這正好呼應了 6-02 為什麼堅持要把 spec、ticket 放進 issue tracker 而不是本機——它們才是真正跨 session 存活的記憶。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-06</span>
+          <span class="head-text">
+            <span class="title">spec 該留著嗎</span>
+            <div class="summary">spec 是次要來源、會跟程式碼漂移，實作完就該關閉存檔，不當成長期文件留著。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課回答一個大家常問的問題：spec 都寫進程式碼了，還要留著它嗎？當作文件保存、或者留一份歷史紀錄不是挺好的嗎？Matt 的答案會讓不少人意外——他選擇把 spec 關閉存檔。</p>
+        <p>他的論證核心是「主要來源 vs 次要來源」的框架：spec 是程式碼運作方式的濃縮版本，屬於次要來源，而次要來源必然只是一種投影、一種摘要，一旦你沒有持續讓它跟著程式碼同步更新，兩者就會開始漂移。市面上有一派流行做法叫「spec-driven development」，主張把 spec 存進 repo 當成真理來源，但 Matt 說正是這種漂移風險讓他不敢這麼做——因為 agent 探索本機 repo 時，遇到一份過時但看起來完整的舊 spec，很可能會信任這份好讀、精簡的次要來源，而不會去碰更囉唆、更難探索的主要來源，也就是程式碼本身。程式碼不會對自己說謊，可執行的部分（函式本身）幾乎不可能謊報自己在做什麼，除非你的 repo 裡本來就有一堆沒人呼叫的死程式碼。</p>
+        <p>所以他的建議是：spec 一旦被落實進程式碼，就該立刻關閉。這正好呼應 6-02 把 spec、ticket 放進 issue tracker 而不是本機 markdown 檔的決定——issue 一關閉，它就自然從主要視圖移出、被標記為封存，但如果之後 agent 真的需要回頭查某個功能當初為什麼這樣設計，這份紀錄還在，可以被找到、被探索。而且放在 tracker 裡的 spec 是整個團隊共享的、可審查可留言、就算你換了工作目錄或換了筆電，這份狀態也不會跟著本機環境流失。</p>
+        <p>他把話說得很重：spec 是暫時的產物，用來界定一段工作的範圍，不是程式碼運作方式的真理來源。這個立場跟不少強調「spec 即真理」的框架正面衝突，他也大方承認這點可以辯論，但根據他自己的實測，把 spec 當長期真理來源留在 repo 裡，效果並不好。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-07</span>
+          <span class="head-text">
+            <span class="title">改道：目標變了怎麼辦</span>
+            <div class="summary">半途發現方向錯了，刪掉未做的 ticket、回頭改 spec、重新產生新一批 ticket 就好。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課處理一個很現實的情境：spec 定了、ticket 也拆好了，做到一半——可能兩張票做完了——你忽然發現，糟了，這個方向根本不對。這時候該怎麼辦？</p>
+        <p>Matt 給的答案建立在一個關鍵前提上：ticket 是可拋棄的。如果已經做了前兩張，後面還沒動的直接刪掉就好，不用有心理負擔。真正要回頭處理的是 spec，而 spec 是可編輯的——你可以就當下的狀況重新開一輪 grilling session，跟 agent 對齊「我們現在在哪裡、原本的方向為什麼不滿意」，改完 spec 之後，再重新跑一次生成 ticket 的流程。新產生的這批 ticket 範圍可能會比原本略有增減，但重點是你找到了一條從「現在的位置」通往「新目的地」的路徑，而不是從頭砍掉重練。</p>
+        <p>整套流程可以濃縮成一句口訣：發現目的地要換 → 刪掉還沒做的 ticket、但留著 spec → 用 grill 重新調整 spec（通常開新 session 做）→ 對 spec 滿意後重新生成 ticket → 從現在的進度繼續實作。</p>
+        <p>這堂課同時也解釋了 6-03、6-04 那套「spec 和 ticket 分成兩份文件」的設計動機——如果兩者混在同一份文件裡，遇到要改道的狀況會變得很混亂，分開存放才能讓 spec 穩穩當「目的地」，而 ticket 徹底可拋棄、隨時可以重新產生。這也是整章「從 issue 到出貨」流程能保有彈性、不怕中途翻盤的關鍵設計。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-08</span>
+          <span class="head-text">
+            <span class="title">Goal 指令</span>
+            <div class="summary">為什麼不直接用 harness 內建的 goal 模式跑到底，而是堅持用 spec 加 ticket 拆多個 session。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課回答另一個常被問到的問題：為什麼不乾脆用很多 harness 都有的 goal 功能——讓 agent 在單一個 context window 裡朝著一個目標一路做到完成，而是要大費周章拆成一張張 ticket？聽起來 spec 本身就是個定義得很清楚的目標，用 goal 直接執行似乎順理成章。</p>
+        <p>但 Matt 觀察到，他看過的所有 goal 實作，都沒有真正利用「smart zone」這個概念，全部仰賴 auto-compacting 硬撐一個 context window 到底。他用自己的圖來形容：一開始有一小段 smart zone，之後就是一大片「dumb zone」——context 塞得太滿、品質開始下滑的區域。每次試都是同樣的結果，這也是他目前仍然認為 spec 加 ticket 優於 spec 加 goal 的原因：ticket 逼你把大部分工作切回一個個 smart zone 裡完成，而不是賭 auto-compaction 的品質。</p>
+        <p>他也留了但書：如果哪天 auto-compaction 進步到 dumb zone 不再是問題，他會認真考慮 goal 這條路——因為前面梳理 spec 的思考工作還是得做，差別只在於接手執行的對象要自己管理 context、自己管理 ticket 進度，你甚至還是可以在最後做一次大範圍的 code review 來檢查是否符合 spec。但就目前來說，他的建議仍然是用 ticket：掌控感更強，通常也更便宜，因為工作大多發生在 smart zone 裡；而從 spec 產生 ticket 這個動作本身通常很快，他自己頂多花幾分鐘，在一些課程沒細講的工作流裡，他甚至會讓 ticket 在無人看管（AFK）狀態下自動生成，看都不看一眼。這堂課本質上是把 6-04 拆 ticket、6-05 clear/compact 判斷背後「為什麼不偷懶」的理由講白了。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-09</span>
+          <span class="head-text">
+            <span class="title">讓 AI 遵守你的程式碼規範</span>
+            <div class="summary">用 coding-standards.md 餵給 code review 的子 agent，比塞進 CLAUDE.md 或硬求實作一次到位更有效。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>6-05 implement skill裡有一行話被 Matt 刻意帶過去沒細講——「做完之後用 code review 審查」，這堂課回頭把這句話攤開講清楚，順便講怎麼用這個 skill 把你自己的程式碼規範塞進 agent 的審查流程裡。</p>
+        <p>他先給了一個三層檢查的框架：第一層是自動化檢查，也就是 lint、type check、單元測試，這些是決定性的，agent 跑出來永遠是同樣的通過或失敗，幾乎不花 token，是免費的。但自動化檢查抓不到所有 bug，需要某種形式的審查系統——在 AI 之前這是人工 code review，人會提供質化的回饋，像是「這個測試好像沒測到重點」「有沒有考慮過這個做法」，而人工 review 向來是開發流程裡最讓人痛苦的一環，PR 堆積如山等審。現在 agent 能做自動化審查、提供這種質化回饋，但 Matt 強調這不能取代人工審查，只是讓人工審查輕鬆一點，因為 agent 已經先過了一輪。</p>
+        <p>真正的重點在後半段：coding-standards.md。他的邏輯是，implement 這個角色本身受到很多限制——要先探索 repo、要真的把功能寫出來、還要除錯確認能跑，負擔很重；相對地 code review 不需要重新探索（探索已經做完了）、拿到的就是正確的檔案、需要改的地方通常不多，測試也早就寫好跑過了。負擔輕，代表 context window 裡有更多空間可以塞規範細節。所以與其硬逼 implement 一次到位把規範刻進腦子裡，不如把規範放進 code review 讀取的 coding-standards.md，讓審查這一關去抓。他秀了自己在 course-video-manager repo 裡的實際範例，裡面條目多半是「踩過的坑」——像是「情境選單項目一定要帶前導圖示」，就是因為以前 agent 老是漏掉圖示他才加進去的；「app routes 底下的所有檔案都會被公開路由，不要放測試檔或工具檔在那」也是同樣邏輯。他甚至提到就算你完全不寫 coding-standards.md，code review skill 本身也內建了一批取自 Martin Fowler《Refactoring》的程式碼異味（code smell）判準，像 feature envy、shotgun surgery，agent 對這些經典術語本來就熟。他給的實用建議很具體：下次看到 agent 做出你不喜歡的事，不要當場罵它，把規則寫進 coding-standards.md，讓審查那關下次抓到它。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-10</span>
+          <span class="head-text">
+            <span class="title">問 Matt</span>
+            <div class="summary">用 ask-mat skill 當作課程結束後的即時諮詢管道，內建的階段邊界檢查表能幫你判斷該怎麼收尾。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>課程進入尾聲，Matt 給了一個實用的收尾工具：ask-mat skill。邏輯很簡單——你當然可以隨時去 Discord 問他或社群成員問題，但在等回覆的空檔，這個 skill 可以先當你的第一顧問。用 `npm run reset` 拉進「add ask mat skill」分支之後，就能在對話裡直接問，比如他示範的問題：「做完一個 spec 的實作、所有 ticket 都關閉之後，修 bug 的最佳流程是什麼？」</p>
+        <p>得到的答案是：clear 掉 context，然後用 diagnosing-bugs 這個 skill——這是課程裡完全沒教過的 skill，代表 Matt 自己實際使用的技能集比整門課涵蓋的範圍還大，這門課教的是主幹流程和幾個重要技能，但還有東西沒講。ask-mat skill 本身放在 getting-started 目錄下，裡面藏了一個特別好用的東西：階段邊界檢查表（phase boundary checklist），專門用來判斷你卡在不確定該 clear、hand off、丟給 sub-agent 還是 compact 的時候，該怎麼選。</p>
+        <p>但他也老實承認這個工具不完美——像他示範時就覺得那個情境其實 compact 比較好，而且很多時候你根本用不到 diagnosing-bugs，因為那是給非常棘手的 bug 用的，簡單 bug 自己就能處理掉。所以他的提醒是：跟對待任何 agent 的回答一樣，帶著保留態度去看，把它當成一個路由器，幫你在不熟悉某個 skill 該怎麼用時先摸個方向，如果發現答案很怪，直接去 skill 的 repo 上開 issue 回報。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">6-11</span>
+          <span class="head-text">
+            <span class="title">接下來往哪走</span>
+            <div class="summary">回顧「grill、spec、ticket、implement、review」五步驟骨架，並指出往後該往哪些方向深化。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>收尾這堂課，Matt 把整章甚至整門課濃縮成一個五步驟骨架：grill（跟 AI 對齊想法）、spec（決定目的地）、ticket（拆解成一個個 smart zone 扛得動的份量，方便平行或依序執行）、implement（動手做）、review（做完再回頭檢查那些實作過程中無法檢查到的東西）。他強調這套骨架是他自己實際建構軟體的核心方法，就算工具本身一直在變——從 Ralph Loop 到現在比較常規的 loop，或者未來又冒出什麼新玩法——這個五步驟的形狀基本上都還撐得住。</p>
+        <p>他接著點出這門課只是打地基，真正要精進得往下面幾個方向深挖：怎麼把「implement」這一步從你得盯著螢幕看，變成可以丟給無人看管（AFK）的 loop 去跑；怎麼在動手寫 spec 之前，先用 prototype 或 research 去探路，把構想階段做得更扎實。他也提到了幾個延伸資源：AI Coding Dictionary（把 model、provider、token、context window 這些術語的心智模型打牢）、他的姊妹專案 Sculptor（一個在隔離沙盒裡做 AFK agent 的開源專案，也是他現在大部分實作工作背後真正在跑的東西）、以及持續在演進的 skill set 本身。</p>
+        <p>最後他把話說得很坦率：AI coding 這個領域還在快速變動，這套五步驟的形狀會被不斷細分、深化、長出新的枝節，但核心骨架他相信會留下來。他也把 Discord 社群定位成長期的支援管道——課程結束不代表關係結束，真的在實務上碰到搞不懂的狀況，回 Discord 找他和社群一起想辦法。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details></div>
+<div class="chapter-footer-nav"><a href="chapter-5.html">← 第 5 章　引導技巧</a><span></span></div>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

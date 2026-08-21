@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第1章 開課前準備 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="">總覽</a>
+      <a href="chapter-1.html" class="current">01 開課前準備</a>
+<a href="chapter-2.html" class="">02 核心概念</a>
+<a href="chapter-3.html" class="">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="">05 引導技巧</a>
+<a href="chapter-6.html" class="">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<div class="chapter-head">
+  <div class="num">CHAPTER 01</div>
+  <h1>開課前準備</h1>
+  <div class="en">Before We Start · 9 個單元</div>
+  <a class="backlink" href="index.html">← 回課程總覽</a>
+</div>
+<div class="unitlist">
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-01</span>
+          <span class="head-text">
+            <span class="title">這門課要帶你去哪</span>
+            <div class="summary">兩百萬星星專案的作者把兩年 AI 編碼經驗濃縮成五步驟系統，重點不是換模型，是換你自己。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt Pocock 開場先亮出一個數字：他的 skills repository 在錄製這堂課時剛突破 20 萬顆星，擠進史上最多星星的 GitHub 專案前 20 名，下載量超過 1300 萬次。這不是自我推銷的花絮，而是整堂課的立論基礎——他不是在教一個實驗性的想法，而是把已經被幾百萬人驗證過的做法,重新包裝成一套課程。理解這個背景，你才會明白後面九成的內容為什麼長得像「軟體工程老兵的紀律」而不是「AI 炫技教學」。</p>
+        <p>課程的骨架是一套五步驟系統：grilling（逼問釐清需求）、寫 spec、把 spec 拆成 tickets、實作、審查。Matt 特別強調這五步沒有變過——不管他換過幾個模型、玩過幾種新工具，這個流程始終撐得住。這句話其實在替你設定一個心理錨點：後面章節教的所有技巧，包括 context 管理、什麼時候該 compact、什麼時候該 clear、什麼時候該把工作交接出去，全部都是服務這五步驟的細節,而不是彼此獨立的招式。</p>
+        <p>值得注意的是他對「該用哪個 agent」的回答:任何能在終端機跑、能用 skills 的 agent 都可以,Claude Code、Codex、OpenCode、GitHub Copilot、Gemini 的那個都算。他把 Claude Code 定位成示範用的工具而不是教學核心,所有內容用 skills 的形式交付,理論上可以搬到任何 agent 上用。這個設計決定了整門課的性格:它賭的是「agent 會一直換,但驅動 agent 的方法論不會」,如果你抱著「我要學會用某個特定工具的所有快捷鍵」的心態來上課,方向已經錯了。</p>
+        <p>練習場是 Cadence,一個賣課程、上課、做測驗的 TypeScript/Node 應用,功能成熟到有實際的軟體開發生命週期可以走。門檻設得很低——會看程式碼、會用終端機基本指令(cd、ls)就夠了,甚至不要求你會寫程式。但結尾那句話才是重點:上完課後你能出更大量、更高品質的成果,靠的不是模型變強,是你自己變強了。這是在替整門課定調——這是一堂關於「人」的課,模型只是工具。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-02</span>
+          <span class="head-text">
+            <span class="title">選方案與選模型</span>
+            <div class="summary">免費方案撐不過第一次認真的 agentic session,訂閱制比 API 計費便宜二十到五十倍。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 講得很直白,幾乎帶點不情願:免費方案完成不了這門課。這不是行銷話術,是他觀察到的現實——主要模型供應商的免費額度不是為 agentic 這種吃 token 吃很兇的工作設計的,你會在第一次認真跑 session 時就撞牆。這句提醒放在第二堂課,等於是在你正式動手前先把預期設對,省得你上到一半才發現額度燒光,體驗被打斷。</p>
+        <p>具體建議分層很清楚:Anthropic 的 Pro 是起跳點,足夠應付課程需求;如果是專業使用,建議上 Max,分 5X 和 20X 兩檔,Matt 錄課時自己用的是 20X,但強調課程真正需要的頂多是 5X。OpenAI 那邊架構類似,Plus 對應 Pro 的定位,額度不夠再往 Pro 升。這種對照方式其實在幫你建立一個心智模型——各家訂閱制的分層邏輯大同小異,不用每個平台都重新學一次。</p>
+        <p>最有意思的是那段關於訂閱制 vs. API 計費的比較。他舉了 Theo 這個人的例子:單月 token 消耗逼近 5 萬美元,但實際只付了 3200 美元的 Claude 訂閱加 200 美元的 Codex 訂閱,總共 3400 美元左右換來近 5 萬美元的算力,划算程度可以到二十到五十倍。這個數字本身很震撼,但 Matt 接著給的心理學解釋更值得記住——當你用 API 按量計費,系統會像家裡裝了電表一樣,你會不自覺地為了省錢而做出不理性的決定,比如明明該用強模型卻為了省 token 硬是切到便宜模型,結果賠上的是輸出品質。訂閱制把這個心理負擔拿掉,因為費用是固定的、上限是已知的,你才能把注意力放在效率而不是省錢上。</p>
+        <p>結尾給的建議很務實:如果對 harness 沒有特別偏好,就用 Claude Code 配 Pro 起步;如果認真想走專業路線,直接上 Max,並且用訂閱方案內建的預設模型就好,不要在低階方案硬要開高階模型,那樣額度會被榨乾得特別快。這一堂看似瑣碎的「繳費指南」,其實是在幫你避開整門課最容易讓人半途而廢的坑——額度用盡導致的挫折感。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-03</span>
+          <span class="head-text">
+            <span class="title">建立練習專案</span>
+            <div class="summary">VS Code、Node、npm install、資料庫 migration 與 seed,一路把 Cadence 跑起來的完整儀式。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課本質上是一份把開發環境從零組起來的操作手冊,但值得留意 Matt 選工具的邏輯——他推薦 VS Code 不是因為它最強,而是因為它免費、跨平台、夠親民,而且內建終端機,恰好貼合這門課「大部分時間都在終端機裡跟 agent 對話」的工作模式。如果你已經有慣用的編輯器,他也直接說「只要能開終端機、能看程式碼,那就沒問題」,這種務實態度貫穿了整堂課的工具選擇,不執著於特定品牌。</p>
+        <p>安裝流程是標準的 Node 生態系三部曲:裝 Node(推薦 LTS 版本而非 Current,因為穩定優先)、跑 npm install 把套件裝進 node_modules、跑 npm run db:migrate 建資料庫、npm run db:seed 灌入假資料。Matt 特別花時間解釋 node_modules 裡裝的是什麼——別人發布在 npm 上的套件,他自己維護的 AI Hero、Sancastle 也在裡面,像 Sancastle 一週就有 10.5 萬次下載。這段看似離題的介紹其實在替後面鋪路:當你之後要理解專案架構、要讓 agent 讀懂依賴關係時,「套件從哪裡來」這個基本認知會派上用場。</p>
+        <p>跑起來之後看到的 Cadence,就是整門課接下來要動刀的對象——一個賣課程、上課、測驗功能齊全的應用。Matt 特別點出一個功能:畫面下方有個 dev UI 可以切換登入身份,比如切到 Emma Wilson 就能看到她已經買了 TypeScript 和 Node.js 兩門課。這不是隨手帶過的小功能,而是接下來所有練習測試不同使用者情境的入口——沒有這個切換工具,你每次要驗證「某個角色看到的畫面對不對」都得手動改資料庫,效率會差很多。</p>
+        <p>這堂課本身沒有太多概念性的東西要消化,但它是後面所有動手練習的地基——資料庫種子資料裡的人名、課程結構,會在後面章節反覆出現。看到假資料成功顯示在畫面上,就代表環境完全就緒,可以正式開始跟 agent 打交道了。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-04</span>
+          <span class="head-text">
+            <span class="title">安裝 Claude Code</span>
+            <div class="summary">裝好 CLI、選對模型與 effort、打一聲招呼確認能通,agent 才算真正上線。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課的節奏很快,因為前面已經把地基打好——專案裝好了、終端機開好了,現在缺的就是那個真正會動手的角色。Matt 用最短的篇幅把安裝流程走完:依平台複製對應的安裝指令、貼進終端機、跑 claude 指令、對「是否信任這個工作區」按下同意,登入時記得選訂閱選項而不是 API key,授權完回到終端機。整段操作沒什麼好深究的,值得留意的反而是他刻意強調「這份安裝步驟同樣適用於 Codex 或其他 agent」,呼應第一堂課立下的原則——工具是替換品,方法才是核心。</p>
+        <p>真正該停下來想一想的是選模型那一段。Matt 示範用 /model 指令,建議直接選訂閱方案自帶的預設模型——他自己的情況是 Opus 5,配一百萬 token 的上下文視窗。這裡藏著一個容易被忽略的細節:effort 等級可以用左右鍵調整,而他錄課時用的是 medium effort,因為錄課當下 Opus 5 還沒問世,他用的是 4.8。這段話等於在告訴你,課程內容不會因為模型版本更新而失效——重點是「用你方案裡的預設中階模型」這個選擇邏輯,不是死記某個型號名稱。</p>
+        <p>最後一步是打一聲招呼,收到回應就代表設定成功。這個動作看似儀式性,但其實是整條安裝鏈路的最終驗收——確認 CLI 裝對了、登入的帳號權限夠、模型選對了、網路連得通。看到這一步跑通,才真正踏進這門課要教的核心內容;在此之前的一切都只是把舞台搭好而已。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-05</span>
+          <span class="head-text">
+            <span class="title">練習怎麼跑</span>
+            <div class="summary">git checkout -b dev 開分支,npm run reset 穿梭時間點,配合 cherry-pick 保留自己的改動不被沖掉。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課要解決一個很實際的問題:當老師在畫面上示範某個功能改完之後的樣子,你要怎麼確定自己電腦上的程式碼跟老師講的是同一個狀態?Matt 的答案是自己寫了一套工具鏈,而不是丟給你一句「請自行對照」。第一步是建一個叫 dev 的分支當作整門課的練習用分支,他建議你也照做——這個分支未來會被隨意實驗、隨意弄髒,不影響 main。</p>
+        <p>核心工具是 npm run reset。每一堂課的每個階段都對應一個或多個 git commit,跑這個指令會列出一長串可以「跳」過去的時間點,選一個就能把本機狀態瞬間對齊到 Matt 錄那段影片當下的程式碼樣貌。他現場示範一個很生活化的例子:package.json 裡課程平台的描述打錯字,寫成「awesome horse platform」而不是「awesome course platform」,跑 reset 選到對應的 commit,錯字瞬間被修正——這個帶點自嘲幽默的 bug,恰好示範了 reset 如何精準對齊到某個瞬間的狀態。</p>
+        <p>但 reset 有個代價:它會把你自己動手加的東西一併洗掉。Matt 示範加一個 foo bar 的 npm script、commit 下去,然後跑 reset,結果 foo bar 直接消失。對還在摸索、想保留自己改動的人,他準備了第二套工具 npm run cherry-pick——概念上就是 git cherry-pick,把某個歷史 commit 疊加到你目前的分支上,而不是把你整個分支輾平重來。不過他也老實建議,如果你對 git 的 cherry-pick 和衝突解決不熟,乾脆全程只用 reset 就好,少一個變數少一個坑。</p>
+        <p>最後補了第三個指令 npm run pull,用來在課程更新時把 Matt 那邊主分支的新內容拉下來,通常是他在 Discord 發現「這個真的不該漏掉」之後的緊急修補。三個指令背後其實都是同一套自製的 AI Hero CLI 在跑,包成 package.json 裡的 script 方便你不用記 git 語法。這堂課乍看是工具教學,實際在解決的是遠距教學最痛的問題——老師畫面和學生畫面永遠對不齊。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-06</span>
+          <span class="head-text">
+            <span class="title">資料庫 migration</span>
+            <div class="summary">schema.ts 定義資料庫該長什麼樣,但改了它不會自動生效,要手動跑 migrate 才會同步。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 開場就講明白這堂課為什麼非上不可——不是因為概念多難,而是因為過去帶課時很多人卡在這個地方。他把專案拆成兩個獨立的單位:一個是原始碼,也就是你會編輯、決定應用行為的檔案;另一個是資料庫,在這門課裡具體來說就是專案根目錄下一個叫 data.db 的檔案。這個區分聽起來理所當然,但恰恰是新手最容易混淆的地方——改了程式碼,以為資料庫會自動跟上,結果沒有。</p>
+        <p>關鍵在於 app/db/schema.ts 這支檔案,裡面定義了資料庫應該有哪些資料表、長什麼樣子。這裡有一個明確的方向性:原始碼定義資料庫「應該」是什麼樣子,但資料庫實際的樣子不會自動變成那樣,中間需要一道手動程序,叫做 migration。Matt 解釋這個手動步驟存在的原因很實際——資料庫裡裝的是真正的資料,使用者的資料,神聖不可隨便覆寫的東西,所以在真實應用裡,原始碼和資料庫必須被當成兩個要「對版本」的東西同步管理,只要其中一個超前,另一個沒跟上,系統就會出錯。</p>
+        <p>他現場製造了一次真實的錯誤示範:用 reset 切換到一個改了 schema 的 commit,courses 資料表被加了一個 notes 欄位,對應的 migration 檔案也自動生成在 drizzle 資料夾下——裡面存放著資料庫變更的完整歷史記錄。但光是切換原始碼版本並沒有真的執行 migration,於是打開課程頁面直接壞掉,終端機丟出「no such column notes」的 SQLite 錯誤。修法很簡單,跑 npm run db:migrate,問題就消失。這裡藏著一個容易忽略的重點:npm run reset 只碰原始碼,不會幫你跑 migration,所以只要你用 reset 切換過版本,幾乎可以確定接下來要手動 migrate 一次。</p>
+        <p>最後他補充了 seed 腳本的角色——這是個可以隨便重來的沙盒資料庫,不是正式環境,seed script 會清空所有表再重新灌入假資料,比如管理員 Alex Rivera、講師 Sarah Chen 和 Marcus Johnson。這句話某種程度上是在替你壯膽:資料庫壞了大不了重 seed,不用怕手滑。整堂課要你記住的心法很單純——只要 agent 動了 schema.ts,你就得意識到資料庫可能跟不上了,要嘛讓 agent 自己跑 migrate,要嘛自己動手,尤其在跑完 reset 之後幾乎是必然要做的事。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-07</span>
+          <span class="head-text">
+            <span class="title">重置回乾淨狀態</span>
+            <div class="summary">大部分學員的 agent 設定其實是過度配置,Matt 的建議近乎粗暴:備份後全部砍掉重練。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課的立場很鮮明,幾乎帶點挑釁——Matt 直接說,多數來上這門課的人已經東拼西湊裝了一堆 MCP 伺服器、調過設定、裝過一票 skills 和 plugins,而這些堆疊起來的結果通常不是進步,是過度配置。他的建議乾脆到近乎粗暴:全部刪掉。理由也很直白,大部分那些配置根本用不到,從一個乾淨的起點開始工作反而更好。</p>
+        <p>但他沒有真的要你不負責任地清空一切。如果你捨不得那些辛苦調出來的設定,他給的解法是讓 agent 自己處理——因為 agent 應該最了解自己的設定放在哪裡,所以他準備了一段可以複製貼上的提示詞,叫 agent 去讀自己的文件、盤點所有設定檔案的位置,備份到安全的地方,再把環境清回空白狀態。因為多數配置本來就是檔案形式的東西,備份跟還原理論上就是搬檔案這麼簡單。</p>
+        <p>Matt 現場示範跑了一次:Claude Code 先去查自己的文件確認設定放在哪裡、盤點清單、備份到安全位置,完成後還會給你一段可以留著的還原提示詞,將來想找回設定時直接貼上去用。他還示範了還原的動作——先跑 clear(這個概念課程後面會細講),再貼上「用剛剛的備份還原我的設定」,設定就整組回來了。</p>
+        <p>結尾那句玩笑話很能說明這堂課的用意:這樣做是為了讓「我的課程教材不會跟你那堆垃圾堆——不對,是精心策劃的奧運聖火——互相干擾」。這其實是一句很重要的提醒,藏在玩笑背後:後面章節教的每個技巧、每個行為,都是在一個接近預設值的環境下驗證出來的,如果你的 agent 還背著一堆舊設定,某個技巧為什麼有效或為什麼失效,你會很難判斷到底是課程內容的問題,還是你自己那堆殘留配置在搗亂。先歸零,才能乾淨地觀察每一步的因果。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-08</span>
+          <span class="head-text">
+            <span class="title">安裝 request logger</span>
+            <div class="summary">把 agent 送去 anthropic 的每一筆請求攔下來存成檔案,系統提示詞、工具清單全都看得到。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 用「黑盒子」形容一般人跟 agent 互動的感受——你打字進去,答案跑出來,中間發生什麼事完全看不見。這堂課要做的事,就是想辦法把這個黑盒子撬開一條縫。他的做法不是靠猜,而是裝一個叫 request logger 的小工具,跑起來之後會在 localhost:8787 開一個本地網頁伺服器。</p>
+        <p>操作原理其實很簡單但很聰明:把環境變數 ANTHROPIC_BASE_URL 指向這個本地伺服器,Claude 原本要送去 Anthropic 官方伺服器的每一筆請求,現在會先經過這個本地中繼站。中繼站做兩件事——正常轉送到 Anthropic,讓 Claude 照常運作,同時把整包內容留一份存到本機的 log 資料夾裡。所以從使用者的角度看,Claude 用起來完全沒差,打個招呼一樣得到「hello, what can I help you with」,但背地裡每一次往返都被完整記錄下來了。</p>
+        <p>打開存下來的 log,會看到用日期時間命名的一批檔案,Matt 特別提醒這個時間是 UTC,跟他本地時間差一小時。其中 request 和 response 的原始檔案格式較難讀,但有個 markdown 版本的檔案才是真正該看的東西——裡面完整攤開了送給模型的系統提示詞、工具定義,全部用 XML 標籤分隔,可以直接跳到 system prompt 標籤看完整內容,或跳到 tools 標籤看工具清單有多長,再往下看訊息歷史,一路對照到最後 assistant 回覆的那句「hello」。</p>
+        <p>這堂課本身沒有要你馬上鑽進 log 細節裡分析,Matt 明講後面章節會花大量時間泡在這些 log 裡。它的作用更像是先把工具裝好、原理搞懂,為後面拆解 agent 行為做準備——當你之後想知道「為什麼 agent 這樣做決定」,不用再靠猜,直接翻 log 就看得到系統到底跟模型說了什麼。他也補了一句實務提醒:這個工具目前只支援 Claude 和 Codex,未來會擴充支援更多 agent,細節請看下方文章連結。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">1-09</span>
+          <span class="head-text">
+            <span class="title">Discord 社群怎麼逛</span>
+            <div class="summary">自學課不代表孤軍奮戰,問題頻道、身份組、Matt 本人都在 Discord 裡候著。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這是整個第一章唯一一堂不談技術操作的課,單純在做一件事:告訴你卡關的時候該去哪裡找人。Matt 開宗明義說這門課是自我步調的,但你不會是一個人走完全程——他經營的 Discord 社群同時服務他所有課程,也對一般大眾開放,而他本人就常駐在裡面。</p>
+        <p>伺服器結構分兩層。上半部的文字頻道公開給所有人,包括 general 閒聊、AI Hero 專屬討論、他維護的兩個開源套件 Everlight 和 Sandcastle 的頻道、skills repo 專屬頻道,還有讓大家曬成果的 showcase 和純聊天的 random。下半部則是買了這門課才看得到的頻道,如果你付費之後還看不到,記得點下方連結去綁定正確的身份組。針對課程本身的提問,他特別推薦用論壇形式的 crash course questions 頻道——貼上「我需要解決什麼問題」之後系統會自動開一個獨立討論串,比起在同一個頻道裡所有訊息混在一起,這種形式讓每個問題都有自己的空間,不容易被洗版蓋掉。</p>
+        <p>身份標示上,紅色標籤是 Heroes,由 Matt 親自指定給那些他覺得特別樂於助人、展示過厲害東西的成員;紫色標籤是版主,包括 Raphael、Tab 和 Matt 自己。如果看到有人惡意洗版——他舉的例子是有人跑來洗 MrBeast 的內容——可以直接 tag 版主角色處理。</p>
+        <p>這堂課篇幅短,但放在第一章收尾的位置有它的用意:前面八堂課把環境、工具、流程都交代完了,這堂等於是把安全網張開——真正動手做練習時,難免會遇到裝置差異、版本落差、理解不到位的狀況,而這些狀況不需要你自己硬扛,社群裡有人在,Matt 本人也在。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details></div>
+<div class="chapter-footer-nav"><span></span><a href="chapter-2.html">第 2 章　核心概念 →</a></div>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

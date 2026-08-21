@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Coding Crash Course 課程導讀（非官方）</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="current">總覽</a>
+      <a href="chapter-1.html" class="">01 開課前準備</a>
+<a href="chapter-2.html" class="">02 核心概念</a>
+<a href="chapter-3.html" class="">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="">05 引導技巧</a>
+<a href="chapter-6.html" class="">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<section class="hero">
+  <div class="kicker">課程導讀 · 非官方</div>
+  <h1>AI Coding Crash Course<br>逐堂深度導讀</h1>
+  <p class="lede">Matt Pocock 主講，把兩年 AI 編碼實戰經驗濃縮成一套五步驟系統，教你用「軟體工程紀律」而不是「碰運氣」的方式，把 coding agent 真正用好。這份導讀依照官方課程的六大章節、59 個單元，逐堂讀完逐字稿後改寫成的深度介紹，方便你上課前先建立心智模型，上課時也能對照複習。</p>
+  <div class="source-note">原始課程頁面：<a href="https://www.aihero.dev/workshops/ai-coding-crash-course">aihero.dev/workshops/ai-coding-crash-course</a></div>
+  <div class="disclaimer">這是讀者自行整理的非官方筆記，內容是把課程逐字稿改寫過的深度導讀，不含官方影片與逐字稿原文。想看完整教學影片與逐字稿，請至 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買。</div>
+</section>
+
+<div class="steps">
+    <div class="step"><div class="n">STEP 1</div><div class="t">Grill 逼問釐清需求</div></div>
+    <div class="step"><div class="n">STEP 2</div><div class="t">寫成 Spec</div></div>
+    <div class="step"><div class="n">STEP 3</div><div class="t">拆成 Ticket</div></div>
+    <div class="step"><div class="n">STEP 4</div><div class="t">實作</div></div>
+    <div class="step"><div class="n">STEP 5</div><div class="t">Review</div></div></div>
+
+<section>
+  <div class="chaptergrid">
+    <a class="chapcard" href="chapter-1.html">
+      <div class="num">CHAPTER 01</div>
+      <h3>開課前準備</h3>
+      <div class="en">Before We Start</div>
+      <div class="count">9 個單元</div>
+    </a>
+
+    <a class="chapcard" href="chapter-2.html">
+      <div class="num">CHAPTER 02</div>
+      <h3>核心概念</h3>
+      <div class="en">Concepts</div>
+      <div class="count">11 個單元</div>
+    </a>
+
+    <a class="chapcard" href="chapter-3.html">
+      <div class="num">CHAPTER 03</div>
+      <h3>認識 Claude Code</h3>
+      <div class="en">Getting To Know Claude Code</div>
+      <div class="count">7 個單元</div>
+    </a>
+
+    <a class="chapcard" href="chapter-4.html">
+      <div class="num">CHAPTER 04</div>
+      <h3>基本功</h3>
+      <div class="en">Fundamentals</div>
+      <div class="count">12 個單元</div>
+    </a>
+
+    <a class="chapcard" href="chapter-5.html">
+      <div class="num">CHAPTER 05</div>
+      <h3>引導技巧</h3>
+      <div class="en">Steering</div>
+      <div class="count">9 個單元</div>
+    </a>
+
+    <a class="chapcard" href="chapter-6.html">
+      <div class="num">CHAPTER 06</div>
+      <h3>把功能出貨</h3>
+      <div class="en">Shipping</div>
+      <div class="count">11 個單元</div>
+    </a></div>
+</section>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

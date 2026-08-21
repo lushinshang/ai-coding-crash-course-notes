@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第3章 認識 Claude Code － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="">總覽</a>
+      <a href="chapter-1.html" class="">01 開課前準備</a>
+<a href="chapter-2.html" class="">02 核心概念</a>
+<a href="chapter-3.html" class="current">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="">05 引導技巧</a>
+<a href="chapter-6.html" class="">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<div class="chapter-head">
+  <div class="num">CHAPTER 03</div>
+  <h1>認識 Claude Code</h1>
+  <div class="en">Getting To Know Claude Code · 7 個單元</div>
+  <a class="backlink" href="index.html">← 回課程總覽</a>
+</div>
+<div class="unitlist">
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-01</span>
+          <span class="head-text">
+            <span class="title">本章導覽</span>
+            <div class="summary">Matt 選 Claude Code 當教學工具，但整套課程理念其實不綁定任何特定 harness。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課全程都會用 Claude Code 來示範,但 Matt 開宗明義先講清楚一件事:這門課的內容不是「Claude Code 課程」,而是「用 Claude Code 這個熱門工具來講 agent 的通用道理」。他挑 Claude Code 的理由很直白——這是目前最多人在用的 harness,他自己現在也主要用它,拿它示範最有共鳴。但只要你的工具能在 CLI 裡跑,理論上都能套用同樣的思路,這也是為什麼後面很多章節談的其實是「agent 這種東西怎麼運作」,而不是某個工具的按鍵手冊。</p>
+        <p>第三章存在的目的是打地基。如果你完全沒用過任何 coding harness,這一章會把 session 管理、prompt 技巧、IDE 整合、時間回溯、bash 執行、權限設定這幾件最基本但最容易踩坑的事一次講完,讓你在進入後面正式教學前,手上已經有一套堪用的操作直覺。Matt 特別提醒,就算你已經是 Claude Code 老手,這章也不是純新手向——裡面夾了幾個進階技巧,值得耐著性子看完,而不是自認熟練就直接跳過。</p>
+        <p>換句話說,這是一堂「先把工具摸熟,才有資格談方法論」的暖身課,後面七堂單元會依序把終端機操作、prompt 輸入、IDE 協作、版本回溯、指令執行、權限控管這些片段拼起來。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-02</span>
+          <span class="head-text">
+            <span class="title">管理 Claude Code session</span>
+            <div class="summary">從啟動、terminal setup 到 /usage、/context、/clear,建立 session 生命週期的基本操作感。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 從最土法煉鋼的地方開始:在 VS Code 的整合終端機裡直接打 `claude` 啟動。第一件要求觀眾做的事,是輸入 `/terminal-setup` 並按 enter——這一步在設定 shift+enter 這個關鍵按鍵組合,少了它,你之後打多行 prompt 時會遇到怪異的鍵位行為。他特別提醒,這個指令執行完成後會變成紫色(lilac),沒變色就代表沒設定成功,這個視覺回饋看似瑣碎,但確實是課程裡少數會讓新手卡關很久的地方。</p>
+        <p>接著是這堂課真正的重點:三個管理 session 的指令。`/usage` 顯示的是目前這個 session、本週,甚至(如果你有訂閱 Fable 方案)本週搭配 Fable 的額度用量——Matt 提到他自己開的是 20x max,但課程只建議用 5x max 甚至 pro 方案就夠用,這裡其實也是在暗示:額度不是越高越好,夠用就好。`/context` 則是拿來看目前 context window 裡裝了什麼——system prompt、系統工具、skills、以及這次對話累積的訊息各佔多少 token,還會告訴你目前模型的總 context window 上限(例如 Opus 4.5 是一百萬 token)。這個指令的價值不在於現在你懂多少,而在於它是後面章節「管理 context」的除錯工具,先認識它,後面談 context 工程時才有畫面可以對照。</p>
+        <p>最後是清空與中斷。`/clear` 會把整個對話歷史砍掉重來,Matt 示範清空前後用 `/context` 對照,清空後 context 只剩 137 個 token(基本上是系統提示的底噪),這是在具象化「模型是無狀態的」這個概念——每次對話都要重新把上下文喂進去,清空就是把這份記憶砍成一張白紙。另一種清空方式是連按兩次 Ctrl+C 直接離開再重開一個全新 session。至於中斷正在跑的任務,按一次 Escape 就能打斷 Claude 手上的工作,並在對話裡插入一句「interrupted, what should Claude do instead」讓你接著下指示——Matt 老實承認自己常常不小心誤觸,這也算是給觀眾打預防針:按錯不用慌,繼續講下去就好。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-03</span>
+          <span class="head-text">
+            <span class="title">在 terminal 下 prompt</span>
+            <div class="summary">用 @ 引用檔案、Ctrl+S 暫存 prompt、貼上圖片,把終端機輸入框變成更好用的工作台。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課接著 3-02 的「基本輸入」,往上加了幾個能讓 prompt 品質直接跳一級的小技巧。第一個是用 `@` 引用檔案——Matt 示範打 `@` 之後直接模糊搜尋 `drizzle.config.ts`、`routes.ts` 這類檔名,按 enter 或 tab 把它們拉進輸入框。這裡的關鍵細節是:被引用的檔案是直接讀進 context window,不會觸發一次額外的工具呼叫(也就是不會多花一次 model provider request),對於需要把 spec 文件整份塞進第一輪對話的場景特別划算。</p>
+        <p>第二個技巧是暫存 prompt。打了一段話但還沒想清楚要不要送出時,按 Ctrl+S 就能把這段文字「stash」起來,畫面左下角會出現一個小標記。這時候你可以先打別的訊息送出,等準備好了再把暫存的內容叫回來繼續編輯送出。Matt 把這個功能定位成「給 Claude 回饋的節奏工具」——你常常會想先確認一件事、插入一句話,再回頭把原本準備好的長 prompt 補完,而不是把所有念頭硬塞進同一次輸入。</p>
+        <p>第三個是貼圖:直接複製一張圖片(他示範的是斯洛維尼亞 Bled 湖的照片),用 Ctrl+V 貼進輸入框,終端機左下角會顯示貼圖狀態,送出後 Claude 能直接辨識圖片內容回答——連教堂鐘樓的細節都答對了。這個功能提醒你 Claude Code 的輸入框不只是文字通道,遇到 UI 截圖、錯誤畫面、設計稿這類視覺素材時,直接貼上通常比硬用文字描述更快、更準。三個技巧合起來,其實是在告訴你:好的 prompt 工程有一半是輸入介面的熟練度,不是純粹的措辭功力。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-04</span>
+          <span class="head-text">
+            <span class="title">Claude 與你的 IDE</span>
+            <div class="summary">透過 /ide 連上 VS Code,把 diff review 從終端機搬進編輯器,是 Matt 全程在 IDE 裡跑 Claude 的真正理由。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 這堂課先撇清一個常見誤會:他全程在 VS Code 裡示範,不代表你非用 VS Code 不可——Cursor、Windsurf、Antigravity 或任何你順手的編輯器都行。連接方式是打 `/ide`,這個指令會顯示目前的 IDE 整合狀態,並提示你如果還沒裝對應擴充套件(他用的是「Claude Code for VS Code」),該怎麼裝。這一步做完,終端機裡的 Claude Code 就跟編輯器建立起連線。</p>
+        <p>真正的重點在後面:這個整合到底解決了什麼問題。答案是 diff 管理。Matt 示範叫 Claude 把 `package.json` 裡的 `test:watch` 指令刪掉,沒連 IDE 的時候,這個修改結果只能以純文字 diff 的形式擠在終端機裡看,體驗相當侷促。但連上 VS Code 之後,同一個 diff 會直接跳出編輯器內建的差異比對畫面——可以捲動、可以看到完整上下文,你能清楚判斷這是不是一次「像樣的修改」。接受方式有兩種:點畫面上的「Accept proposed changes」,或者更直覺的,直接在編輯器裡儲存檔案,存檔本身就等於同意這次變更。</p>
+        <p>Matt 直言這是他堅持在 IDE 裡跑 Claude Code 的核心原因——他常常需要在 Claude 生成的結果上順手調整幾個地方,而審查、微調 diff 這件事在正規編輯器裡做,比困在終端機裡舒服太多,他估計自己有 99% 的時間都是靠這個 diff 檢視功能。IDE 整合當然還有其他附加能力,但這一項才是決定「要不要在 IDE 裡開 Claude」的關鍵理由,也是後面章節你會看到他持續採用這套工作流程的伏筆。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-05</span>
+          <span class="head-text">
+            <span class="title">在時間軸上前進與回溯</span>
+            <div class="summary">雙击 Escape 進入 rewind 模式,搭配 session 持久化與 claude --resume,讓你敢大膽嘗試也能隨時撤退。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課銜接的是上一支影片留下的那個被刪掉的 `test:watch` 指令——Matt 先示範最直覺的作法:直接跟 Claude 說「revert that please」,它就會照著剛剛的修改反著做一次,把刪掉的東西加回來,再按 Ctrl+S 存檔確認。但這只是暖身,真正的主角是連按兩下 Escape 進入的 rewind 模式。</p>
+        <p>Rewind 模式會列出整條對話的時間軸,每個節點代表一次互動,選中某個節點之後,系統給你三種還原選項:只還原程式碼、只還原對話內容、或是程式碼與對話一起還原到那個時間點。Matt 說他自己最常用的就是「兩者都還原」,直接把整個 session 拉回到指令下之前的狀態,像沒發生過一樣乾淨。如果還想往回推更遠,同樣連按兩次 Escape 就能繼續選更早的節點——這裡他也提到列表裡還有一個「summarize from here」的選項,先按下不表,留給後面章節講。這種「先試試看,不滿意就整個倒帶」的自由度,其實是敢放手讓 agent 做大動作修改的心理安全網,沒有這層保障,很多人會不敢讓 Claude 碰太多檔案。</p>
+        <p>另一個容易被忽略但很重要的特性是:Claude Code 的 session 是存在本機的,不是關掉終端機就人間蒸發。連按兩次 Ctrl+C 離開後,你有好幾種方式接回原本的對話——可以直接用系統印出的 `claude --resume &lt;uuid&gt;` 指令精準回到那個 session;也可以打開全新的 `claude`,在裡面打 `/resume` 叫出所有歷史 session 清單(甚至可以在整個 repo 範圍內搜尋),挑一個按 enter 進去;最快的則是 `claude --continue`,直接接續上一個 session。這三條路殊途同歸,但適用情境不同——知道 UUID 就用第一種最精準,忘了細節就用 `/resume` 用清單找,趕時間就用 `--continue`。搭配前面的 rewind,整堂課的訊息很清楚:你在時間軸上前進、後退、甚至跨 session 復活,都不用擔心一去不回頭。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-06</span>
+          <span class="head-text">
+            <span class="title">執行 bash 指令</span>
+            <div class="summary">用驚嘆號進入 bash 模式、Ctrl+B 背景執行、Ctrl+Z 暫時隱藏,決定哪些指令結果要不要讓 Claude 看見。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 這堂課把話講得很重:能執行 bash 指令,才是把 agent 從「被動寫程式碼的工具」變成「真正能自己找回饋迴圈、跟專案互動」的關鍵能力。沒有這個能力,Claude 頂多是憑猜測生成程式碼;有了它,Claude 能自己讀 `package.json` 找出 dev server 指令、自己執行、自己看結果修正——這也是為什麼他把這件事放在權限設定(3-07)前面先講,理解執行指令的機制,才有資格談要不要放行。</p>
+        <p>操作上很簡單:在輸入框打一個驚嘆號 `!` 就進入 bash 模式,這時候打的任何東西都會被當成 shell 指令直接執行,而且結果會被放進 Claude 的 context。Matt 示範跑 `npm run type check`,因為他示範環境沒先跑過 `npm install`,冒出一堆錯誤——但這些錯誤同樣會進到 Claude 的視野裡,於是他接著請 Claude 幫忙處理,Claude 立刻看出 Zod 雖然寫在 `package.json` 裡但沒真的安裝,建議跑 `npm install` 解決。這個小插曲其實示範了 bash 模式最實用的場景:你手動跑一個會出錯的指令,把錯誤直接餵給 Claude,省掉自己複製貼上錯誤訊息的步驟。</p>
+        <p>但 bash 模式處理不了「跑起來不會結束」的指令,比如 dev server。這時候要在 bash 模式裡先跑 `npm run dev`,趁它還在跑的時候按 Ctrl+B 把它丟到背景執行,畫面上會出現一則「command was manually backgrounded」的訊息,輸出內容則寫進本機檔案,底下狀態列會多出一個背景任務的提示。用方向鍵往下移到這個任務再按 enter,就能檢視這個背景 shell 實際在做什麼——他示範看到 dev server 跑在 localhost:5175,還能按 X 直接停掉它,或按左鍵退回主畫面。這對除錯 dev server 問題特別好用:Claude 能自己看 log、自己送 curl 請求驗證、自己讀懂輸出,不用你在中間傳話。</p>
+        <p>最後一個工具是完全相反的方向——如果你想跑一個指令但完全不想讓 Claude 看到結果,又想保留 Claude 目前的對話狀態不被打斷,就按 Ctrl+Z 把 Claude Code 整個「掛起(suspend)」。這時候終端機回到普通 shell,你可以做任何事,像他示範的 `echo foo`,Claude 完全看不到;做完之後打 `fg` 就能把 Claude Code 原封不動叫回來。Matt 把整套邏輯收成一句判斷準則:想讓 Claude 看到結果就用 `!` 進 bash 模式,要長駐執行就 Ctrl+B 丟背景,完全不想讓它看見就 Ctrl+Z 掛起——這三條路線,分別對應「共享資訊」「持續監控」「完全隔離」三種不同的協作意圖。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">3-07</span>
+          <span class="head-text">
+            <span class="title">權限設定</span>
+            <div class="summary">從逐次核准、settings.local.json 到 auto mode 的 LLM 分類器,是把「風險換效率」這件事調到自己舒服刻度的機制。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 用一句話點出這堂課的立場:跟 agent 合作永遠要衡量風險與報酬,尤其是你願意放給它多少權力。他直接舉了一個嚇人的例子——如果把 Claude 的權限開到無限大,像很多人做的那樣,你等於是在賭它不會手滑把整個檔案系統刪掉。Claude Code 的解法是一套很細緻的權限模型,預設狀態非常保守:他示範叫它跑 `echo hello`,因為這個指令絕對安全,直接放行;但換成跑 type check(`pnpm type check`),系統立刻跳出確認框,列出確切要執行的指令、它想這麼做的理由(這裡用了 React Router Type Gen 加 TSC),並給出三個選項——這次允許、以後在這個專案裡看到同樣指令都自動允許、或拒絕。拒絕的時候還可以按 Tab 補充理由,比如他示範改口要求改用 `npx tsc`,系統會拿著新指令再問一次。</p>
+        <p>這些「以後都允許」的選擇不是隨口說說,它們會被實際寫進 `.claude/settings.local.json` 底下的 `permissions.allow` 陣列。這個語法值得花時間搞懂,因為你可以直接手動編輯這份設定,提前把你知道會反覆用到的指令列進去——比如寫死 `pnpm type check` 這一條規則,或者換成萬用字元讓所有 `pnpm` 開頭的指令都自動放行。反過來,`deny` 陣列可以用來明確擋掉危險動作,像他示範的 `git push` 搭配萬用字元,直接封殺所有推送指令,不用每次都手動攔。這套機制不只管 bash 指令,web 搜尋跟網頁抓取一樣要走這個核准流程——他示範叫 Claude 去查 React Router Type Gen 的文件,同樣會跳出核准框,答應之後同一條規則也會寫進 `settings.local.json`。</p>
+        <p>值得留意的是,`settings.local.json` 在他的專案裡是被 `.gitignore` 排除的,只對他個人生效。如果想把這組規則變成整個團隊共用的預設值,做法很簡單——把檔名從 `settings.local.json` 改成 `settings.json`,這樣就能進版本控制、跟著 repo 一起分享,任何人第一次在這個專案跑 `claude`,都會自動套用同一套權限規則,不必每個人重新手動核准一輪,這對新加入專案的人特別省事。</p>
+        <p>最後 Matt 介紹了他個人現在的預設模式:auto mode。用 Shift+Tab 可以在 manual(逐次核准)、accept edits(自動接受編輯)、plan mode、auto mode 之間切換。Auto mode 的機制是用一個 LLM 分類器(他猜是 Haiku)在動作執行前先評估這個指令安不安全,安全就直接放行不用你介入——他示範跑 `npm run type check`,不用任何手動核准就直接執行了。這個機制的代價是會多花一點 token 跟一點時間讓分類器判斷,而且分類器不是完美的:他坦承有時候資料庫遷移這種危險動作被放行,反而建立 GitHub issue 這種正常動作偶爾被卡住。即便如此,他認為整體抓得「剛好在可接受的那一側」——真正危險的操作(像不小心 `rm -rf` 整個檔案系統)幾乎都會被擋下,而且不太會把使用額度衝高太多。更重要的是 `settings.json` 跟 auto mode 不是互斥的,harness 會先檢查 settings 裡有沒有現成規則,沒有才會丟給分類器判斷,所以把常用指令寫進 settings.json,等於幫 auto mode 分流減負。這個預設值可以到 `/config` 裡找到「default permission mode」設定起來,Matt 自己就是把它固定在 auto mode——這也解釋了為什麼你之後在課程示範裡很少看到他被權限彈窗打斷。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details></div>
+<div class="chapter-footer-nav"><a href="chapter-2.html">← 第 2 章　核心概念</a><a href="chapter-4.html">第 4 章　基本功 →</a></div>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第5章 引導技巧 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="">總覽</a>
+      <a href="chapter-1.html" class="">01 開課前準備</a>
+<a href="chapter-2.html" class="">02 核心概念</a>
+<a href="chapter-3.html" class="">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="current">05 引導技巧</a>
+<a href="chapter-6.html" class="">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<div class="chapter-head">
+  <div class="num">CHAPTER 05</div>
+  <h1>引導技巧</h1>
+  <div class="en">Steering · 9 個單元</div>
+  <a class="backlink" href="index.html">← 回課程總覽</a>
+</div>
+<div class="unitlist">
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-01</span>
+          <span class="head-text">
+            <span class="title">引導地圖</span>
+            <div class="summary">每個 session 都是失憶重來，本單元建立 push 與 point 兩種引導模型的核心區分。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課開場先把一個殘酷事實攤開：agent 是無狀態的，每次開新 session 就等於換了一個完全不認識你的新人，你在上一輪教過的規矩、專案裡的坑、你偏好的做法，全部清空重來。Steering（引導）這一整章要解決的問題就是：哪些指示該讓 agent 每次都看到，又該用什麼方式送進去，才不會每次都要重講一遍。</p>
+        <p>真正的重點在於成本結構。Matt 把一個 session 拆解成 turn，每個 turn 又是好幾百個 model provider request，而每一次 request 都會把完整歷史加上新內容一起送出去。這代表你只要把一條指示塞進 context window 的早期位置，它就會在接下來每一個 request 裡被重複傳送、重複收費——雖然有 caching 可以省一點，但更麻煩的是「注意力成本」：塞進去的指示越多，agent 對每一條指示的注意力就被稀釋得越薄，越容易滑向他說的「dumb zone」。這兩種成本合起來，他定義成一個新詞：context load，之後整章都會反覆用這個詞當度量衡。</p>
+        <p>由此他提出這章最核心的二分法：push（推送）與 point（指標）。Push 是把指示直接放進 context window，永遠在場、agent 不可能漏看，但不管這個 turn用不用得到都照樣付出 context load；point 則是把指示放在環境裡某個地方，context window 裡只留一行「指標」，等 agent 判斷真的需要時才去把完整內容拉進來，大多數 turn 幾乎不花錢。他特別點名 agents.md（Claude Code 裡叫 CLAUDE.md）就是 push 的代表工具，而且吐槽了業界現在「猛塞 agents.md」的風潮——他認為多數人做錯了方向，這章接下來會示範怎麼優先用 point，只在真正需要「永遠在場」的情況才用 push。</p>
+        <p>這一集本身沒有動手操作，是純概念鋪陳,但它是整章的地基:5-02 到 5-09 討論的檔案加指標、Agent Skills、導航指標、pruning、自動記憶，全部都是圍繞 push vs point 這條線在展開的不同技巧。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-02</span>
+          <span class="head-text">
+            <span class="title">用指標來引導</span>
+            <div class="summary">用資料庫遷移的真實坑,示範把該塞進 push 的規則改造成 doc + pointer。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>延續上一集的理論，這集直接進到一個真實案例：這門課的專案裡,每次改資料庫 schema（新增或修改表）都必須連動修改 seed.ts,否則重新產生資料庫時會留下跟實際 schema 對不上的髒資料。這種「兩件事必須綁在一起做，卻在程式碼裡完全看不出關聯」的知識，正是新人第一天要靠人口耳相傳教的那種東西，agent 也一樣沒辦法從程式碼本身推匯出來，所以是典型「值得塞進去」的資訊。</p>
+        <p>Matt 先示範最直覺但錯誤的做法：把整套遷移步驟直接寫進 agents.md（push），然後用 request logger 實際抓封包給你看——你會看到這段文字被包在一段 system reminder 裡送進每一次 request，前面寫著「important, these instructions override any default behavior」，但底下 Claude Code 自己又加了一句「this context may or may not be relevant to your task, you should not respond to this context unless it is highly relevant」。這個細節很值得注意：Anthropic 自己也知道大家把 agents.md 塞爆的問題,才加了這句免責宣告,這也解釋了為什麼很多人抱怨 claude.md 裡寫的規則不一定會被遵守。</p>
+        <p>問題是：這套遷移步驟不是每次工作都用得到。很多功能改動根本不碰資料庫，QA session 也用不到，硬把它 push 進去等於每個 turn 都在燒不必要的 context load。所以他的解法是把這段詳細步驟搬出 agents.md，放進 repo 根目錄新建的 docs 資料夾裡，agents.md 裡只留一行 context pointer（「當你要動 schema 的時候，去讀這份檔案」），這就是這章會反覆出現的「doc + pointer」模式。</p>
+        <p>這集也第一次帶出「writing for agents」這個 skill——一個專門用來寫 agents.md、寫 skill、寫給 agent 看的檔案的工具，Matt 說自己寫檔案、寫 steering 規則時都靠它。這集本身是練習題（作業嚮導讀），要你自己動手把大段規則搬到指標背後，再用一次實際的 schema 改動去驗證 agent 真的會去把那份檔案拉進來——這個驗證動作直接對應鐵律裡「驗證後才能說完成」的精神，也是為 5-03 引入 Agent Skills 鋪路：doc + pointer 做得再好，也還有一個致命限制沒解決，那就是下一集要談的「不能打包帶走」。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-03</span>
+          <span class="head-text">
+            <span class="title">什麼是 Agent Skills</span>
+            <div class="summary">doc + pointer 無法跨專案攜帶,Agent Skills 把這個模式打包成可分享的標準格式。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>上一集做出來的 doc + pointer 組合雖然解決了 context load 的問題，但 Matt 點出它有個明顯的天花板：整套東西完全綁死在這個 repo 裡，你沒辦法把它包一包直接送給同事，也沒辦法帶去下一個專案，只能手動複製貼上。Agent Skills 就是為了解決這個「可攜性」問題而生的標準化包裝。</p>
+        <p>一個 skill 本質上就是「同一套指標模式，但打包成標準化的自包含資料夾」——裡面有個 SKILL.md，扮演的角色跟之前的 doc 一模一樣，但多了 name 和 description 兩個欄位，這兩者本身就是那個 context pointer：harness 平常只把 name/description 放進 context window，讓 agent 自己判斷「這個描述符不符合現在的任務」，符合才把 SKILL.md 的完整內容拉進來。Matt 用自己寫的「writing for agents」skill 當例子——description 寫著「use when creating or editing skills or modifying agents.md or claude.md」，就是一句典型的判斷觸發條件的話。更進一步，skill 資料夾裡還能塞其他檔案，形成多層指標：SKILL.md 裡又可以再指向資料夾裡的 reference.md（例如他自己的 skill 裡就有一份只在「你現在正在寫 skill」這個情境下才需要用到的 skill mechanics 檔案），可以做到相當深的資訊分層，卻完全不需要一次全部塞進 context。</p>
+        <p>這集另外一個重點是 model-invoked 和 user-invoked 的差別。預設情況下 skill 是 model invoked，description 會進 context window 讓 agent 自己判斷要不要拉；但你也可以設 disable model invocation: true，讓這個 skill 的 description 完全不進 context window，harness 甚至不知道它存在，只有使用者自己主動叫它才會跑（他舉了 handoff 這個 skill 當範例）。這形成一個取捨：model-invoked skill 越多，context load 越高；user-invoked skill 越多，則是「認知負擔」越高——因為使用者自己要記得有這些 skill、什麼時候該手動叫。Matt 坦承自己寫的 skill 大多是 user-invoked，因為免費（不佔 context）這件事對他來說很有吸引力。他也提到 Agent Skills 是在 agentskills.io 定義的開放標準，代表一個 skill 寫一次可以在所有支援這套標準的 harness 上通用，這也是為什麼它比單純的 doc + pointer 更值得投資。這集是純講解，為 5-04 的動手實作暖身。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-04</span>
+          <span class="head-text">
+            <span class="title">動手寫一個 skill</span>
+            <div class="summary">把 5-02 做的資料庫遷移檔案正式改寫成第一個可攜式 Agent Skill 的實作練習。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這是一集實作題，任務很明確：把 5-02 已經寫好的「doc + pointer」資料庫遷移檔案，正式升級成一個標準的 Agent Skill，讓它變成一個可以直接送給同事、丟到別的專案都能用的獨立單元。skill 名稱他建議直接叫 database migrations，而原本 pointer 那句提示文字，直接就變成 skill 的 description——這呼應了上一集講的，description 本身就是那句「context pointer」的角色。</p>
+        <p>值得注意的是這集給了兩條路：你可以自己手動把檔案搬進 skill 資料夾的標準格式，也可以偷懶直接叫「writing for agents」這個 skill 幫你轉換。Matt 特別建議在動手之前，先用 request logger 送一個 dummy request 去看 baseline（也就是沒有這個 skill 時 agent 的行為長怎樣），做完轉換之後再故意做一次 schema 改動，去驗證這個 skill 真的會在對的時機被 model 自動叫出來。這個「先量基線、再驗證行為有沒有變」的習慣，其實就是把 5-02 那種手動檢查 context window 內容的做法，延伸成一個可以重複套用的驗證流程——之後每次調整 steering 規則，都可以照這個套路做。</p>
+        <p>這集份量不大，但意義是承先啟後：把前幾集分散的概念（doc、pointer、context load、model-invoked）第一次收攏成一個完整、可驗證、可攜帶的實體產出。後面 5-05 會接著討論這個 skill 該放在哪個層級才對。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-05</span>
+          <span class="head-text">
+            <span class="title">user skill 與 project skill</span>
+            <div class="summary">skill 可以放在使用者層或專案層，選錯層級會讓好不容易做出的 skill 用不到或用不好。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>做出第一個 skill 之後，馬上要面對一個實際問題：這個檔案該放在哪裡？Matt 講了兩個層級。User 層級放在使用者自己電腦上的 .claude 或 .agent skills 資料夾，是個人的、跟著你走遍所有專案，但不會進這個 repo 的版本控管，別人也看不到；project 層級則是 checked into repo，只屬於這一個專案，但會自動跟著 clone 傳給所有隊友，而且大家都可以一起修改、一起把它養大。</p>
+        <p>他給的判斷原則很直接：如果這是你個人的工作習慣、你喜歡的做事方式、只對你自己有意義的捷徑，就放 user 層；一旦這個 skill 是「團隊要靠它才能正確協作」「編碼了這個專案該怎麼被處理」的東西，就該放進 project 層——而且他特別強調 project 層其實該是較強的預設值，因為它能讓整個團隊一起貢獻、一起把 skill 養大，長期下來對所有共事的人都有幫助。他還補了一個更簡單的經驗法則：如果你主要是單打獨鬥，user 層比較方便，因為它跟著你到處走；一旦變成多人協作的專案，project 層才是正解。</p>
+        <p>這集份量很短，是 5-03、5-04 講完「skill 是什麼、怎麼做」之後自然接上的落地問題——做出一個好 skill 只是一半，放對位置才能讓它真正發揮「可攜帶、可分享」的價值。這條分層邏輯也預示了後面 5-06、5-07 會一直出現的主題：steering 相關的產出（無論是 doc、pointer 還是 skill）都需要有意識地管理它的歸屬和範圍，不然照樣會失控膨脹。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-06</span>
+          <span class="head-text">
+            <span class="title">導航指標</span>
+            <div class="summary">除了教 agent「該做什麼」，也要教它「東西在哪」，用少量高頻的導航指標取代地毯式搜尋。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>前面幾集的 steering 大多聚焦在「指導 agent 該做什麼事」，這一集轉了個方向，談的是「怎麼幫 agent 更快找到東西」。Matt 用了一個很生動的比喻：把你的 code base 想成 Google Maps 的衛星視角，agent 平常在裡面找東西，走的都是「地方道路」——一個一個掃資料夾、開檔案、做搜尋，一路順著引用關係摸過去（他現場示範搜尋 quiz 這個關鍵字，然後再手動進 schema 去追出處），而這整個探索過程本身就會不斷把新檔案、新的 tool call 塞進 context window，也是一種隱性成本。他說，如果能給 agent 一條「高速公路」——context window 裡放一個指標，直接帶它去對的檔案——探索效率會差很多。</p>
+        <p>他把這種指標叫做 navigation pointer，並直接呼應前幾集反覆踩的坑：seed script 常常被 agent 忽略，導致資料庫遷移出包，解法不是寫一大段規則去教它「該怎麼做」，而是只需要讓它知道「這個檔案存在」，於是他叫 agent（這次是透過 writing for agents skill）在 agents.md 裡加一行簡短的導航指標，指向 seed script。這跟 5-02 教它「必須同步修改 seed.ts」是不同層次的問題——那是教做法，這是教地圖。</p>
+        <p>但他馬上警告不要濫用：不是每個重要檔案都該塞一條導航指標進去，不然等於把整個目錄結構 push 進 context，又會推高 context load。真正該建高速公路的地方，是 agent 自己很難發現的非直覺依賴關係——他舉自己的 skills repo 當例子：每個新增的 skill 都要同步進三個地方（docs bucket、plugin.json manifest、對應分類的 README），這種跨檔案的隱性規則如果不寫進 agents.md，agent 幾乎不可能自己推理出來。他也特別提醒一個反直覺的風險：導航指標會過期。如果你砍掉了某個資料夾卻忘記把 agents.md 裡對應的指標也刪掉，那個「失效的高速公路」反而比沒有指標更糟——因為 agent 被訓練成信任這些資訊，指標一旦指向不存在的東西，不僅浪費 token，還會讓它花時間去搞懂為什麼找不到。最後他把這個概念和更早教過的「@提及」檔案的用法連起來：那其實就是一種「直接塞進文字框、只用一次的臨時高速公路」，是同一個概念的不同呈現方式。這集是為下一集 pruning 鋪墊：既然指標會過期、會累積，就需要有系統性的方法去清理它們。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-07</span>
+          <span class="head-text">
+            <span class="title">剪枝 pruning</span>
+            <div class="summary">三個檢驗工具（重複、沉積物、no-op）教你如何定期修剪只會愈長愈大的 steering 檔案。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這集處理一個幾乎每個團隊共用的 agents.md 都會踩到的問題：這種檔案「只會長大，幾乎不會變小」。Matt 解釋這背後是心理因素而非技術因素——加一條規則感覺很便宜也很安全，尤其是在一份大家共同編輯的團隊檔案裡；但刪掉一條規則卻讓人有種「我在否定這條規則的價值、在別人的貢獻上踩一腳」的感覺。結果就是檔案從五行長到五百行、五千行，他直接斷言：幾乎所有他在真實世界看過的 agents.md 都太大太大太大了。</p>
+        <p>針對這個問題，他給出一套具體的三件式剪枝工具。第一是單一事實來源（single source of truth）：任何 agent 需要知道的事實，應該只活在一個權威的地方。重複會造成三種成本——維護成本（改動要改好幾處）、context load（更多 token 講同一件事）、以及最隱蔽的一種：重複的資訊會因為出現次數多而被 agent 賦予不成比例的高權重,反而把真正重要但只出現一次的資訊給淹沒。第二是沉積物（sediment）,這本質上是心理問題的具體化：因為「加比刪安全」的心態，規則一層層堆積,曾經正確、或曾經在某個情境下正確、但現在已經不適用或不是普遍適用的規則,會一直躺在檔案裡持續消耗 context load,讓整份 agents.md 對越來越多工變得不相關——這正是 5-01 提過的信用卡巧克力蛋糕問題的根源。第三、也是他認為最陰險、最容易加進去卻最難被發現該刪掉的：no-op,也就是那些實際上什麼都沒改變輸出的指令。他舉的例子很實際：如果你的 implement skill 裡寫著「寫詳細的 commit message」,這條指令真的有必要嗎？刪掉它,模型會不會照樣寫出好的 commit message？多半會——那就是在為一個模型本來就會做的事情付 context load 的錢。檢驗 no-op 的方法很簡單：刪掉它，看行為有沒有變,沒變就說明它本來就是廢話。</p>
+        <p>這三個檢驗（重複、沉積物、no-op）構成一套可以套用在任何 steering 檔案上的稽核清單,任何過不了這三關的內容,就是在白白吃掉 context load 卻沒有任何產出,應該被剪掉。這集是純方法論講解，緊接著下一集就會真槍實彈地拿一份 agent 自動生成的巨型 agents.md 來實測這套工具。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-08</span>
+          <span class="head-text">
+            <span class="title">實際試一次 pruning</span>
+            <div class="summary">用 claude init 生成的 172 行巨型 CLAUDE.md 當活教材，實戰演練上一集的三種剪枝手法。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 開場就自嘲這是「示範怎麼生出一份爛 steering 檔案的最佳方法之一」：在 Claude Code 裡跑 /init，它會自動掃描整個 repo，把它覺得值得記錄的東西全部塞進一份新的 CLAUDE.md——換句話說，是讓 agent 自己引導自己。結果不出意外，產出一份長達 172 行的巨大檔案，他開啟一個全新 terminal 跑 /context 確認，光是這個檔案就吃掉大約 4000 個 token。這個練習刻意選了個「反面教材」當起點，正好拿來實戰上一集教的三個剪枝工具。</p>
+        <p>他把任務拆成清楚的步驟：先自己動眼睛通讀一遍，憑直覺抓出哪些段落像 no-op、哪些地方重複了（他特別提醒重複不只發生在檔案內部，也可能是這份檔案講的東西其實 agent 很容易自己從別的地方讀到，那也算一種重複）；因為這份檔案是剛生成的、沒有經過時間累積,他推斷這次不太可能出現沉積物問題（沉積物需要時間才會形成）。讀完一遍有概念之後，才叫 writing for agents skill 出馬幫忙實際瘦身——這個順序值得留意：人先建立判斷,才把動手的部分交給 agent,而不是一開始就整份丟給 agent 處理。</p>
+        <p>他也重申，處理這些該刪的內容時有三個選項：整條刪掉、放到指標背後（doc + pointer）、或乾脆包成一個 skill——分別對應不同的資訊重要程度和使用頻率。這集本質上是把 5-06、5-07 教的診斷工具和裁剪手法，在一個具體、混亂、有代表性的樣本上走一遍完整流程，目標是讓這份 172 行的檔案最後瘦成一份幾乎只剩指標、token 數大幅下降的精簡版本——也是檢驗讀者是否真的內化了「push vs point」這條主線的實戰關卡。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">5-09</span>
+          <span class="head-text">
+            <span class="title">Claude Code 的自動記憶</span>
+            <div class="summary">Harness 內建的自動記憶系統會自己寫入 steering 規則，Matt 認為那是自動生成的沉積物，建議直接關掉。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這一集補上最後一種 steering 來源：agent 自己寫給自己的記憶。多數 harness 都內建某種記憶系統，會在你工作過程中,自動偵測你對它行為做的修正、你表達過的偏好、或關於「你希望事情怎麼被完成」的事實，不用你特別要求，就悄悄寫進本地檔案，供之後的 session 讀取——依 harness 不同，讀回去的方式可能像 agents.md 一樣被 push 進去，也可能是走 pointer。理論上，這代表 agent 會在不需要你手動引導的情況下，逐漸建立起一幅「你喜歡怎麼工作」的畫像。</p>
+        <p>Matt 帶著大家實際在 Claude Code 裡跑 /memory 檢視，發現自己的 auto memory 是開著的,它用 claude.md 當作記憶的載體格式,還有一個專門的 auto memory 資料夾,點開後可以看到一份 memory.md，裡面記的東西相當零碎（他自己形容是「有點亂七八糟的東西」），而且內容完全因人而異，取決於你過去 session 裡說過什麼。</p>
+        <p>但他對這整套機制的立場很明確：幾乎沒什麼幫助，而且直接點名這就是「自動產生的沉積物」（auto sediment）——前一集才剛教過沉積物是什麼問題（不斷堆積、很少被移除、逐漸讓檔案對更多工變得不相關），auto memory 等於是把這個問題自動化、放手讓它自己長,而完全沒有人在把關做 5-07 教的那三種檢驗（重複、沉積物、no-op）。他給的具體建議是直接進 auto memory 設定把它關掉，關掉後不會再存新記憶,而且他推測這樣做還能順帶省下 context window（因為連「建立記憶」這個工具本身都不需要放進去了）。他把這個立場提升到一個更根本的原則：使用者應該保有對「記憶怎麼被建立、steering 怎麼被完成」的主控權，一旦放任這些自動記憶無止盡地累積,你等於是在自己的 context 裡養出一堆沒人清理的垃圾。這集短小精悍，作為整個引導章節的收尾,呼應了開篇 5-01 提出的核心主張——push 是有代價的,而且這個代價常常是在你沒注意到的地方悄悄發生。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details></div>
+<div class="chapter-footer-nav"><a href="chapter-4.html">← 第 4 章　基本功</a><a href="chapter-6.html">第 6 章　把功能出貨 →</a></div>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

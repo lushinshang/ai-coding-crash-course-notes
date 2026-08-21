@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第2章 核心概念 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --placeholder-bg: #fbf2e4;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17;
+    --bg-elevated: #262320;
+    --text: #ece6da;
+    --text-dim: #a89e8c;
+    --accent: #e08a5f;
+    --accent-soft: #3a2c22;
+    --border: #3a352c;
+    --placeholder-bg: #332a1d;
+    --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17;
+  --bg-elevated: #262320;
+  --text: #ece6da;
+  --text-dim: #a89e8c;
+  --accent: #e08a5f;
+  --accent-soft: #3a2c22;
+  --border: #3a352c;
+  --placeholder-bg: #332a1d;
+  --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.75;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 20px;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+header.top .topnav { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.02em; }
+header.top a.home span { color: var(--accent); }
+.chapnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.chapnav a {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.chapnav a.current { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 600; }
+.chapnav a:hover { border-color: var(--border); }
+
+.hero { padding: 56px 0 28px; }
+.hero .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.3; margin: 0 0 14px; }
+.hero p.lede { font-size: 17px; color: var(--text-dim); max-width: 640px; }
+.source-note { font-size: 13px; color: var(--text-dim); margin-top: 18px; }
+.source-note a { color: var(--accent); }
+.disclaimer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  max-width: 640px;
+}
+.disclaimer a { color: var(--accent); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 44px; }
+.step {
+  flex: 1 1 140px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.step .n { font-size: 12px; color: var(--accent); font-weight: 700; }
+.step .t { font-weight: 600; margin-top: 4px; }
+
+.chaptergrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-top: 8px; }
+.chapcard {
+  display: block;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.chapcard:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chapcard .num { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+.chapcard h3 { margin: 6px 0 4px; font-size: 19px; }
+.chapcard .en { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+.chapcard .count { font-size: 13px; color: var(--text-dim); }
+
+.chapter-head { padding: 40px 0 8px; }
+.chapter-head .num { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; font-size: 13px; text-transform: uppercase; }
+.chapter-head h1 { margin: 8px 0 4px; font-size: 30px; }
+.chapter-head .en { color: var(--text-dim); font-size: 14px; margin-bottom: 6px;}
+.backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+.backlink:hover { color: var(--accent); }
+
+.unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+details.unit {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+details.unit[open] summary { border-bottom: 1px solid var(--border); }
+details.unit.placeholder { border-style: dashed; background: var(--placeholder-bg); }
+summary.unit-head {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+summary.unit-head::-webkit-details-marker { display: none; }
+summary.unit-head .code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 42px;
+}
+summary.unit-head .head-text { flex: 1; min-width: 0; }
+summary.unit-head .title { font-weight: 700; font-size: 16px; }
+summary.unit-head .summary { color: var(--text-dim); font-size: 14px; margin-top: 3px; }
+summary.unit-head .chev { color: var(--text-dim); flex-shrink: 0; transition: transform 0.15s ease; }
+details.unit[open] summary .chev { transform: rotate(90deg); }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.unit-body { padding: 4px 20px 22px; }
+.unit-body p { margin: 0 0 14px; font-size: 15.5px; }
+.unit-body p:last-child { margin-bottom: 0; }
+.resource-row { margin-top: 16px; }
+.resource-row .note {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.resource-row .note a { color: var(--accent); }
+
+.chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-footer-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topnav">
+    <a class="home" href="index.html">AI Coding Crash Course <span>課程導讀</span></a>
+    <nav class="chapnav">
+      <a href="index.html" class="">總覽</a>
+      <a href="chapter-1.html" class="">01 開課前準備</a>
+<a href="chapter-2.html" class="current">02 核心概念</a>
+<a href="chapter-3.html" class="">03 認識 Claude Code</a>
+<a href="chapter-4.html" class="">04 基本功</a>
+<a href="chapter-5.html" class="">05 引導技巧</a>
+<a href="chapter-6.html" class="">06 把功能出貨</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap">
+
+<div class="chapter-head">
+  <div class="num">CHAPTER 02</div>
+  <h1>核心概念</h1>
+  <div class="en">Concepts · 11 個單元</div>
+  <a class="backlink" href="index.html">← 回課程總覽</a>
+</div>
+<div class="unitlist">
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-01</span>
+          <span class="head-text">
+            <span class="title">模型、harness、agent、環境</span>
+            <div class="summary">拆解 agent 的四個零件，破解「換模型就能變強」的迷思，把注意力導向可控的系統設計。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>Matt 開場就丟出一張圖：環境、模型、harness、agent，四個詞疊在一起。多數人學 AI coding 是從「模型」開始認識的——Opus、Sonnet、GLM、Fable，這些名字先進場。但這堂課刻意把模型放到最小的角色：它只是「引擎」，一個接收文字、吐出文字的無狀態機器，自己什麼都做不了。真正讓它能寫檔案、跑指令、查網路的,是包在外面的 harness，而 harness 又必須綁定一個具體的環境才有意義——Claude Code、Codex 綁的是檔案系統，ChatGPT、claude.ai 綁的是它們自己那套虛擬環境（存文件、搜網頁）。model 加上 harness，在某個環境裡運作，這整組合起來才叫做 agent。Matt 特別用虛線畫 agent 的邊界，暗示它不是一個獨立實體，只是「harness 包著 model」這件事的代稱。</p>
+        <p>這個拆解看似基礎，但它是整章、甚至整門課的座標系。後面十堂課要講的 context window、聰明區笨蛋區、無狀態、幻覺、subagent，全部都是在講「harness 和環境可以怎麼被設計，好讓同一顆引擎跑得更好」。換句話說，2-01 先把讀者的注意力從「哪個模型最強」移開，因為訓練新模型是絕大多數人碰不到的門檻，但調整 harness 和環境——你今天下午就能動手。</p>
+        <p>值得記住的一個細節是 Matt 承認這個比喻不完美：像 npm script 算 harness 的一部分還是環境的一部分，見仁見智，harness 跟環境之間本來就有模糊地帶。但這不影響核心結論——他真正想打的靶是「唯模型論」。當有人喊著「只要換成某某新模型，一切都會變好」，Matt 的立場是：模型只是系統裡的一個零件，性能瓶頸更常出在你怎麼設計 harness 跟環境。這句話會在後面第 10 堂「怎麼選模型」再次被呼應成「50/50」的具體比例，值得先記下來對照。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-02</span>
+          <span class="head-text">
+            <span class="title">非決定性</span>
+            <div class="summary">同樣的提示詞，模型每次答案都不一樣——這不是 bug，是設計上刻意保留的特性。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>上一堂課把模型定位成「引擎」，這堂課立刻拆穿引擎的運作邏輯：模型做的事情，說穿了就是不斷猜下一個 token。給它一串文字，它在腦中的權重裡找出所有候選字，給每個候選字一個機率，然後丟進取樣器（sampler）裡抽一個出來。Matt 舉的例子很直白：問模型「我最喜歡的顏色是」，紅色可能有最高機率，藍色 28%，橘色也有一定機率——取樣器不是每次都選機率最高的那個，有時候會選藍色，甚至選橘色。</p>
+        <p>直覺上你會想：那把 temperature（溫度）調到零不就好了？永遠選機率最高的那個字，答案不就穩定又正確？Matt 在這裡引用了一篇論文《Trading Off Diversity and Quality in Natural Language Generation》，講的是「likelihood trap」（可能性陷阱）：當你把溫度往下壓、逼模型每次都選最可能的字，人類評分反而覺得輸出品質變差。這其實跟人聊天很像——一個人如果每句話都講最安全、最常見的句子，聽起來反而生硬乏味。多樣性和隨機性不是雜訊，它是輸出品質的一部分。更狠的是，Matt 補了一刀：就算你真的把溫度設成零，因為 LLM 運算是大規模平行處理，運算順序本身就會造成浮點誤差的細微差異，同一顆模型、同一張 GPU，還是可能吐出不同答案。非決定性是刻在骨子裡的，你去不掉。</p>
+        <p>這堂課的重點不是要你去研究取樣演算法，而是要你建立一個心理預期：接下來整門課，你螢幕上出現的結果一定會跟 Matt 示範的不完全一樣，這是正常的，不是你操作錯了。而且這件事會一路延伸到後面談權限管理的章節——因為既然模型永遠有非零機率做出奇怪甚至危險的事，你的系統設計就不能假設「模型每次都會照規矩來」，必須靠 harness 和環境的護欄去兜底。非決定性不是你要修的 bug，而是你整套工作流程都得繞著它去設計的既定事實。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-03</span>
+          <span class="head-text">
+            <span class="title">一輪對話與模型供應商請求</span>
+            <div class="summary">打開 request logger 看穿一次對話背後，harness 跟雲端模型之間真正在傳什麼。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>前兩堂課都是概念鋪陳，這堂課終於動手：Matt 跑起 request logger，把 Claude Code 的 base URL 指向本地的紀錄伺服器，這樣每一次跟模型的往來都會被完整記錄下來，而不是消失在黑盒子裡。他打了一句「hello」，然後翻開 log 檔——結果是一份巨大的請求內容，裡面塞滿了系統提示、工具定義、對話歷史，最後才是那一句簡單的「hello, what would you like to work on today?」回覆。這個對比本身就是這堂課想讓你感受到的東西：使用者眼中極簡的一問一答，背後其實是一次沉重的網路請求。</p>
+        <p>這個「本地 harness 打包一切送到雲端模型、拿回一小段文字」的往返，Matt 給它一個明確名字：model provider request（模型供應商請求）。即使你用的是 Ollama 這種本地跑模型的方案，這個概念依然成立，只是供應商剛好跟你的 agent 擠在同一台機器上而已。接著他示範了更關鍵的一段：叫 agent 寫一個檔案，這時候 log 裡出現了 tool use——模型不是直接回文字,而是回一段 JSON,說「我要呼叫 write 工具,參數是這個檔案路徑跟這些內容」。harness 收到這段 JSON 後自己去執行寫檔案的動作,再把「檔案建立成功」這個結果包成新的請求送回模型,模型才據此產生「完成了,我在根目錄建立了 compliments.md」這句回覆。</p>
+        <p>這一來一回——訊息、工具呼叫、工具結果、新訊息——被稱為一個 turn(輪)。Matt 特別強調一個容易被忽略的規模感:一個 turn 可以拖上好幾個小時,內含成百上千次的 model provider request。你在畫面上看到的「agent 正在思考」,其實往往是無數次雲端往返疊出來的。這堂課建立的詞彙表——model provider request、tool call、tool result、turn——不是為了掉書袋,而是後面所有討論 context、成本、效能優化時，你需要拿來精確描述問題的最小單位。沒有這套語言，你很難跟別人討論「為什麼這次對話變貴了」或「為什麼模型突然變笨」。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-04</span>
+          <span class="head-text">
+            <span class="title">session 與 context</span>
+            <div class="summary">幫上一堂看到的巨量文字取名叫 context，並定義了「session」這個之後要一直拿來操作的單位。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>上一堂看 log 的時候，Matt 刻意沒用一個大家都很熟的詞——這堂課把它補上：那一大坨系統提示、工具定義、歷史對話，全部合起來就叫做 agent 的 context（上下文）。這不是修辭上的補充，而是把「turn」和「context」接起來的關鍵一步：模型每次要預測下一個 token，靠的就是把這整包 context 轉成 token 丟進去做運算，你在 arena.ai 排行榜上看到的「context window 一百萬 token」那個數字，講的正是這包東西能塞多大。但這個數字是廠商依照自家模型和基礎設施「大概能撐多少」去訂出來的一個相對武斷的上限——超過就直接失敗，一個輸出 token 都拿不到。</p>
+        <p>這堂課還有個容易被忽略但很重要的提醒：context window 從來不是從零開始的。你一啟動 harness，它就已經預先塞了一堆東西進去——工具清單、角色設定、行為規範，這一整包叫做 system prompt（系統提示）。Matt 直接讀了 Claude Code 系統提示的片段給你看：「你是 Claude Code，Anthropic 的官方 CLI……協助已授權的安全測試……拒絕破壞性技術、阻斷服務攻擊」——這些話你從沒打過，但每一次對話都幫你先墊在最底下。這說明了為什麼「選 harness」本身就是一個影響很大的決定：不同 harness 塞進去的起始文字量差很多，起跑點就不一樣。</p>
+        <p>最後才是這堂課真正要交付的字：session（會話）。多個 turn 疊加起來、context 不斷累積的整個過程，就叫一個 session。Matt 舉了個具體結構：第一個 turn 有五次 model provider request，第二個三次，第三個四次，最後一次請求送出去的，就是「目前為止全部的對話歷史」。這個詞之所以重要，是因為它馬上會變成一個可操作的單位——你可以清空 context 開新的 session，可以做 compact（壓縮），也可以切到別的 session 之後再回來。這正是下一堂「聰明區與笨蛋區」的伏筆：session 裡塞的東西越多，會發生什麼事？答案不會是好事。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-05</span>
+          <span class="head-text">
+            <span class="title">聰明區與笨蛋區</span>
+            <div class="summary">token 數量越多，關係數量呈平方成長，這是整章最硬核也最實用的一堂——你的 agent 有保鮮期。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這是整章的技術核心，也是整門課反覆被引用的地基概念。Matt 先拋出一個懷疑：上一堂看到的那份巨大 log，其實才 18K token，模型可以撐到一百萬 token 的 context window，意思是你還能再塞 95 萬個 token 進去——那模型真的能同時「理解」這麼多文字嗎？他接著用一個逐步堆疊的例子拆解注意力機制的代價：送一個 token 給模型，它不用追蹤任何關係；送兩個 token，它除了記住兩個字本身，還要追蹤這兩者之間的關係——三件事要記，不是兩件；送三個 token，關係數變成三個；送四個，關係數跳到六個；送五個，變成十個。這不是線性成長，是二次方成長。Matt 換算了一個很有畫面的數字：一千個 token 對應到一百萬個關係，一萬個 token 對應一億個，十萬個 token 對應大約一百億個關係要同時追蹤。</p>
+        <p>他用足球聯賽做比喻：加一支球隊進聯盟，聽起來很單純，但賽程要打的場次數瞬間暴增——這正是 attention（注意力機制）在做的事，它要算出每個 token 跟其他所有 token 之間有多相關。而關係數一旦爆炸，模型就像在一個吵鬧的房間裡，所有人都在搶著喊話要你注意——它沒辦法好好分辨誰重要誰不重要，這個現象就叫 attention degradation（注意力退化）。</p>
+        <p>這個機制推導出一個非常實用的結論：context window 裡存在一個「聰明區」和「笨蛋區」。context 剛開始比較短的時候，模型能做複雜的規劃、能寫出結構完整的軟體；隨著 context 越塞越滿，它慢慢退化成只能做簡單事——寫檔案、關 issue，甚至勉強寫 spec，但你別指望它還能拿出最佳表現。Matt 給了一個具體的、他自己在用的警戒線：目前主流模型大概在 15 萬 token 左右開始進入笨蛋區——這個數字他特別強調是會隨模型進步往後推的（上一版課程錄製時大概是 10 到 12 萬），但笨蛋區這個現象本身不會消失，因為它是注意力機制的數學本質，不是某個模型版本的暫時缺陷。</p>
+        <p>這也回答了一個常被問的疑惑：既然一百萬 token 的 context window 大部分根本用不到最佳品質，廠商為什麼還要標榜這個數字？Matt 的答案很直接——一方面確實是好看的行銷數字，另一方面有些任務（例如在大量文本裡檢索特定資訊）本來就不需要「聰明區」，只需要撈得到東西就好。但如果你是在寫程式、要模型做規劃和推理，那一百萬 token 對你幾乎沒有意義，真正該關心的是那條 15 萬 token 的警戒線。笨蛋區也不是懸崖式的斷點，是一路緩慢下滑，Matt 說他把 15 萬這個數字當成「開始緊張、開始想怎麼收尾、怎麼交接」的觸發點，而不是等到模型明顯變笨才反應。這條警戒線會直接連到後面 2-08 幻覺、2-11 subagent 兩堂課——幻覺變嚴重、需要靠 subagent 分工，根本原因都是同一件事：怎麼盡量把工作留在聰明區裡完成。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-06</span>
+          <span class="head-text">
+            <span class="title">無狀態</span>
+            <div class="summary">模型什麼都不記得，記憶其實活在 harness 跟環境裡——這決定了「AI 的記憶系統」該怎麼設計。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課把前面幾堂的架構圖再往下挖一層。Matt 重新描述一次 session 累積 context 的過程，然後點出一個容易被忽略的事實：整個 session 的狀態，其實是存在 harness 這條線裡，模型本身完全是無狀態的（stateless）。每一次 model provider request，harness 都要把之前發生過的一切重新打包、完整送過去，因為模型自己什麼都不記得——它不是「讀取記憶」，而是每次都被重新告知一切。這跟 2-02 談的非決定性放在一起看會更清楚：模型不只每次答案可能不同，它連上一秒鐘發生過什麼都不知道，全部要靠外部餵給它。</p>
+        <p>很多人把這種無狀態視為缺陷，於是拼命想幫 agent 裝上「記憶系統」，讓它記得你、隨時間變聰明。但 Matt 把這個問題拆成三層說清楚：模型完全無狀態；harness 是有狀態的，但只在同一個 session 內有效，一旦你清空 session，harness 這層記憶也跟著歸零；只有環境（也就是檔案系統）是真正持久的——你把東西寫進檔案，就算 session 清空了，那個檔案還在。所以真正能撐起長期記憶的，從來不是模型，也不完全是 harness，而是環境本身。</p>
+        <p>這裡他引用了 Pi 的創辦人 Mario Zechner 的一句話：「我常被問用什麼記憶系統，我的答案一直是——我的程式碼庫就是我的記憶系統。」Matt 表態自己認同這個立場：預設情況下盡量保持無狀態，把重要的東西存進程式碼庫裡，理由很單純——這樣做比較簡單，而且他實測下來效果更好。他對那些試圖把記憶系統直接掛在 agent 本體上的做法抱持懷疑態度。這個判斷其實延續了 2-01 定下的原則：與其把資源花在讓模型本身變得更聰明、更有記憶，不如把力氣投資在環境設計上——這件事你完全掌握得住，而且好處會一直留著，不會隨模型換代而消失。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-07</span>
+          <span class="head-text">
+            <span class="title">這樣花了多少錢</span>
+            <div class="summary">帳單為什麼看不懂：拆解 input token、output token、快取寫入與快取讀取的計價邏輯。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>理解帳單為什麼難懂，其實跟前面幾堂建立的詞彙直接相關：成本分散在 session、turn、model provider request 三層裡，你能看到帳單往上跳，卻很難說清楚「到底是哪個動作讓它變貴的」。Matt 這堂課把黑盒子拆開的方式，是回到最基本的兩個數字：每次 model provider request，你送出去的是 input token，收回來的是 output token，而 output token 的計價通常貴上好幾倍——他舉 Claude Fable 5 的 API 價格為例，input 一百萬 token 十美元，output 卻是五十美元，整整五倍。但反過來說，output 通常只有幾百個 token（一個工具呼叫、一段簡短回覆），真正撐大帳單體積的是 input，因為 input 等於「你目前為止整個 session 的內容」。</p>
+        <p>接著他用 request logger 實測給你看快取（cache）怎麼運作。第一句「hello」，log 顯示 input token 只有兩個，但底下多了 cache creation input tokens 這一項——這代表系統提示那一大包文字被寫進了 prefix cache（前綴快取），這次是「寫入」，還沒享受到折扣。緊接著第二句「tell me you like my shirt」，這次 log 顯示讀到了兩萬多個 cache read token，只補寫了 59 個新的——快取已經預熱，之後每次請求都是在讀已經算過的東西，而快取讀取的計價是基礎 input token 的十分之一。這解釋了為什麼 session 是「靠往後疊字」在成長的：每次請求都是前一次請求原封不動加上新的一小段，這正好吃到快取機制的紅利，也是為什麼 harness 會把很少變動的內容放在請求最前面、常變動的內容（例如使用者訊息）放在後面——這是設計出來配合快取行為的，不是巧合。</p>
+        <p>但 Matt 最後留下的提醒才是重點：這套機制看似讓對話越長越便宜，其實反過來會製造陷阱——你在 session 一開始塞進去的任何一個 input token，之後每一次請求都要重新算進帳單裡，就算靠快取打折，那個折扣後的成本還是會一次又一次地疊加。換句話說，早期就堆進 context 裡的雜訊，會像沉積物一樣一路被你付錢付到底。這句話直接呼應了 2-05 的核心結論：保持 context 精簡、保持內容跟任務相關，不只是為了讓模型維持在聰明區，同時也是在替你的錢包省錢——這兩件事其實是同一個決定的兩面。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-08</span>
+          <span class="head-text">
+            <span class="title">幻覺</span>
+            <div class="summary">幻覺分兩種——一種是模型真的不知道，一種是明明給了答案它卻不理你，對策完全不同。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>「笨蛋區」這個詞在 2-05 拋出來之後，一直懸而未決的是：進了笨蛋區之後，agent 具體會做出什麼蠢事？這堂課給出的第一個、也是最危險的答案，就是幻覺（hallucination）——模型自信滿滿地講出錯的東西。Matt 說這在寫程式的情境裡可能造成的傷害非常直接：產出根本跑不起來的程式碼、把你的產品方向帶偏、甚至推薦你用一個早就不安全的 API。</p>
+        <p>他把幻覺拆成兩種完全不同的成因，這個分類法才是這堂課真正值錢的地方。第一種叫 factuality（事實性）幻覺：模型講出不存在的函式、錯誤的 API 簽名、捏造的引用文獻。這種幻覺的根源是「parametric knowledge」（參數化知識）不足——模型的知識是在訓練當下被壓縮進幾十億個數字（權重）裡的，就像一張極高解析度的照片被壓成很小的檔案，細節必然會流失；而且這些知識有截止日期，訓練之後發生的事、新出的函式庫和 API，模型完全不知道。Matt 現場示範了一個真實案例：他問 Opus 4.8「不要搜尋，憑你所知回答，X 的 API 多貴」，模型很篤定地回了一套過時的價格分級，還加註「可能已過時」；但當他改口叫模型去搜尋查證，模型才發現自己記的價格早在今年 2 月就變了——這正是知識截止日期造成的事實性幻覺，模型對舊資訊的記憶也只是「模糊的印象」，不是精確的資料庫查詢。</p>
+        <p>第二種叫 faithfulness（忠實性）幻覺：就算你已經把正確資訊親手放進 context 裡，模型還是可能忽略它、偏離它，或用一種很奇怪的方式曲解它。Matt 直接點出這正是笨蛋區最惡劣的地方——因為注意力退化（2-05 講的關係數爆炸），context 裡塞太多東西時，模型分不出哪些才是真正重要的資訊，即使答案就白紙黑字寫在眼前，它也未必抓得到。他給出一個很實用的判斷樹：碰到幻覺時，先問「這個資訊有沒有在 context window 裡」——沒有，那是事實性問題，解法是把正確的資訊載入 context（Matt 的原則是「永遠不要信任沒有來源的 LLM」，一定要讓模型基於有出處的資料回答）；如果資訊明明就在 context 裡，那就是忠實性問題，多半意味著你該退出笨蛋區、清空 context，讓注意力退化降下來，模型才能喘口氣。</p>
+        <p>值得注意的是，就算你人在聰明區，忠實性幻覺也不會完全歸零——因為非決定性（2-02 講過的）意味著模型永遠有非零機率選到一個奇怪的走向。Matt 對此的態度很務實：他不指望這個問題會被廠商徹底解決，但理解這套「先分類、再對症下藥」的邏輯，會讓你在接下來整門課碰到奇怪輸出時，第一反應不是慌，而是先判斷這是哪一種幻覺。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-09</span>
+          <span class="head-text">
+            <span class="title">思考力道 effort</span>
+            <div class="summary">effort 調高不是變聰明的魔法按鈕，是拿 token、時間跟聰明區額度去換一點點分數。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>effort（思考力道）是幾乎所有模型供應商現在都提供的一顆旋鈕，Claude Code 裡打 `/effort` 就能切換，從低到高、甚至到 max。Matt 先用一個對照實驗建立直覺：同一句提示「探索這個程式碼庫並告訴我內容」，max effort 花了 41,000 個 token、跑了兩分十五秒；low effort 只花 11,000 個 token、跑了一分十一秒。max 確實挖得更深——多抓到一些細節、甚至發現了一點文件跟程式碼對不上的地方——但代價是四倍的 token。這個對比馬上帶出核心問題：這顆旋鈕背後到底在做什麼，值不值得轉到底？</p>
+        <p>技術上，effort 調高，本質是讓模型多產生 reasoning token（推理 token）——除了文字輸出和工具呼叫，模型還能產生第三種輸出，一種類似「內心獨白」的思考過程。這個機制的理論根據來自一篇老論文提出的 chain-of-thought prompting：直接問「23 顆蘋果用掉 20 顆、又買了 6 顆，還剩幾顆」，模型有時會答錯（27）；但如果引導它把中間步驟一步步寫出來（23 減 20 等於 3，3 加 6 等於 9），答案就對了。effort 調高，做的就是強迫模型多寫這些中間步驟。</p>
+        <p>Matt 接著搬出 DeepSWE 這個基準測試的圖表，數字很有說服力：Fable 在低 effort 下正確率 60%，中 65%，高 69%，extra high 70%，max 還是 70%——換句話說 extra high 之後幾乎沒有邊際效益了。他甚至挑出一個誇張案例：Sonic 5 在低 effort 下只有 31% 正確率，要花到 26 美元一個任務才能衝到 54%；而 GPT 5.6 Sol 只要 1.86 美元，正確率就已經超過那個 26 美元的 Sonic 5。這個對比讓 Matt 直接下了結論：effort 越高，不只是「品質換金錢」的取捨，還牽動另一條隱藏成本——輸出的 token 越多，跑得越慢，而且更快把你推進 2-05 講的笨蛋區（Sonic 5 一個任務就吃掉 214K token，聰明區早就用光了）。所以 effort 從來不是單純的「調高=變強」，它同時在拿延遲和聰明區的可用空間去換分數。</p>
+        <p>最後 Matt 給了一個很實際的個人判斷：他幾乎從不用 max，甚至覺得 extra high 大多時候是浪費 token——廠商把它放進去，某種程度是為了在跑分上多擠出幾個百分點，跟你日常真正在意的成本、延遲、品質沒有直接關係。他自己的做法是選定 Opus 4.8、medium effort，然後就不再為每個任務去微調 effort，理由跟 2-01 一路延續下來的哲學一致：與其在模型這一層瘋狂微調（min-max），不如把力氣放在 harness 和環境上——因為調好那兩層之後，任何模型換上來都能受益,而調好某個模型的 effort，換了模型那份優化就歸零了。這個判斷會在下一堂「怎麼選模型」被進一步放大成一個明確的比例數字。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-10</span>
+          <span class="head-text">
+            <span class="title">怎麼選模型</span>
+            <div class="summary">模型只佔整個系統的一半分量——Matt 給出具體的 50/50 判斷，並教你怎麼建立自己的模型直覺。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這是 Matt 被問到最多次的問題，他甚至先自嘲了一段:他的商業夥伴 Joel 調侃他在直播上經常被觀眾洗版「換這個模型」，換到自己都要重新解釋一次設定。他坦言確實對這種「這個新模型完爆所有對手，你不用就等著被淘汰」的風氣有點不耐煩。這堂課要做的事，是把 2-01 提出的架構圖，量化成一個具體的比例：模型大概佔整個系統重要性的一半——不多不少，50/50，跟 harness 加環境那一側打平。這句話同時否定了兩種極端：既不是「模型不重要，隨便選都行」，也不是「模型就是一切,其他都是細節」。如果你換成一個很爛的模型，系統照樣廢掉；但如果模型本身已經夠好,接下來能榨出的改善空間,往往在 harness 和環境裡。</p>
+        <p>判斷該選哪個模型，Matt 給了兩個維度。第一個是效率：不能只看 token 花了多少，要看「這些 token 換到了什麼」。他拿排行榜圖表舉例——Gemini 3.5 Flash 花了很多 token 卻沒換到太多產出，但因為它每個 token 的單價便宜，換算下來反而落在效率不錯的區域；換句話說，便宜模型可能靠走量打平品質差距,貴模型如果每個 token 都算得精準,也可能比較划算。而且你選的不只是模型，還連帶選了一套計價結構——用 API 逐 token 計費，跟訂閱制的每月吃到飽，實際成本可以差很多。第二個維度是任務需要的品質等級不同:探索、研究、摘要這類工作,低 effort 可能就夠用;但詳細規劃、程式碼審查這種需要深度推理的任務,拉高 effort 帶來的分數提升才是真的有感——這時候值得考慮用不同模型分工，比如規劃階段用 Fable medium，落地實作階段用 GPT 5.6 Sol medium。</p>
+        <p>但 Matt 反覆強調一件事:任何排行榜、任何 benchmark 圖表，終究只是別人任務集合上的分數，跟你每天實際在做的工作不見得對得上。他給的真正建議是——把模型當成員工來理解:員工會來來去去，真正能長期發揮價值的，是你有沒有投資公司的基礎建設（也就是 harness 和環境），讓任何一個新進員工都能上手發揮。要摸清楚一個模型的脾氣，唯一辦法是實際用過、盯著帳單看、憑經驗建立自己的模型排序，而不是照抄別人的圖表。他甚至預告後面課程會教一套更empirical（更貼近經驗值）的評估方法——拿同樣的輸入，換兩套不同的模型或 effort 設定，實測比較哪個表現更好,這比看排行榜可靠得多。整堂課收在同一個立場:選定一個順手的模型和 effort，好好把它摸熟，別把時間耗在不斷 min-max 切換上——這正是 2-09 結尾丟出的判斷，在這裡被講得更完整。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details>
+      <details class="unit">
+        <summary class="unit-head">
+          <span class="code">2-11</span>
+          <span class="head-text">
+            <span class="title">subagent</span>
+            <div class="summary">把探索工作外包給另一個 agent，用它的 token 換自己的聰明區——這是笨蛋區問題的第一個系統性解法。</div>
+          </span>
+          <span class="chev">▸</span>
+        </summary>
+        <div class="unit-body">
+        <p>這堂課是整個第二章十堂鋪陳之後，第一次給出一個具體、可操作的解法。問題在 2-05 已經講得很清楚：context 塞得越滿，模型越笨，而且越貴。理想狀況下，每個階段（系統提示、探索、實作）都應該盡量精簡，但如果探索階段做得太省，蒐集到的資訊不夠完整，接下來的實作階段就會因為資訊品質不好而跟著出錯。這變成一個死結：你想省 token，卻又不敢省，因為省下來的代價會轉嫁到後面。</p>
+        <p>Matt 給出的解法是：把探索這件事外包給另一個 agent。主 agent 不必自己在 context 裡塞滿探索過程中翻閱的每一個檔案、每一段程式碼，而是叫另一個（子）agent 去做這件深度探索的工作,那個 subagent 可以在自己獨立的 context 裡盡情花費 token 去深挖程式碼庫,最後只把整理過的結論、摘要傳回主 agent。Matt 的比喻很貼切：這就像資深工程師交辦一個junior 工程師「幫我研究一下這個，回報結果給我就好」——junior 花的力氣（token）不會佔用資深工程師（主 agent）自己的 context 額度。</p>
+        <p>這個機制還能再往下延伸：主 agent（也就是 orchestrator，協調者）可以同時並行派出多個 subagent，各自負責不同的研究任務，就像兩個 junior 工程師同時分頭調查，最後各自回報。更進一步，subagent 甚至可以被指定用不同的系統提示、不同的模型、不同的 effort 等級去執行，而且部分 harness 還允許 subagent 再往下衍生出自己的 subagent（雖然不是每個 harness 都支援多層，有些只允許往下一層）。這意味著 subagent 不是「打折版」的助手，它可以跟主 agent 一樣強大，差別只在於它被賦予的任務範圍和它產出的資訊最終要怎麼被摘要、被送回主線。</p>
+        <p>Matt 在這堂課刻意停在理論層次，把實作留到後面的「基礎篇」章節去大量練習,但這個收尾其實巧妙地把整個第二章串成一條線:從認識 agent 的四個零件開始,中間拆解了非決定性、context、聰明區笨蛋區、無狀態、成本、幻覺、effort、選模型,最後停在 subagent——一個把前面所有限制條件(token 有限、注意力會退化、笨蛋區有代價)都納入考量後,自然浮現出來的架構性解法。理解了這條推導鏈,你會發現 subagent 不是一個炫技功能,而是這整套系統設計邏輯下,幾乎必然會出現的答案。</p>
+          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+        </div>
+      </details></div>
+<div class="chapter-footer-nav"><a href="chapter-1.html">← 第 1 章　開課前準備</a><a href="chapter-3.html">第 3 章　認識 Claude Code →</a></div>
+
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自本機逐字稿與 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
