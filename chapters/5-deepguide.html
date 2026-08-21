@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>別把整本說明書塞進代理人腦袋 － 第5章 引導技巧深度導讀 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; object-fit: contain; aspect-ratio: 1672 / 941; }
+@media (max-width: 640px) {
+  .hero-picture img { aspect-ratio: 941 / 1672; }
+}
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 30px; line-height: 1.35; margin: 0 0 6px; }
+.hero-text .subtitle { color: var(--text-dim); font-size: 15px; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 16px 20px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15.5px; color: var(--text);
+}
+blockquote.summary p { margin: 0 0 10px; }
+blockquote.summary p:last-child { margin-bottom: 0; }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 22px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body h2 { font-size: 21px; margin: 40px 0 14px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.mermaid-wrap { margin: 28px 0; overflow-x: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+
+.takeaway { margin-top: 40px; padding: 20px 22px; background: var(--code-bg); border-radius: 14px; }
+.takeaway h2 { margin: 0 0 12px; font-size: 18px; color: var(--accent); }
+.takeaway p { margin: 0 0 12px; }
+.takeaway p:last-child { margin-bottom: 0; }
+
+.about-note { margin-top: 28px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-elevated); font-size: 13px; color: var(--text-dim); }
+
+.further-list { margin-top: 20px; }
+.further-list h3 { font-size: 14px; color: var(--text-dim); margin: 0 0 8px; font-weight: 600; }
+.further-list ul { margin: 0; padding-left: 20px; }
+.further-list li { font-size: 13.5px; color: var(--text-dim); margin-bottom: 4px; }
+
+.resource-note {
+  margin-top: 20px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-deepguide-hero-portrait.png">
+      <img src="../assets/images/5-deepguide-hero-landscape.png" alt="別把整本說明書塞進代理人腦袋 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 深度導讀</div>
+      <h1>別把整本說明書塞進代理人腦袋</h1>
+      <div class="subtitle">從推與指、Agent Skills 到剪枝與自動記憶，重新設計你的 AI 代理人如何被引導</div>
+      <blockquote class="summary">      <p>每次開新的 session，代理人都是徹底失憶的。它不記得你的資料庫有多任性、不記得團隊的命名慣例、也不記得上次你花十分鐘才教會它的坑。這不是 bug，是無狀態（stateless）模型的本質——context window 一清空，所有默契都歸零。很多人的直覺反應是把所有規則寫進 `CLAUDE.md`（或 `agents.md`），一次講清楚、永遠講清楚。這一章要說的是：這個直覺是錯的——你寫進去的每一行字，都會在<strong>之後每一次</strong>模型請求裡被重新讀一次、算一次錢、佔一次注意力。</p>
+      <p>這一章把「引導」（steering）拆成一組可操作的工具：什麼時候該把規則「推」進 context，什麼時候只留一個「指標」讓代理人自己去拿；文件與指標怎麼進化成可攜帶、可分享的 Agent Skills；如何用「導航指標」幫代理人抄近路，而不是每次都在專案裡瞎逛；以及最容易被忽略的一步——引導檔案要定期回頭「剪枝」，否則它只會像地層一樣越積越厚，最後連代理人都不知道該相信哪一句。結論方向很明確：<strong>引導不是寫得越多越好，是留得越少越準</strong>。</p></blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">172行</div><div class="label">claude init 自動生成的 CLAUDE.md 行數</div></div>
+      <div class="statcard"><div class="num">~4,000</div><div class="label">這份檔案在 /context 中佔用的 token 數</div></div>
+      <div class="statcard"><div class="num">2種</div><div class="label">引導只有兩種策略：推與指</div></div>
+      <div class="statcard"><div class="num">3項</div><div class="label">剪枝稽核清單：單一事實來源／沉積／空操作</div></div>
+    </div>
+    <article class="body">
+      <h2>推與指：兩種完全不同的成本結構</h2>
+      <p>一個 session 裡有很多輪對話，每一輪背後可能是幾十、幾百次模型請求，因為每次請求都要把完整歷史連同新內容一起送出去。這代表：只要有一行指令在對話一開始就被塞進 context window，它就會在<strong>接下來的每一次請求</strong>裡被重新送出、重新收費。就算有 prompt caching 稍微降低成本，那份「一直開著的注意力稅」還在——每多一條常駐指令，其他指令的訊號就被稀釋一分，代理人離「表現變笨」就近一步。這整包代價，被稱為 <strong>context load</strong>。</p>
+      <p>引導因此只有兩種策略。「推」（push）是把指令直接寫進 `CLAUDE.md`／`agents.md`，讓它在每個 session 一開始就常駐在 context 裡，代理人不可能漏看；「指」（point）是把完整指令放在檔案系統某處，context window 裡只留一行路標——「做這類工作時去讀這份文件」——代理人真正需要時才拉取完整內容，大多數輪次幾乎不花 context load。</p>
+      <p>推的問題不只是貴，更嚴重的是代理人常常<strong>分不清規則什麼時候該套用</strong>。逐字稿裡的例子：有人在 Claude.ai 全域指令裡寫「我在 PCI DSS 信用卡合規環境下工作，任何安全相關的事都要標記」，結果問它怎麼烤巧克力蛋糕，它給完食譜後，很認真補了一句——既然你在 PCI DSS 環境下處理信用卡，做蛋糕也該考慮安全性。這不是模型故障，是常駐規則沒有能力判斷「這次用得上嗎」。<strong>推的本質不是省事，是把「這條規則現在該不該用」的判斷責任，從你身上卸下來丟給一個沒有這個判斷力的系統</strong>。Matt 直言業界正在瘋狂往 `CLAUDE.md`／`agents.md` 塞東西，他稱之為「推的流行病」，結果是浪費大量 token、拖垮表現。他的預設反過來：<strong>只有真正每個 session 都用得到的東西，才值得推</strong>。</p>
+      <p>課程用一個資料庫遷移實例把代價具體化：這個專案裡，改動 schema 必須同步修改 `seed.ts`（重建資料庫的種子腳本），否則重建出來的資料會跟 schema 對不上——這個依賴關係不是型別安全能抓到的，必須有人明講。第一次示範把整套步驟直接寫進 `agents.md`，打開 request logger 一看，果然整段文字被包在標記「important，必須完全照做」的 system reminder 裡，逐字送進每一次請求——不管這次改動跟不跟資料庫有關，整段遷移步驟都跟著跑一趟。</p>
+      <p>解法是把這套步驟搬出 `agents.md`，放進新建的 `docs/` 資料夾，`agents.md` 只留一句指向它的話，用「writing for agents」這個 skill 執行——這也是 Matt 寫任何給代理人看的文件時都會用的工具。轉換完成後，只有真的要改 schema 時才會沿指標拉進完整步驟，其餘 session 完全不用背這包行李。有意思的是，Claude Code 本身也在防守這件事：`CLAUDE.md` 送進去時，system reminder 最後會補一句「這段內容不一定跟你現在的任務相關，除非高度相關否則不必回應」——正是因為太多人往 `CLAUDE.md` 塞雜物，逼得 Anthropic 加一道保險。<strong>很多人抱怨 `CLAUDE.md` 裡的規則常不被照做，答案往往不是模型不聽話，是規則本來就不該常駐在那裡</strong>。</p>
+      <div class="mermaid-wrap"><img src="../assets/images/5-deepguide-mermaid.svg" alt="流程圖" style="width:100%;height:auto;"></div>
+      <h2>Agent Skills：把「文件＋指標」打包成可攜單元</h2>
+      <p>文件＋指標解決了 context load，但有個天花板：一切鎖死在單一 repo，換專案就得手動複製貼上。Agent Skills 是為此而生的標準化包裝——本質還是「指標指向文件」，只是打包成一個資料夾、一個開放規格（定義在 agentskills.io），寫一次可在所有支援的 harness 通用。skill 資料夾裡至少有一份 `SKILL.md`，開頭的 name 與 description 就是常駐指標，只有這兩行預設出現在 context window 裡，代理人靠讀 description 判斷要不要把整份內容拉進來；資料夾裡也能再放參考文件，並在 `SKILL.md` 內用同樣手法指向它，一層套一層，只在真正用到那一刻才付出對應成本。</p>
+      <p>呼叫方式有兩種，常被忽略。預設是「模型觸發」，description 進 context，代理人自己判斷要不要拉；也可以設 `disable model invocation: true` 變成「使用者觸發」，description 完全不出現在 context 裡，只有你手動叫出來才會執行。<strong>模型觸發的 skill 越多，context load 越高；使用者觸發的 skill 越多，你自己要記住的東西就越多</strong>——是認知負擔跟 context load 之間的直接置換。也因為使用者觸發完全不花常駐成本，Matt 自己的 skill 大多是使用者觸發型；下 `/skills` 可列出目前掛載的清單並分辨兩種類型。</p>
+      <p>動手做一個 skill，就是把資料庫遷移的「文件＋指標」原地升級：名稱訂為 database migrations，指標裡的提示文字直接變成 description，先送對照組請求看基準值，再做一次 schema 改動驗證 skill 是否在對的時機被叫出來。</p>
+      <p>skill 還可以活在兩個層級。放使用者層時只屬於你，跟著你走遍每個專案；放專案層時 checked in 進 Git 歷史，只作用這個專案，但誰 clone 都自動拿到。判斷準則：<strong>個人工作習慣放使用者層；一旦是團隊仰賴、固定「這個專案該怎麼做事」的規範，就該放進專案層</strong>，讓所有人一起養它。Matt 認為專案層才是更強的預設——單人作業時使用者層方便，一旦多人協作，skill 就該進 repo。</p>
+      <h2>導航指標：幫代理人開一條高速公路</h2>
+      <p>引導不只是規則問題，也是找路問題。想像程式碼庫是一張衛星圖：代理人找東西時多半只能走「地方道路」——一層層掃資料夾、開檔案、搜尋，過程中每一次動作都在往 context 塞新 token。<strong>導航指標就是幫代理人鋪一條高速公路</strong>：在 `agents.md` 放一行提示，直接告訴它某個關鍵檔案在哪、為什麼重要。</p>
+      <p>延續資料庫遷移的例子：真正的失敗模式往往不是代理人不會改 schema，而是它壓根不知道 `seed.ts` 存在，於是漏改。只要加一句導航指標指向這支腳本，之後就不會再漏掉。Matt 自己的 skills 倉庫是更複雜的例子：每新增一個 skill，都得同步登記進 docs bucket、`.claude/plugin/plugin.json` 清單、對應分類的 README，這套跨檔案依賴不是代理人能憑直覺猜到的，所以他寫了一份詳細的 `agents.md`，用一串導航指標把這些關聯標出來。</p>
+      <p>但高速公路不是越多越好——<strong>現實裡沒有人會把公路修到每個角落</strong>，把整個目錄結構塞進 context 代價是龐大的 context load，導航指標該留給代理人「自己很難發現」的地方。更麻煩的是：<strong>一條過期的高速公路，比完全沒有高速公路更糟</strong>，因為代理人被訓練成信任 context 裡的資訊，指標一旦指向不存在的東西，不只白讀了錯誤資訊，還要再花一輪搞清楚為什麼是錯的，每次調整專案結構都該回頭檢查指標還準不準。</p>
+      <h2>剪枝：對抗沉積與空操作</h2>
+      <p>推與指、skill、導航指標解決的是「怎麼放進去」，但團隊共用的引導檔案有一個天生缺陷：<strong>它們只會長大，幾乎不會變小</strong>。加一條規則感覺廉價又安全，刪一條卻像在說這條規則不重要、在踩過別人的心血——檔案就這樣從五行長到五百行、一千行。Matt 說他在真實世界看到的絕大多數 `agents.md` 都大到離譜。</p>
+      <p>課程給了三個檢驗每一條規則的工具。第一是<strong>單一事實來源</strong>：每項事實只該存在一個權威的地方，一旦同一件事在不同文件各寫一份、彼此還微調過，代理人就分不清哪份是真的，容易信錯邊——這帶來三重代價：多處維護、context load 因多餘 token 增加，還會讓重複的內容被不成比例放大權重，蓋過同樣重要但沒被重複的資訊。</p>
+      <p>第二是<strong>沉積（sediment）</strong>，本質是團隊協作的心理問題：加規則安全、刪規則有壓力，缺乏剪枝紀律的引導檔案必然一層層堆積地層，逐漸跟越來越多任務不相關。沉積特別危險，因為它「曾經是對的」——也許現在仍對，只是不再適用所有情境，卻被當成放諸四海皆準留在那裡。<strong>面對沉積不能心軟，只有刪除或藏到指標背後兩個選項</strong>。</p>
+      <p>第三、也是最易被塞進去最難被發現的，是<strong>空操作（no-op）</strong>：對輸出毫無影響的指令，不是模型本來就會做，就是這條指令在當下情境根本不起作用。課程舉例：implement skill 裡寫「寫一則詳細的 commit message」，但模型本來就會這麼做，刪掉它試試看行為有沒有變化，沒變就是空操作，白白佔位置。<strong>檢驗方法很簡單：刪掉它、觀察行為有沒有變，沒變就是空操作</strong>——一條指令完全切合情境，也仍可能只是在重複模型本來就會做的事。</p>
+      <p>這三項測試構成一套剪枝工具箱：<strong>通不過任何一項的內容，都不值得留在 context window 裡</strong>。課程用 `claude init` 生成的 `CLAUDE.md` 當反面教材：讓代理人自己掃描 repo 寫出說明書，結果是一份<strong>172 行</strong>的巨大檔案，用 `/context` 一查，光這份檔案就吃掉約 <strong>4,000 個 token</strong>。練習任務是先讀一遍抓出可疑的空操作與重複，再用 writing for agents skill 精簡，目標是把它瘦身成幾乎全是指標的極簡清單。<strong>自動產生的引導檔案，往往就是「推」這個壞習慣被放到最大的樣本</strong>，因為沒有人真的逐條問過這句話有沒有在做事。</p>
+      <h2>自動記憶：不要讓代理人自己抓方向盤</h2>
+      <p>還有一種引導來源前面沒提到：代理人自己寫給自己的。大多數 harness 內建記憶系統，會自動把它認為值得記住的東西——一次糾正、一句偏好、一項工作方式的事實——存進本地檔案，之後 session 再讀回 context，依 harness 不同要嘛直接推進去、要嘛做成指標。理論上代理人能在你不用手動引導的情況下，逐漸建立對你工作方式的認知。</p>
+      <p>Claude Code 可用 `/memory` 檢視，打開自動記憶資料夾會看到一份 `memory.md`，裡面是這個 session 摸索出來、有點零碎的內容。Matt 的態度很明確：<strong>自動記憶很少真正有幫助</strong>。他前面花整章示範怎麼狠剪 `agents.md`，理由正是不喜歡代理人自己引導自己——自動記憶累積出來的東西逃不掉空操作與垃圾內容的問題。<strong>自動記憶本質上就是自動沉積</strong>，會不斷堆出陳舊地層，而且幾乎不會被主動清理。他建議直接把自動記憶關掉，關掉後不會再存新記憶，也可能因為少了「建立記憶」這個工具而讓 context window 更輕。<strong>你才應該是決定記憶怎麼建立、引導怎麼做的人，一旦放手讓自動記憶自己累積，換來的只是又一堆佔著 context 卻沒人清理的沉積</strong>。</p>
+    </article>
+    <div class="takeaway">
+      <h2>帶走的事</h2>
+      <p>這一章其實只在講一件事：context window 是有限資源，每一行放進去的引導文字，都是用未來每一次請求的注意力與費用換的。推與指的分野、Skill 的可攜化、導航指標的取捨、剪枝的三項檢驗、自動記憶該不該開，全部是同一個帳本上的不同分項——問的都是這句話值不值得常駐在那裡。真正決定引導品質的，往往不是寫了多少規則，而是有沒有定期回去問：這條規則現在還在做事，還是只是躺在那裡佔位置。</p>
+    </div>
+    <div class="about-note">本文改寫自 AI Coding Crash Course 第 5 章「Steering」9 支課程單元的逐字稿，內容經過消化整合、重新敘事，若有轉述失真之處，請對照原始課程內容核實。</div>
+    <div class="further-list">
+      <h3>本章單元</h3>
+      <ul>
+        <li>5-01 引導地圖</li>
+        <li>5-02 用指標來引導</li>
+        <li>5-03 什麼是 Agent Skills</li>
+        <li>5-04 動手寫一個 skill</li>
+        <li>5-05 user skill 與 project skill</li>
+        <li>5-06 導航指標</li>
+        <li>5-07 剪枝 pruning</li>
+        <li>5-08 實際試一次 pruning</li>
+        <li>5-09 Claude Code 的自動記憶</li>
+      </ul>
+    </div>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="chapter-nav">
+      <a href="../chapter-5.html">← 回本章單元列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
