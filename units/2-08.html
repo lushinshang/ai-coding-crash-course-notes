@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>幻覺 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-2.html">← 回第2章 核心概念</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/2-08-hero-portrait.png">
+      <img src="../assets/images/2-08-hero-landscape.png" alt="幻覺 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第2章 核心概念 · 2-08</div>
+      <h1>幻覺</h1>
+      <blockquote class="summary">幻覺分兩種——一種是模型真的不知道，一種是明明給了答案它卻不理你，對策完全不同。</blockquote>
+    </div>
+
+    <article class="body">
+      <p>進了笨蛋區之後，agent 具體會做出什麼蠢事？最危險的答案是幻覺（hallucination）——模型自信滿滿地講出錯的東西。在寫程式的情境裡，這造成的傷害非常直接：產出根本跑不起來的程式碼、把產品方向帶偏、甚至推薦一個早就不安全的 API。</p>
+      <p>真正值錢的是把幻覺拆成兩種完全不同的成因。第一種叫 factuality（事實性）幻覺：模型講出不存在的函式、錯誤的 API 簽名、捏造的引用文獻。這種幻覺的根源是 parametric knowledge（參數化知識）不足——模型的知識是在訓練當下被壓縮進幾十億個數字裡的，就像一張極高解析度的照片被壓成很小的檔案，<strong>細節必然會流失</strong>；而且這些知識有截止日期，訓練之後發生的事、新出的函式庫和 API，模型完全不知道。有個真實案例很能說明問題：問 Opus 4.8「不要搜尋，憑你所知回答，X 的 API 多貴」，模型很篤定地回了一套過時的價格分級，還加註「可能已過時」；但改口叫模型去搜尋查證，才發現它記的價格早在今年 2 月就變了——<strong>模型對舊資訊的記憶也只是模糊的印象，不是精確的資料庫查詢</strong>。</p>
+      <p>第二種叫 faithfulness（忠實性）幻覺：就算已經把正確資訊親手放進 context 裡，模型還是可能忽略它、偏離它，或用一種很奇怪的方式曲解它。這正是笨蛋區最惡劣的地方——因為注意力退化，context 裡塞太多東西時，模型分不出哪些才是真正重要的資訊，即使答案就白紙黑字寫在眼前，也未必抓得到。有個很實用的判斷樹：碰到幻覺時，先問「這個資訊有沒有在 context window 裡」——沒有，那是事實性問題，解法是把正確的資訊載入 context（<strong>永遠不要信任沒有來源的 LLM</strong>，一定要讓模型基於有出處的資料回答）；如果資訊明明就在 context 裡，那就是忠實性問題，多半意味著該退出笨蛋區、清空 context，讓注意力退化降下來，模型才能喘口氣。</p>
+      <p>值得注意的是，就算人在聰明區，忠實性幻覺也不會完全歸零——因為非決定性意味著模型永遠有非零機率選到一個奇怪的走向。不指望這個問題會被廠商徹底解決，但理解這套「先分類、再對症下藥」的邏輯，會讓接下來整門課碰到奇怪輸出時，第一反應不是慌，而是先判斷這是哪一種幻覺。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-2.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
