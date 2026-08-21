@@ -188,6 +188,9 @@ details.unit[open] summary .chev { transform: rotate(90deg); }
   padding: 8px 12px;
 }
 .resource-row .note a { color: var(--accent); }
+.summary-full { margin: 0 0 12px; }
+a.read-more { display: inline-block; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+a.read-more:hover { text-decoration: underline; }
 
 .chapter-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
 .chapter-footer-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
@@ -225,16 +228,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">1-01</span>
           <span class="head-text">
             <span class="title">這門課要帶你去哪</span>
-            <div class="summary">兩百萬星星專案的作者把兩年 AI 編碼經驗濃縮成五步驟系統，重點不是換模型，是換你自己。</div>
+            <div class="summary">兩百萬星星專案的作者濃縮兩年 AI 編碼經驗成五步驟系統，重點不是換模型，是換你自己。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt Pocock 開場先亮出一個數字：他的 skills repository 在錄製這堂課時剛突破 20 萬顆星，擠進史上最多星星的 GitHub 專案前 20 名，下載量超過 1300 萬次。這不是自我推銷的花絮，而是整堂課的立論基礎——他不是在教一個實驗性的想法，而是把已經被幾百萬人驗證過的做法,重新包裝成一套課程。理解這個背景，你才會明白後面九成的內容為什麼長得像「軟體工程老兵的紀律」而不是「AI 炫技教學」。</p>
-        <p>課程的骨架是一套五步驟系統：grilling（逼問釐清需求）、寫 spec、把 spec 拆成 tickets、實作、審查。Matt 特別強調這五步沒有變過——不管他換過幾個模型、玩過幾種新工具，這個流程始終撐得住。這句話其實在替你設定一個心理錨點：後面章節教的所有技巧，包括 context 管理、什麼時候該 compact、什麼時候該 clear、什麼時候該把工作交接出去，全部都是服務這五步驟的細節,而不是彼此獨立的招式。</p>
-        <p>值得注意的是他對「該用哪個 agent」的回答:任何能在終端機跑、能用 skills 的 agent 都可以,Claude Code、Codex、OpenCode、GitHub Copilot、Gemini 的那個都算。他把 Claude Code 定位成示範用的工具而不是教學核心,所有內容用 skills 的形式交付,理論上可以搬到任何 agent 上用。這個設計決定了整門課的性格:它賭的是「agent 會一直換,但驅動 agent 的方法論不會」,如果你抱著「我要學會用某個特定工具的所有快捷鍵」的心態來上課,方向已經錯了。</p>
-        <p>練習場是 Cadence,一個賣課程、上課、做測驗的 TypeScript/Node 應用,功能成熟到有實際的軟體開發生命週期可以走。門檻設得很低——會看程式碼、會用終端機基本指令(cd、ls)就夠了,甚至不要求你會寫程式。但結尾那句話才是重點:上完課後你能出更大量、更高品質的成果,靠的不是模型變強,是你自己變強了。這是在替整門課定調——這是一堂關於「人」的課,模型只是工具。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/1-01.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
