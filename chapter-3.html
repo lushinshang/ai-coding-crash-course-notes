@@ -254,15 +254,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">3-03</span>
           <span class="head-text">
             <span class="title">在 terminal 下 prompt</span>
-            <div class="summary">用 @ 引用檔案、Ctrl+S 暫存 prompt、貼上圖片,把終端機輸入框變成更好用的工作台。</div>
+            <div class="summary">@ 引用檔案不花一次請求、Ctrl+S 暫存半成品 prompt、直接貼圖問畫面裡有什麼。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課接著 3-02 的「基本輸入」,往上加了幾個能讓 prompt 品質直接跳一級的小技巧。第一個是用 `@` 引用檔案——Matt 示範打 `@` 之後直接模糊搜尋 `drizzle.config.ts`、`routes.ts` 這類檔名,按 enter 或 tab 把它們拉進輸入框。這裡的關鍵細節是:被引用的檔案是直接讀進 context window,不會觸發一次額外的工具呼叫(也就是不會多花一次 model provider request),對於需要把 spec 文件整份塞進第一輪對話的場景特別划算。</p>
-        <p>第二個技巧是暫存 prompt。打了一段話但還沒想清楚要不要送出時,按 Ctrl+S 就能把這段文字「stash」起來,畫面左下角會出現一個小標記。這時候你可以先打別的訊息送出,等準備好了再把暫存的內容叫回來繼續編輯送出。Matt 把這個功能定位成「給 Claude 回饋的節奏工具」——你常常會想先確認一件事、插入一句話,再回頭把原本準備好的長 prompt 補完,而不是把所有念頭硬塞進同一次輸入。</p>
-        <p>第三個是貼圖:直接複製一張圖片(他示範的是斯洛維尼亞 Bled 湖的照片),用 Ctrl+V 貼進輸入框,終端機左下角會顯示貼圖狀態,送出後 Claude 能直接辨識圖片內容回答——連教堂鐘樓的細節都答對了。這個功能提醒你 Claude Code 的輸入框不只是文字通道,遇到 UI 截圖、錯誤畫面、設計稿這類視覺素材時,直接貼上通常比硬用文字描述更快、更準。三個技巧合起來,其實是在告訴你:好的 prompt 工程有一半是輸入介面的熟練度,不是純粹的措辭功力。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/3-03.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
