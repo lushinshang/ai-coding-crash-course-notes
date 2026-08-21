@@ -337,11 +337,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>effort（思考力道）是幾乎所有模型供應商現在都提供的一顆旋鈕，Claude Code 裡打 `/effort` 就能切換，從低到高、甚至到 max。Matt 先用一個對照實驗建立直覺：同一句提示「探索這個程式碼庫並告訴我內容」，max effort 花了 41,000 個 token、跑了兩分十五秒；low effort 只花 11,000 個 token、跑了一分十一秒。max 確實挖得更深——多抓到一些細節、甚至發現了一點文件跟程式碼對不上的地方——但代價是四倍的 token。這個對比馬上帶出核心問題：這顆旋鈕背後到底在做什麼，值不值得轉到底？</p>
-        <p>技術上，effort 調高，本質是讓模型多產生 reasoning token（推理 token）——除了文字輸出和工具呼叫，模型還能產生第三種輸出，一種類似「內心獨白」的思考過程。這個機制的理論根據來自一篇老論文提出的 chain-of-thought prompting：直接問「23 顆蘋果用掉 20 顆、又買了 6 顆，還剩幾顆」，模型有時會答錯（27）；但如果引導它把中間步驟一步步寫出來（23 減 20 等於 3，3 加 6 等於 9），答案就對了。effort 調高，做的就是強迫模型多寫這些中間步驟。</p>
-        <p>Matt 接著搬出 DeepSWE 這個基準測試的圖表，數字很有說服力：Fable 在低 effort 下正確率 60%，中 65%，高 69%，extra high 70%，max 還是 70%——換句話說 extra high 之後幾乎沒有邊際效益了。他甚至挑出一個誇張案例：Sonic 5 在低 effort 下只有 31% 正確率，要花到 26 美元一個任務才能衝到 54%；而 GPT 5.6 Sol 只要 1.86 美元，正確率就已經超過那個 26 美元的 Sonic 5。這個對比讓 Matt 直接下了結論：effort 越高，不只是「品質換金錢」的取捨，還牽動另一條隱藏成本——輸出的 token 越多，跑得越慢，而且更快把你推進 2-05 講的笨蛋區（Sonic 5 一個任務就吃掉 214K token，聰明區早就用光了）。所以 effort 從來不是單純的「調高=變強」，它同時在拿延遲和聰明區的可用空間去換分數。</p>
-        <p>最後 Matt 給了一個很實際的個人判斷：他幾乎從不用 max，甚至覺得 extra high 大多時候是浪費 token——廠商把它放進去，某種程度是為了在跑分上多擠出幾個百分點，跟你日常真正在意的成本、延遲、品質沒有直接關係。他自己的做法是選定 Opus 4.8、medium effort，然後就不再為每個任務去微調 effort，理由跟 2-01 一路延續下來的哲學一致：與其在模型這一層瘋狂微調（min-max），不如把力氣放在 harness 和環境上——因為調好那兩層之後，任何模型換上來都能受益,而調好某個模型的 effort，換了模型那份優化就歸零了。這個判斷會在下一堂「怎麼選模型」被進一步放大成一個明確的比例數字。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-09.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
