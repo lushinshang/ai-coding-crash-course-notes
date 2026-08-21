@@ -246,10 +246,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>上一堂課把模型定位成「引擎」，這堂課立刻拆穿引擎的運作邏輯：模型做的事情，說穿了就是不斷猜下一個 token。給它一串文字，它在腦中的權重裡找出所有候選字，給每個候選字一個機率，然後丟進取樣器（sampler）裡抽一個出來。Matt 舉的例子很直白：問模型「我最喜歡的顏色是」，紅色可能有最高機率，藍色 28%，橘色也有一定機率——取樣器不是每次都選機率最高的那個，有時候會選藍色，甚至選橘色。</p>
-        <p>直覺上你會想：那把 temperature（溫度）調到零不就好了？永遠選機率最高的那個字，答案不就穩定又正確？Matt 在這裡引用了一篇論文《Trading Off Diversity and Quality in Natural Language Generation》，講的是「likelihood trap」（可能性陷阱）：當你把溫度往下壓、逼模型每次都選最可能的字，人類評分反而覺得輸出品質變差。這其實跟人聊天很像——一個人如果每句話都講最安全、最常見的句子，聽起來反而生硬乏味。多樣性和隨機性不是雜訊，它是輸出品質的一部分。更狠的是，Matt 補了一刀：就算你真的把溫度設成零，因為 LLM 運算是大規模平行處理，運算順序本身就會造成浮點誤差的細微差異，同一顆模型、同一張 GPU，還是可能吐出不同答案。非決定性是刻在骨子裡的，你去不掉。</p>
-        <p>這堂課的重點不是要你去研究取樣演算法，而是要你建立一個心理預期：接下來整門課，你螢幕上出現的結果一定會跟 Matt 示範的不完全一樣，這是正常的，不是你操作錯了。而且這件事會一路延伸到後面談權限管理的章節——因為既然模型永遠有非零機率做出奇怪甚至危險的事，你的系統設計就不能假設「模型每次都會照規矩來」，必須靠 harness 和環境的護欄去兜底。非決定性不是你要修的 bug，而是你整套工作流程都得繞著它去設計的既定事實。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-02.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
