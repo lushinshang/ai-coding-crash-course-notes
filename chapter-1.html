@@ -280,16 +280,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">1-05</span>
           <span class="head-text">
             <span class="title">練習怎麼跑</span>
-            <div class="summary">git checkout -b dev 開分支,npm run reset 穿梭時間點,配合 cherry-pick 保留自己的改動不被沖掉。</div>
+            <div class="summary">git checkout -b dev 開分支，npm run reset 穿梭時間點，配合 cherry-pick 保留自己的改動不被沖掉。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課要解決一個很實際的問題:當老師在畫面上示範某個功能改完之後的樣子,你要怎麼確定自己電腦上的程式碼跟老師講的是同一個狀態?Matt 的答案是自己寫了一套工具鏈,而不是丟給你一句「請自行對照」。第一步是建一個叫 dev 的分支當作整門課的練習用分支,他建議你也照做——這個分支未來會被隨意實驗、隨意弄髒,不影響 main。</p>
-        <p>核心工具是 npm run reset。每一堂課的每個階段都對應一個或多個 git commit,跑這個指令會列出一長串可以「跳」過去的時間點,選一個就能把本機狀態瞬間對齊到 Matt 錄那段影片當下的程式碼樣貌。他現場示範一個很生活化的例子:package.json 裡課程平台的描述打錯字,寫成「awesome horse platform」而不是「awesome course platform」,跑 reset 選到對應的 commit,錯字瞬間被修正——這個帶點自嘲幽默的 bug,恰好示範了 reset 如何精準對齊到某個瞬間的狀態。</p>
-        <p>但 reset 有個代價:它會把你自己動手加的東西一併洗掉。Matt 示範加一個 foo bar 的 npm script、commit 下去,然後跑 reset,結果 foo bar 直接消失。對還在摸索、想保留自己改動的人,他準備了第二套工具 npm run cherry-pick——概念上就是 git cherry-pick,把某個歷史 commit 疊加到你目前的分支上,而不是把你整個分支輾平重來。不過他也老實建議,如果你對 git 的 cherry-pick 和衝突解決不熟,乾脆全程只用 reset 就好,少一個變數少一個坑。</p>
-        <p>最後補了第三個指令 npm run pull,用來在課程更新時把 Matt 那邊主分支的新內容拉下來,通常是他在 Discord 發現「這個真的不該漏掉」之後的緊急修補。三個指令背後其實都是同一套自製的 AI Hero CLI 在跑,包成 package.json 裡的 script 方便你不用記 git 語法。這堂課乍看是工具教學,實際在解決的是遠距教學最痛的問題——老師畫面和學生畫面永遠對不齊。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/1-05.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>練習怎麼跑 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-1.html">← 回第1章 開課前準備</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/1-05-hero-portrait.png">
+      <img src="../assets/images/1-05-hero-landscape.png" alt="練習怎麼跑 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第1章 開課前準備 · 1-05</div>
+      <h1>練習怎麼跑</h1>
+      <blockquote class="summary">git checkout -b dev 開分支，npm run reset 穿梭時間點，配合 cherry-pick 保留自己的改動不被沖掉。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">3 個指令</div><div class="label">reset／cherry-pick／pull</div></div>
+    </div>
+    <article class="body">
+      <p>遠距教學有一個從沒被真正解決過的問題：老師在畫面上示範完一個功能，你怎麼確定自己電腦上的程式碼，跟老師剛剛講的是同一個狀態？大部分課程的答案是「請自行對照」，但這門課的答案是一套自己寫的工具鏈。第一步很簡單，建一個叫 dev 的分支當練習場，這個分支之後會被隨意弄髒、隨意實驗，不會動到 main 分毫。</p>
+      <p>真正的核心是 `npm run reset`。每一堂課的每個階段都對應一個或多個 git commit，跑這個指令會列出一長串可以「跳」過去的時間點，選一個就能把本機狀態瞬間對齊到影片拍攝當下的程式碼樣貌。有個帶點自嘲的示範很能說明這個機制多精準：`package.json` 裡課程平台的描述打錯字，寫成「awesome horse platform」而不是「awesome course platform」，跑 reset 選到對應的 commit，錯字瞬間被修正——<strong>一個 bug 級的打字失誤，反而成了展示時間旅行精準度最好的教材</strong>。</p>
+      <p>但 reset 有個代價：它會把你自己動手加的東西一併洗掉。示範裡加了一個 foo bar 的 npm script、commit 下去，跑 reset，foo bar 直接消失，一點痕跡都不留。對還在摸索、捨不得自己改動被洗掉的人，另外準備了 `npm run cherry-pick`——概念上就是 git cherry-pick，把某個歷史 commit 疊加到目前分支上，而不是把整條分支輾平重來。但這裡有個誠實的但書：<strong>如果對 git 的 cherry-pick 和衝突解決不熟，乾脆全程只用 reset 就好，少一個變數少一個坑</strong>，這句提醒比工具本身更重要——會用進階工具不代表該用。</p>
+      <p>還有第三個指令 `npm run pull`，用來在課程更新時，把上游主分支的新內容拉下來，通常是發現「這個真的不該漏掉」之後的緊急修補才會用到。三個指令背後其實是同一套自製 CLI 在跑，包成 npm script 只是不想讓你去記 git 語法。這堂課表面上是工具教學，實際在解決的是遠距教學最痛的一個問題：老師畫面和學生畫面永遠對不齊，而這套工具鏈，就是把「對齊」這件事變成一行指令。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-1.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
