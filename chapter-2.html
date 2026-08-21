@@ -311,10 +311,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>理解帳單為什麼難懂，其實跟前面幾堂建立的詞彙直接相關：成本分散在 session、turn、model provider request 三層裡，你能看到帳單往上跳，卻很難說清楚「到底是哪個動作讓它變貴的」。Matt 這堂課把黑盒子拆開的方式，是回到最基本的兩個數字：每次 model provider request，你送出去的是 input token，收回來的是 output token，而 output token 的計價通常貴上好幾倍——他舉 Claude Fable 5 的 API 價格為例，input 一百萬 token 十美元，output 卻是五十美元，整整五倍。但反過來說，output 通常只有幾百個 token（一個工具呼叫、一段簡短回覆），真正撐大帳單體積的是 input，因為 input 等於「你目前為止整個 session 的內容」。</p>
-        <p>接著他用 request logger 實測給你看快取（cache）怎麼運作。第一句「hello」，log 顯示 input token 只有兩個，但底下多了 cache creation input tokens 這一項——這代表系統提示那一大包文字被寫進了 prefix cache（前綴快取），這次是「寫入」，還沒享受到折扣。緊接著第二句「tell me you like my shirt」，這次 log 顯示讀到了兩萬多個 cache read token，只補寫了 59 個新的——快取已經預熱，之後每次請求都是在讀已經算過的東西，而快取讀取的計價是基礎 input token 的十分之一。這解釋了為什麼 session 是「靠往後疊字」在成長的：每次請求都是前一次請求原封不動加上新的一小段，這正好吃到快取機制的紅利，也是為什麼 harness 會把很少變動的內容放在請求最前面、常變動的內容（例如使用者訊息）放在後面——這是設計出來配合快取行為的，不是巧合。</p>
-        <p>但 Matt 最後留下的提醒才是重點：這套機制看似讓對話越長越便宜，其實反過來會製造陷阱——你在 session 一開始塞進去的任何一個 input token，之後每一次請求都要重新算進帳單裡，就算靠快取打折，那個折扣後的成本還是會一次又一次地疊加。換句話說，早期就堆進 context 裡的雜訊，會像沉積物一樣一路被你付錢付到底。這句話直接呼應了 2-05 的核心結論：保持 context 精簡、保持內容跟任務相關，不只是為了讓模型維持在聰明區，同時也是在替你的錢包省錢——這兩件事其實是同一個決定的兩面。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-07.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
