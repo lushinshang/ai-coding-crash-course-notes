@@ -324,10 +324,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課正式端出整章、甚至可以說整門課的骨幹工作流:grill-execute-clear。做法是裝一個叫 grill me 的 skill(`npm run reset` 之後把它加進 repo,會同時裝進兩個 skill,重點看 grilling 那個)。這個 skill 的說明其實只有一句話最關鍵:「不斷盤問使用者,直到雙方達成共同理解為止——把設計樹的每個分支都走過一遍,不留任何默認假設,在使用者確認雙方理解一致之前不要動手做。」換句話說,就是把上一堂缺的那個「對齊」環節,用一個明確的 skill 指令硬性補回來。</p>
-        <p>實際操作示範的功能是「課程評論」:允許學生(也允許教師)在課程頁面留言,像個簡易討論區。用法是 `/grill-me`,先丟一句很鬆散、不用很完整的初始想法給 agent,讓它開始跟你對話。接下來要做的是一路陪它問答下去,直到真的達成共同理解為止,才進到實作(execute)階段——這也是為什麼這個循環叫 grill(盤問)、execute(執行)、clear(清空)三段式:先用對話逼出雙方都認同的規格,再放手讓它做,做完再視情況決定怎麼處理這個 session(這部分留到 4-09 之後細講)。</p>
-        <p>這堂課跟 4-06、4-07 是一組完整的三段對照實驗:4-06 展示「什麼都不做」的結果,4-07 展示「用 plan mode 這種看似正式但本質沒變」的結果,4-08 才是 Matt 真正推薦的做法——用持續盤問取代急就章的計畫或急就章的實作。從這裡開始,「grill 完再繼續實作」本身也是一個具體案例,示範了下一段要細講的「phase boundary(階段邊界)要不要接著做下去」的判斷:因為 grill 階段結束時 token 用量還不高（示範中大約 30K），所以直接無縫接進 implementation,不需要清空或壓縮,這個細節在 4-11 會被拿出來當範例重新解釋。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-08.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
@@ -340,10 +337,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>接續 4-08 做完的 grill-execute 流程,implementation 做完準備進入 QA 階段時,context 已經逼近 smart zone 的尾端。Matt 把選項攤開來講:繼續在原 session 做下去,會讓結果慢慢劣化(不是立刻崩,而是漸進式變差),而且每次請求都要把之前所有 token 一起送出去(雖然有 cache 讓成本變低,但你還是在一個延遲更高、品質更差的環境裡工作)；那乾脆整個清空(clear)呢?他實際示範清空後會發生什麼——agent 得重新確立前一段對話裡已經確立的一切,你得補提示「我們要對剛做完的東西做 QA,去探索一下,理解它為什麼長這樣」,agent 是能重新探索沒錯,但盤問階段(grilling)裡建立的那些「為什麼這樣設計」的脈絡,清空之後就真的沒了——這是一種有損(lossy)的做法。</p>
-        <p>於是他介紹 compaction:把目前 session 的 context 壓縮,拿去 seed 一個新 session。這跟 subagent 的邏輯有點像但方向相反——subagent 是主 session 派出去做事、回報結果;compaction 則是把「目前這個 session」本身壓縮、轉移到「下一個 session」,兩邊都還是你在操作。在 Claude Code 裡指令是 `/compact`,可以附一句話告訴它要摘要的重點是什麼——這句話很重要,因為做摘要的也是一個語言模型,你給它越明確的摘要方向,它就越能抓對哪些資訊該留下來。示範裡他只簡單交代「接下來要做 QA」,壓縮跑完後 session 從 150K token 壓到 28.3K,騰出大量 smart zone 空間;順帶提到一個小技巧——compact 執行中可以先把下一句要說的話排進佇列(queue),不用乾等它跑完。</p>
-        <p>Matt 特別用「歷史學家」的比喻講清楚 compaction 的取捨:原始 session 裡發生的一切是「第一手史料」(primary source),忠實但龐雜;compaction 產生的摘要是「二手史料」(secondary source)——任何人幫你整理歷史,整理的過程本身就會遺漏一些東西,但換來的是效率。留在第一手來源裡工作,資訊最完整但噪音也最多;換成二手來源,騰出空間但可能漏掉一些細膩的脈絡。他強調在「對剛做完的東西做 QA」這個情境下,compaction 是教科書等級的正確選擇,因為此時你要的正是一份乾淨、聚焦的摘要,而不是全部細節。這堂課只是 compaction 的入門,後面 4-10 的 handoff、4-11 的決策樹,都是繼續在這個「原始資料 vs. 壓縮資料」的框架上疊加更多選項。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-09.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
@@ -356,11 +350,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Compaction 好用,但有個死穴:只能在同一個資料夾、同一個 agent 裡壓縮。如果你在 Claude Code 裡做完實作,想換 codecs 來做 review,compaction 完全幫不上忙——這種跨 agent、跨情境的交接需求,Matt 說他遇到太多次,乾脆做了一個專門的 handoff skill。</p>
-        <p>原理跟 compaction 幾乎一樣,都是把 session 摘要壓縮,差別在於它不是在記憶體裡把摘要塞進新 session,而是實際寫成一個 `handoff.md` 檔案,存在使用者作業系統的暫存目錄(temp directory)裡。這代表它是刻意設計成短命的(ephemeral)——不會被永久保存,電腦下次重開機或系統自己清暫存目錄時就會消失。因為是一個檔案,它就變得完全可攜:可以餵給 codecs、可以丟進另一個資料夾裡的 agent、甚至可以直接傳給同事。Matt 舉的一個典型場景是:你在做一個功能的時候,順手發現一個不相關的 bug,這時候就可以先做一份 handoff,晚點另開一個 session 去修。</p>
-        <p>示範用 `claude --resume` 回到之前的星等評分 session(當時大約 89K token,是個該考慮交接的時間點),下 `/handoff` 接一句「交給 codecs 做 review」——跟 compact 一樣,要給它一個交接目的,skill 才知道該摘要哪些重點。產出的檔案內容跟 compaction 的摘要很像,一樣很詳細、附檔案參照。要接續使用時,先清空當前 session,再用 `@` 符號指到 temp 目錄裡那份 handoff 檔案,內容就會被讀進新 session 的 context,馬上可以接著做。</p>
-        <p>這堂課把 handoff 定位成 compaction 的「更彈性但更麻煩」版本，不是替代品：想留在同一個資料夾、只是想延續前一段對話的 context,compaction 還是比較好用,尤其是它可以直接排隊接著做事;handoff 勝在跨 agent、跨資料夾、跨人的彈性,但串接下一段對話這件事比較繁瑣,只有在你真的需要那份彈性時才值得用。這個對照關係,直接鋪陳到下一堂 4-11 要整理的完整決策樹。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-10.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
@@ -373,10 +363,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課是整個 context 管理主題的總收束。Matt 先點出一個模式:回顧前面幾堂做的事,一段 coding session 其實會自然斷成幾個「階段」(phase)——grilling、implementation、QA——階段本身鬆散不精確,但每個階段之間都有一個「階段邊界」(phase boundary),而這些邊界正是你要做決定的時間點。他舉自己的實際案例佐證:grilling 結束時才 30K token,所以直接接著做 implementation 最合理,因為 implementation 可以吃到 grilling 這個「第一手來源」,不會有壓縮造成的資訊流失;但 implementation 做完準備 QA 時已經逼近 smart zone 上限,才選擇 compact,把不相關的雜訊清掉,只留 QA 真正需要的重點。</p>
-        <p>在這個框架下,他把可用的動作收攏成五種:直接在原 session 繼續、整個清空(clear)、壓縮並開新 session(compact)、寫成可攜檔案交接(handoff)、或是丟給 subagent 去做再回報結果。接著給出一張決策樹的完整走法:第一步問「能不能直接繼續?」——如果 context 還是下一步要用的第一手資料,或者你 smart zone 預算還夠(比如才 80K,而且知道接下來的任務不大),就繼續就好;不能繼續的話,問「這段 context 對下個任務完全無關嗎?」——完全無關就直接清空,因為清空是唯一「零成本」的選項,瞬間完成、瞬間拿回最大可用空間;但如果清空會把有用的資訊一起丟掉(比如清掉了 grilling 建立的設計理由),那就不能清空;再往下問「需要交接給別的 agent、別的資料夾、或別人嗎?」——是的話用 handoff;再往下問「這件事能不能放著讓它自己跑,完全不需要你介入(AFK, away from keyboard)?」——如果任務範圍夠明確不需要你插手(比如做完實作後的自動化 code review),就丟給 subagent,讓它在自己獨立的 context window 裡做,不干擾主 session;走到決策樹最底端,如果 context 相關、不能繼續、不需要 handoff、也不需要人不在場地跑,那就是 compact,這是所有條件都不成立時的預設解法。</p>
-        <p>Matt 坦承這些判斷不是客觀公式,帶有主觀品味成分,會隨著經驗累積越做越準,也鼓勵學員拿具體情境去 Discord 討論、用這套「phase boundary」的語言彼此交流。這堂課的真正價值,是把前面 4-08 到 4-10 分散示範的每個技巧,收束成一張可以隨時查閱、隨時套用的判斷地圖——也直接為下一堂 4-12 的「自動 compaction 好不好」鋪路：既然人可以在階段邊界上做出這麼細緻的判斷,那把這個判斷丟給 harness 自動處理,會發生什麼事?</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-11.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
@@ -389,11 +376,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課回答一個很自然會冒出來的問題:context window 有上限(Matt 用的 Opus 4.5 是一百萬 token),如果真的塞爆了會怎樣?答案很直接——送出超過上限的請求,Anthropic 會直接回錯誤,模型根本沒辦法處理。所以每個 harness 都內建了保護機制:到達某個門檻,就自動幫你壓縮(auto-compact)。在 Claude Code 裡可以用 `/config` 搜尋 auto-compact 確認它預設是開啟的,而且可以在 `settings.json` 裡自訂觸發的 token 門檻(比如改成 250,000)。</p>
-        <p>自動壓縮聽起來很誘人:如果它真的能在對的時間點自動做對的事,你就完全不用煩惱 phase boundary、不用管 smart zone,前面整套決策樹都可以省下來——確實網路上不少人主張自動壓縮就夠用了,不用自己操心。但 Matt 的實測經驗是相反的:自動壓縮是一個極難解、做錯了代價很痛的問題。他回到前面 grilling→implementation 的示意圖說明:如果硬要在某處插入一次壓縮,最安全的位置顯然是階段邊界(grilling 做完、implementation 開始之前),因為如果壓縮發生在 grilling 進行到一半,你等於是在還沒討論完的狀態下就把當下的討論壓成摘要,後半段只能靠著一份摘要繼續談,對話很容易斷線、忘記剛才在講什麼;如果發生在 implementation 進行到一半,情況往往更糟——他實際遇過的狀況是前後兩段程式碼風格完全不一致,agent 徹底忘記原本該實作的某個功能,等於是自己毀掉自己一半的工作成果。</p>
-        <p>自動壓縮還有一個結構性缺陷:它觸發時你沒有機會像手動 `/compact` 或 `/handoff` 那樣附一句「請摘要成這個重點、下一段要做的是這件事」——而 Matt 反覆強調,這句摘要指令正是決定壓縮品質好壞的關鍵。所以他的立場很清楚:如果你的 session 頻繁觸發 auto-compact,那通常代表哪裡出了問題,而不是代表這個機制在幫你省事。他把這件事上升到一個更大的原則——他一貫傾向的做法是提升人的技能,而不是把判斷力外包給 harness 和模型去扛,雖然這意味著人要經過一次學習曲線,但練起來之後,你會有更多 session 停留在 smart zone 裡,而且對整個工作流有更強的掌控力。</p>
-        <p>這堂課是整個第 4 章的收尾:它把「要不要交出控制權給自動化」這個問題明確攤開來,並給出一個清楚立場——手動判斷雖然麻煩,但目前仍然是更可靠的路。呼應了整章一路鋪陳下來的骨幹:context 清理(4-01~4-03)打地基、探索與理解(4-04~4-06)建立能力、對齊而非急就章(4-07~4-08)確立心法、compaction/handoff/決策樹(4-09~4-11)提供具體工具,最後這堂則提醒你,即使 harness 提供了看似省事的自動化,身為操盤手的你,還是得繼續握著方向盤。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-12.html">閱讀完整導讀 →</a>
         </div>
       </details></div>
 <div class="chapter-footer-nav"><a href="chapter-3.html">← 第 3 章　認識 Claude Code</a><a href="chapter-5.html">第 5 章　引導技巧 →</a></div>
