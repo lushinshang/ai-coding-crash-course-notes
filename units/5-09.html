@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 的自動記憶 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-09-hero-portrait.png">
+      <img src="../assets/images/5-09-hero-landscape.png" alt="Claude Code 的自動記憶 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 · 5-09</div>
+      <h1>Claude Code 的自動記憶</h1>
+      <blockquote class="summary">Harness 內建的自動記憶系統會自己寫入 steering 規則，Matt 認為那是自動生成的沉積物，建議直接關掉。</blockquote>
+    </div>
+
+    <article class="body">
+      <p>這一集補上最後一種 steering 來源：agent 自己寫給自己的記憶。多數 harness 都內建某種記憶系統，會在你工作過程中,自動偵測你對它行為做的修正、你表達過的偏好、或關於「你希望事情怎麼被完成」的事實，不用你特別要求，就悄悄寫進本地檔案，供之後的 session 讀取——依 harness 不同，讀回去的方式可能像 agents.md 一樣被 push 進去，也可能是走 pointer。理論上，這代表 agent 會在不需要你手動引導的情況下，逐漸建立起一幅「你喜歡怎麼工作」的畫像。</p>
+      <p>Matt 帶著大家實際在 Claude Code 裡跑 /memory 檢視，發現自己的 auto memory 是開著的,它用 claude.md 當作記憶的載體格式,還有一個專門的 auto memory 資料夾,點開後可以看到一份 memory.md，裡面記的東西相當零碎（他自己形容是「有點亂七八糟的東西」），<strong>而且內容完全因人而異，取決於你過去 session 裡說過什麼。</strong></p>
+      <p><strong>但他對這整套機制的立場很明確：幾乎沒什麼幫助，而且直接點名這就是「自動產生的沉積物」（auto sediment）</strong>——前一集才剛教過沉積物是什麼問題（不斷堆積、很少被移除、逐漸讓檔案對更多工變得不相關），auto memory 等於是把這個問題自動化、放手讓它自己長,而完全沒有人在把關做 5-07 教的那三種檢驗（重複、沉積物、no-op）。他給的具體建議是直接進 auto memory 設定把它關掉，關掉後不會再存新記憶,而且他推測這樣做還能順帶省下 context window（因為連「建立記憶」這個工具本身都不需要放進去了）。<strong>他把這個立場提升到一個更根本的原則：使用者應該保有對「記憶怎麼被建立、steering 怎麼被完成」的主控權，一旦放任這些自動記憶無止盡地累積,你等於是在自己的 context 裡養出一堆沒人清理的垃圾。</strong>這集短小精悍，作為整個引導章節的收尾,呼應了開篇 5-01 提出的核心主張——push 是有代價的,而且這個代價常常是在你沒注意到的地方悄悄發生。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-5.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
