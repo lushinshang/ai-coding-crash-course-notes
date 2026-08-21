@@ -132,6 +132,18 @@ header.top a.home span { color: var(--accent); }
 .backlink { display: inline-block; margin: 18px 0 0; font-size: 13px; color: var(--text-dim); text-decoration: none; }
 .backlink:hover { color: var(--accent); }
 
+.deepguide-cta {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  margin: 20px 0 4px; padding: 16px 20px; background: var(--accent-soft); border-radius: 14px;
+}
+.deepguide-cta .label { font-size: 14px; color: var(--text); }
+.deepguide-cta .label strong { color: var(--accent); }
+.deepguide-cta a.deepguide-link {
+  font-size: 14px; font-weight: 700; color: #fff; background: var(--accent);
+  text-decoration: none; padding: 9px 16px; border-radius: 10px; white-space: nowrap;
+}
+.deepguide-cta a.deepguide-link:hover { opacity: 0.9; }
+
 .unitlist { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
 details.unit {
   background: var(--bg-elevated);
@@ -222,6 +234,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
   <div class="en">Concepts · 11 個單元</div>
   <a class="backlink" href="index.html">← 回課程總覽</a>
 </div>
+
 <div class="unitlist">
       <details class="unit">
         <summary class="unit-head">

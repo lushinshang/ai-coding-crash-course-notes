@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>開課前，你要搞定的不是模型 － 第1章 開課前準備深度導讀 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; object-fit: contain; aspect-ratio: 1672 / 941; }
+@media (max-width: 640px) {
+  .hero-picture img { aspect-ratio: 941 / 1672; }
+}
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 30px; line-height: 1.35; margin: 0 0 6px; }
+.hero-text .subtitle { color: var(--text-dim); font-size: 15px; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 16px 20px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15.5px; color: var(--text);
+}
+blockquote.summary p { margin: 0 0 10px; }
+blockquote.summary p:last-child { margin-bottom: 0; }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 22px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body h2 { font-size: 21px; margin: 40px 0 14px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.mermaid-wrap { margin: 28px 0; overflow-x: auto; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+
+.takeaway { margin-top: 40px; padding: 20px 22px; background: var(--code-bg); border-radius: 14px; }
+.takeaway h2 { margin: 0 0 12px; font-size: 18px; color: var(--accent); }
+.takeaway p { margin: 0 0 12px; }
+.takeaway p:last-child { margin-bottom: 0; }
+
+.about-note { margin-top: 28px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-elevated); font-size: 13px; color: var(--text-dim); }
+
+.further-list { margin-top: 20px; }
+.further-list h3 { font-size: 14px; color: var(--text-dim); margin: 0 0 8px; font-weight: 600; }
+.further-list ul { margin: 0; padding-left: 20px; }
+.further-list li { font-size: 13.5px; color: var(--text-dim); margin-bottom: 4px; }
+
+.resource-note {
+  margin-top: 20px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.chapter-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.chapter-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-1.html">← 回第1章 開課前準備</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/1-deepguide-hero-portrait.png">
+      <img src="../assets/images/1-deepguide-hero-landscape.png" alt="開課前，你要搞定的不是模型 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第1章 開課前準備 深度導讀</div>
+      <h1>開課前，你要搞定的不是模型</h1>
+      <div class="subtitle">從五步驟方法論到黑盒子攤開：AI Coding Crash Course 的準備工作全貌</div>
+      <blockquote class="summary">      <p>這門課開宗明義就把一個常見的期待打破：上完課，你能出更大量、更高品質的成果，但推動這件事的不是模型變聰明，是你自己學會怎麼驅動 agent。這句話定了整章「開課前準備」的調——第一章九個單元，表面上在處理訂閱方案、專案安裝、資料庫 migration、agent 設定這些瑣碎的環境問題，實際上每一個環節都在替後面的核心方法論鋪路：怎麼選一套不會因為換工具就報廢的做法，怎麼確保自己的電腦跟老師畫面上的狀態隨時對得上，怎麼在動手改東西之前先看懂系統的真實邏輯而不是憑感覺硬改。</p>
+      <p>本文把這九個單元合併成一條敘事線，依序拆解四件事：這門課的方法論為什麼刻意不綁定特定 agent、訂閱制和按量計費之間那道結構性差距背後藏著什麼心理機制、把 Cadence 這個練習專案跑起來要走過哪些容易卡關的步驟、以及開課前兩個「先歸零、先開窗」的動作——清空過度堆疊的舊設定、把送給模型的每一筆請求攤開來看——為什麼被安排在正式動手之前。讀完會發現，這一章沒有一句話是在講「怎麼寫程式」，但幾乎每一句都在替後面所有章節的判斷力打地基。</p></blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">20萬+</div><div class="label">GitHub stars（讓方法論脫離工具的證明）</div></div>
+      <div class="statcard"><div class="num">US$3,400</div><div class="label">訂閱制實付，換算按量計費約 US$50,000</div></div>
+      <div class="statcard"><div class="num">20~50倍</div><div class="label">訂閱制比按量計費划算的倍率</div></div>
+      <div class="statcard"><div class="num">localhost:8787</div><div class="label">request logger 本地監聽位址</div></div>
+    </div>
+    <article class="body">
+      <h2>方法論比工具重要，訂閱制比帳單焦慮重要</h2>
+      <p>這門課結束時你會變得很能打，理由不是模型變強，是你自己被教會了一套五步驟系統：先逼問清楚需求（grill），寫成一份規格（spec），把規格拆成一張張工單（ticket），動手實作，最後做審查。這五步在講師過去兩年不斷換模型、換工具的過程中從沒變過，這也是他敢在此刻開課的底氣。</p>
+      <p>更值得留意的是這套方法論刻意不綁定任何特定 agent，判準只有一個：能不能在終端機裡跑、能不能讀 skills。這個門檻低到幾乎涵蓋市面上所有主流 agent——Claude Code、Codex、OpenCode、GitHub Copilot，教學內容也全部用 skills 形式交付，理論上學完可以直接搬到任何一個 agent 上用。<strong>agent 這個東西汰換速度太快，押注在某一款工具的操作細節上風險太高，真正值得投資的是背後那套不隨工具更迭而過時的方法論。</strong>示範用 Claude Code，理由很直白——這是講師自己每天在用的主力工具，也是目前最多人用的一款，但一旦進入課程核心，幾乎不會再特別談論它。支撐這個判斷的還有一組數字：講師自己維護的 skills 專案星數剛跨過二十萬顆，擠進史上星數最多的 GitHub 專案前二十名，下載次數超過一千三百萬次——這不是拿來炫耀的花絮，是在回答一個隱藏的問題：如果方法論真的能脫離特定工具獨立存在，那它應該能被大規模驗證過。</p>
+      <p>方法論定調之後，緊接著要解決一個更現實的問題：免費方案完成不了這門課，第一次認真跑一個 session 就會撞牆。具體該選哪一檔並不複雜——Anthropic 這邊 Pro 是起跳點，要專業使用就往上跳到 Max（分 5X 和 20X 兩檔，課程錄製時用的是 20X，但真正需要的頂多是 5X）；OpenAI 這邊 Plus 對應 Pro 的定位，額度不夠再往 Pro 升。真正該停下來想的是訂閱制跟按量計費之間那道結構性差距：有個開發者這個月的 token 帳單，照牌價算逼近五萬美元，實際付出去的只有三千四百美元——三千兩百美元的 Claude 訂閱，加兩百美元的 Codex 訂閱，同一份工作量中間差了十幾倍。按量付費會製造一種很像家裡裝了電表的感覺，這種心態一旦滲進工作方式，人會開始做出偏離理性的選擇：明明該上最強的模型，卻為了把數字壓低硬是切成便宜模型將就，賠掉的是輸出品質。<strong>訂閱制把這個心理負擔整個拿掉，因為費用一開始就是固定的，你才有餘裕把注意力放在「怎麼把這件事做好」而不是「這次又花了多少」。</strong>最後的建議很直接：沒有特別偏好就用 Claude Code 配 Pro；想走專業路線就直接上 Max，而且不管哪一檔都建議用訂閱方案內建的預設模型。</p>
+      <div class="mermaid-wrap"><img src="../assets/images/1-deepguide-mermaid.svg" alt="流程圖" style="width:100%;height:auto;"></div>
+      <h2>把舞台搭好：從專案到 agent 上線</h2>
+      <p>選編輯器這件事的答案出乎意料地無趣——不是因為哪一套最強，是因為免費、跨平台、夠親民，而且內建終端機。<strong>這門課大部分時間都在終端機裡跟 agent 對話，編輯器本身反而是配角</strong>，如果手上已經有慣用的工具，只要能開終端機、能看程式碼，直接繼續用也沒問題，這種不執著品牌的態度貫穿了整堂課挑工具的邏輯。</p>
+      <p>真正的儀式從終端機開始：確認 git 裝好、把課程 repo clone 下來、確認 Node.js 裝的是 LTS（長期支援版）而不是號稱最新最潮但穩定性沒保證的 Current 版本（示範時裝的是 22.21.1）。裝好之後跑 `npm install`，把一整批套件拉進 `node_modules`——其中一個叫 Sancastle 的套件，一週下載次數是十萬五千次，這個數字是在建立一個之後會用到的概念：專案依賴的每一個套件，背後都是一個被廣泛使用的獨立作品，不是憑空冒出來的黑盒子。裝完套件，下一步是把資料庫生出來，先跑 migrate 建立空的資料表結構，再跑 seed 灌進假資料，跑起來之後看到的 Cadence，就是接下來整門課要動刀的對象：一個功能齊全、有賣課程、上課、測驗的真實應用。畫面下方藏著一個容易被忽略但後面會一直用到的功能——切換登入身份的 dev UI，切到某個學生角色就能看到她已經買了哪些課，這是接下來所有「這個角色看到的畫面對不對」測試的入口。</p>
+      <p>環境搭好了，唯獨少了真正會動手做事的那個角色。裝 CLI 這段本身沒什麼好講的：依平台複製對應指令、貼進終端機、跑起來、對「是否信任這個工作區」按下同意、登入時選訂閱選項而不是 API key，同一套安裝邏輯換成 Codex 或其他 agent 一樣適用，呼應的正是前面立下的原則：工具是替換品，方法才是核心。選模型這一步才是真正該停下來想的地方，用 `/model` 指令叫出選單，建議做法是直接選訂閱方案自帶的預設模型，不用糾結該選哪一個型號。示範時選的是配了一百萬 token 上下文視窗的 Opus 5，effort 等級可以用左右鍵調整，但這裡有個容易被忽略的細節：錄這門課的當下其實用的是 medium effort 的 4.8，因為 Opus 5 那時候都還沒問世。<strong>課程內容不會因為模型版本更新而失效，重點是「用你方案裡的預設中階模型」這個選擇邏輯，不是死記某個型號名稱</strong>，型號會換，這個判斷原則不會換。最後一步是打一聲招呼，收到回應就代表設定成功——CLI 裝對了、帳號權限夠、模型選對了、網路連得通，四件事只要有一件沒到位，這聲招呼就打不通。</p>
+      <h2>時間旅行與資料庫同步：兩個容易踩坑的機制</h2>
+      <p>遠距教學有一個從沒被真正解決過的問題：老師在畫面上示範完一個功能，你怎麼確定自己電腦上的程式碼跟老師剛剛講的是同一個狀態？這門課的答案是一套自己寫的工具鏈。第一步是建一個叫 dev 的分支當練習場，之後隨意弄髒、隨意實驗都不會動到 main。真正的核心是 `npm run reset`：每一堂課的每個階段都對應一個或多個 git commit，跑這個指令會列出一長串可以「跳」過去的時間點，選一個就能把本機狀態瞬間對齊到影片拍攝當下的樣貌。有個帶點自嘲的示範很能說明這個機制多精準——`package.json` 裡課程平台的描述打錯字，寫成「awesome horse platform」而不是「awesome course platform」，跑 reset 選到對應的 commit，錯字瞬間被修正。<strong>一個 bug 級的打字失誤，反而成了展示時間旅行精準度最好的教材。</strong></p>
+      <p>但 reset 有個代價：它會把自己動手加的東西一併洗掉，示範裡加了一個 foo bar 的 npm script、commit 下去，跑 reset，foo bar 直接消失，一點痕跡都不留。對還捨不得自己改動被洗掉的人，另外準備了 `npm run cherry-pick`——把某個歷史 commit 疊加到目前分支上，而不是把整條分支輾平重來。但這裡有個誠實的但書：如果對 git 的 cherry-pick 和衝突解決不熟，乾脆全程只用 reset 就好，少一個變數少一個坑——<strong>會用進階工具不代表該用</strong>。還有第三個指令 `npm run pull`，用來在課程更新時把上游主分支的新內容拉下來。三個指令背後其實是同一套自製 CLI 在跑，包成 npm script 只是不想讓學員去記 git 語法。</p>
+      <p>跟時間對齊同樣重要的，是另一件更違反直覺的事：改完程式碼、重新整理頁面，畫面卻噴出一個看起來毫不相干的資料庫錯誤。<strong>改程式碼不會讓資料庫自動跟上</strong>，這中間永遠隔著一道需要手動執行的步驟。專案裡藏著兩個性質完全不同的單位——原始碼是會編輯、決定應用行為的檔案；資料庫具體來說是一個叫 `data.db` 的檔案，安靜躺在專案根目錄下。關鍵檔案 `app/db/schema.ts` 定義的是資料庫「應該」長什麼樣子，但原始碼負責定義藍圖，資料庫不會自動變成藍圖畫的樣子，中間那道手動程序就叫 migration，理由也很實際：資料庫裡裝的是真正的使用者資料，神聖不可隨便覆寫，原始碼和資料庫必須被當成兩個各自對齊版本的東西，只要有一邊超前，系統就會報錯。有一次現場示範精準命中了這個陷阱：切換到一個改了 schema 的版本，courses 資料表被加了一個 notes 欄位，光是切換原始碼版本並沒有真的執行 migration，打開頁面直接壞掉，終端機丟出一句「no such column notes」的錯誤，跑一次 migrate 指令問題就消失。<strong>用來切換程式碼版本的那個指令只碰原始碼，不會幫你跑 migration</strong>，所以只要切換過版本，幾乎可以確定接下來要手動 migrate 一次，這不是例外狀況，是常態。好消息是這個資料庫本身沒什麼好怕的，它是個可以隨便重來的沙盒，壞了大不了重 seed，管理員、講師的帳號又會全部回來。</p>
+      <h2>歸零與開窗：清掉舊設定，打開黑盒子</h2>
+      <p>幾乎每個帶著一身裝備走進這門課的人，都會被同一句話潑冷水：<strong>把它全部刪掉</strong>。裝過幾個 MCP 伺服器、調過一輪設定、裝過一票 skills 和 plugins，這些堆疊起來的結果通常不是能力升級，是過度配置，大部分根本用不到，從一個乾淨的起點開始工作反而更容易把事情做好。但這不是要人不負責任地清空一切——如果那些設定是辛苦調出來的，解法不是自己動手刪，是讓 agent 自己處理，畢竟它最了解自己的設定放在哪裡：讀自己的文件、盤點設定檔案位置、備份到安全的地方，再把環境清回空白狀態，還會生成一段還原提示詞供將來直接貼上去用。<strong>後面每一個技巧為什麼有效、為什麼失效，都要在一個接近預設值的環境下驗證出來</strong>，如果 agent 還背著一堆舊設定，某個技巧是課程內容的問題還是被殘留配置搗亂，會很難判斷。</p>
+      <p>歸零之後，緊接著要做的是反方向的事：把黑盒子撬開一條縫。跟 agent 互動的體驗本質上是一個黑盒子，文字打進去、答案跑出來，中間發生了什麼完全看不見。撬開的工具是一個叫 request logger 的小程式，跑起來之後會在 localhost 8787 這個位址開一個本地網頁伺服器。操作起來只有一行設定：把一個環境變數指向這個本地伺服器，原本要直接送去 Anthropic 官方伺服器的每一筆請求，現在會先經過這個中繼站——正常轉送出去讓 agent 照常運作，同時把整包內容留一份存到本機資料夾裡。從使用者角度看什麼都沒變；但背地裡，<strong>每一次往返都被完整記錄下來了，黑盒子的內容第一次被攤在陽光下</strong>。存下來的檔案裡有一份 markdown 版本最值得看，完整攤開送給模型的系統提示詞、工具定義，全部用 XML 標籤分隔開來，再往下是完整的訊息歷史。這堂課的作用是先把工具裝好、把原理搞懂，真正的價值要到後面才會顯現：當你想知道「為什麼 agent 這樣做決定」，不用再靠猜，直接翻 log 就看得到系統到底跟模型說了什麼。</p>
+      <h2>不是孤軍奮戰</h2>
+      <p>自我步調的課程有一個容易被忽略的風險：卡關的時候，身邊沒有人。第一章唯一一堂不談技術操作的課，處理的正是這件事——不是教你裝什麼工具，是告訴你卡關的時候該去哪裡找人。伺服器結構分成兩層，上半部公開給所有人，下半部是付費之後才看得到的頻道。<strong>真正提問的地方，是論壇形式的專屬問題頻道</strong>：貼上問題描述，系統會自動開一個獨立討論串，跟所有訊息混在同一個頻道裡比起來，這種形式讓每個問題都有自己的空間，不容易被洗版蓋掉。身分標示上，紅色是特別樂於助人的成員被指定的榮譽身分，紫色是版主，遇到惡意洗版直接 tag 版主角色就能處理。前面八堂課把環境、工具、流程都交代完了，這堂等於把安全網張開：真正動手做練習時，難免會遇到裝置差異、版本落差、理解不到位的狀況，這些狀況不需要自己硬扛。</p>
+    </article>
+    <div class="takeaway">
+      <h2>帶走的事</h2>
+      <p>這一章從頭到尾沒有教任何一行「寫程式」的技巧，卻花了九個單元把方法論、預算心理、環境對齊、資料同步、設定衛生、可觀測性、求助管道一次交代清楚。這些看似瑣碎的準備動作有一條共同的邏輯：<strong>它們都在替後面章節排除雜訊，讓每一個技巧的成敗，都能被歸因到技巧本身，而不是環境沒搭好、帳單焦慮、還是舊設定殘留在搗亂。</strong>真正的課程還沒開始，但決定這門課能不能學好的關鍵判斷，已經在第一章全部下完了。</p>
+    </div>
+    <div class="about-note">本文素材來自《AI Coding Crash Course》第一章「Before We Start」共 9 支課程單元的英文逐字稿，經過整理與改寫，融合成一篇連貫的深度導讀。內容為轉述與詮釋，若有理解偏差或轉述失真之處，請對照原始課程影片核實。</div>
+    <div class="further-list">
+      <h3>本章單元</h3>
+      <ul>
+        <li>這門課要帶你去哪</li>
+        <li>選方案與選模型</li>
+        <li>建立練習專案</li>
+        <li>安裝 Claude Code</li>
+        <li>練習怎麼跑</li>
+        <li>資料庫 migration</li>
+        <li>重置回乾淨狀態</li>
+        <li>安裝 request logger</li>
+        <li>Discord 社群怎麼逛</li>
+      </ul>
+    </div>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="chapter-nav">
+      <a href="../chapter-1.html">← 回本章單元列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
