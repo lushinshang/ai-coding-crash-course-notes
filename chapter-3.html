@@ -280,15 +280,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">3-05</span>
           <span class="head-text">
             <span class="title">在時間軸上前進與回溯</span>
-            <div class="summary">雙击 Escape 進入 rewind 模式,搭配 session 持久化與 claude --resume,讓你敢大膽嘗試也能隨時撤退。</div>
+            <div class="summary">rewind 模式加上本機持久化的 session,讓你敢放手讓 agent 大動作修改,因為隨時能整個倒帶。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課銜接的是上一支影片留下的那個被刪掉的 `test:watch` 指令——Matt 先示範最直覺的作法:直接跟 Claude 說「revert that please」,它就會照著剛剛的修改反著做一次,把刪掉的東西加回來,再按 Ctrl+S 存檔確認。但這只是暖身,真正的主角是連按兩下 Escape 進入的 rewind 模式。</p>
-        <p>Rewind 模式會列出整條對話的時間軸,每個節點代表一次互動,選中某個節點之後,系統給你三種還原選項:只還原程式碼、只還原對話內容、或是程式碼與對話一起還原到那個時間點。Matt 說他自己最常用的就是「兩者都還原」,直接把整個 session 拉回到指令下之前的狀態,像沒發生過一樣乾淨。如果還想往回推更遠,同樣連按兩次 Escape 就能繼續選更早的節點——這裡他也提到列表裡還有一個「summarize from here」的選項,先按下不表,留給後面章節講。這種「先試試看,不滿意就整個倒帶」的自由度,其實是敢放手讓 agent 做大動作修改的心理安全網,沒有這層保障,很多人會不敢讓 Claude 碰太多檔案。</p>
-        <p>另一個容易被忽略但很重要的特性是:Claude Code 的 session 是存在本機的,不是關掉終端機就人間蒸發。連按兩次 Ctrl+C 離開後,你有好幾種方式接回原本的對話——可以直接用系統印出的 `claude --resume &lt;uuid&gt;` 指令精準回到那個 session;也可以打開全新的 `claude`,在裡面打 `/resume` 叫出所有歷史 session 清單(甚至可以在整個 repo 範圍內搜尋),挑一個按 enter 進去;最快的則是 `claude --continue`,直接接續上一個 session。這三條路殊途同歸,但適用情境不同——知道 UUID 就用第一種最精準,忘了細節就用 `/resume` 用清單找,趕時間就用 `--continue`。搭配前面的 rewind,整堂課的訊息很清楚:你在時間軸上前進、後退、甚至跨 session 復活,都不用擔心一去不回頭。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/3-05.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
