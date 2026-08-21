@@ -108,13 +108,16 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
     <div class="hero-text">
       <div class="kicker">第6章 把功能出貨 · 6-01</div>
       <h1>如何應付龐大任務</h1>
-      <blockquote class="summary">把龐大任務拆成一個個 session 扛得動的階段，並判斷何時該開新 session。</blockquote>
+      <blockquote class="summary">用 spec 定目的地、用 ticket 拆路徑，把超出單一 context window 負荷的野心之作拆成能交付的份量。</blockquote>
     </div>
-
+    <div class="statgrid">
+      <div class="statcard"><div class="num">30</div><div class="label">他處理過最大的 spec 底下掛的 ticket 張數</div></div>
+    </div>
     <article class="body">
-      <p>這堂課本地缺逐字稿，只能根據官網公開的課程簡介寫候補摘要。官網簡介是這樣寫的："Decomposing complex work into session-sized chunks — how to break down big projects into phases your agent can execute one at a time, and how (and when) to create a new session."</p>
-      <p><strong>換句話說，這堂課要處理的問題是：一個大專案不可能塞進單一個 agent session 裡一次做完，你得先學會把它切成一階段一階段、每階段份量剛好落在一個 session 能負荷的範圍內。</strong>同時也會談到判斷時機的問題——什麼徵兆代表該收尾、開一個全新的 session 繼續下去，而不是硬撐著在同一個對話裡把 context 塞爆。</p>
-      <p>這是整章「從 issue 到出貨」流程的起手式，後面 6-02 到 6-05 講的 issue tracker、spec、ticket、implement，基本上都是在具體回答這堂課丟出的問題：怎麼拆、拆到哪個顆粒度、什麼時候換一個乾淨的 context 重新開始。</p>
+      <p>到這裡，你已經被灌輸了一種近乎偏執的習慣——時時刻刻盯著 context window，分辨自己現在站在 smart zone 還是已經滑進 dumb zone。<strong>這套習慣在單一個 session 就能做完的工作上很夠用：改個小功能、修個 bug，一路從頭做到尾，盯緊這條線不要跨進 dumb zone 就好。</strong>但真正龐大的工作根本不是這麼一回事——一次會動到整個應用程式每一層的重構，或者你光看任務描述就知道連塞進一整個 context window 都不夠，更別說擠進 smart zone。這種規模的工作，要怎麼一次交出去？</p>
+      <p>答案不是什麼新發明，而是軟體工程師做了幾十年的老招：把大任務拆成一個個小塊，每一塊都小到能完整塞進 agent 的 smart zone。問題是拆完之後，規劃這件事本身也變了——在這之前，計畫的有效期限就是一個 context window 的長度，從沒認真想過如果工作要橫跨多個 session、多個 context window，前置的規劃該長什麼樣子。</p>
+      <p>這套摸索出來的做法靠兩份文件撐起來。第一份描述目的地——你到底要抵達哪裡；第二份則把抵達那裡的路徑拆成一張張 ticket，一張 ticket 對應一個能塞進 smart zone 的工作份量。<strong>如果目的地要拆成四塊，你就會得到一份 spec 加四張 ticket，每一張 ticket 本身就是那個 session 的實作計畫。</strong>這樣拆開來的好處是規模可以放得很大——他自己就處理過底下掛了 30 張 ticket 的巨型 spec，一路做下來還是撐住了。</p>
+      <p>這也是整個章節接下來要展開的主軸：用 spec 定目的地、用 ticket 切路徑，把原本超出單一 context window 負荷的野心之作，拆成一段段可以真正交付的工作。</p>
     </article>
     <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
     <div class="unit-nav">
