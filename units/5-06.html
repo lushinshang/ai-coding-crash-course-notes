@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>導航指標 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-06-hero-portrait.png">
+      <img src="../assets/images/5-06-hero-landscape.png" alt="導航指標 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 · 5-06</div>
+      <h1>導航指標</h1>
+      <blockquote class="summary">除了教 agent「該做什麼」，也要教它「東西在哪」，用少量高頻的導航指標取代地毯式搜尋。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">3</div><div class="label">每個新 skill 要同步更新的地方數(docs bucket、plugin.json manifest、對應分類 README)</div></div>
+    </div>
+    <article class="body">
+      <p>前面幾集的 steering 大多聚焦在「指導 agent 該做什麼事」，這一集轉了個方向，談的是「怎麼幫 agent 更快找到東西」。Matt 用了一個很生動的比喻：把你的 code base 想成 Google Maps 的衛星視角，agent 平常在裡面找東西，走的都是「地方道路」——一個一個掃資料夾、開檔案、做搜尋，一路順著引用關係摸過去（他現場示範搜尋 quiz 這個關鍵字，然後再手動進 schema 去追出處），而這整個探索過程本身就會不斷把新檔案、新的 tool call 塞進 context window，也是一種隱性成本。<strong>他說，如果能給 agent 一條「高速公路」——context window 裡放一個指標，直接帶它去對的檔案——探索效率會差很多。</strong></p>
+      <p>他把這種指標叫做 navigation pointer，並直接呼應前幾集反覆踩的坑：seed script 常常被 agent 忽略，導致資料庫遷移出包，解法不是寫一大段規則去教它「該怎麼做」，而是只需要讓它知道「這個檔案存在」，於是他叫 agent（這次是透過 writing for agents skill）在 agents.md 裡加一行簡短的導航指標，指向 seed script。這跟 5-02 教它「必須同步修改 seed.ts」是不同層次的問題——那是教做法，這是教地圖。</p>
+      <p>但他馬上警告不要濫用：不是每個重要檔案都該塞一條導航指標進去，不然等於把整個目錄結構 push 進 context，又會推高 context load。真正該建高速公路的地方，是 agent 自己很難發現的非直覺依賴關係——他舉自己的 skills repo 當例子：每個新增的 skill 都要同步進三個地方（docs bucket、plugin.json manifest、對應分類的 README），這種跨檔案的隱性規則如果不寫進 agents.md，agent 幾乎不可能自己推理出來。<strong>他也特別提醒一個反直覺的風險：導航指標會過期。如果你砍掉了某個資料夾卻忘記把 agents.md 裡對應的指標也刪掉，那個「失效的高速公路」反而比沒有指標更糟——因為 agent 被訓練成信任這些資訊，指標一旦指向不存在的東西，不僅浪費 token，還會讓它花時間去搞懂為什麼找不到。</strong>最後他把這個概念和更早教過的「@提及」檔案的用法連起來：那其實就是一種「直接塞進文字框、只用一次的臨時高速公路」，是同一個概念的不同呈現方式。這集是為下一集 pruning 鋪墊：既然指標會過期、會累積，就需要有系統性的方法去清理它們。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-5.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
