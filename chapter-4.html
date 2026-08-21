@@ -267,16 +267,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">4-04</span>
           <span class="head-text">
             <span class="title">探索程式庫</span>
-            <div class="summary">Model 沒有記憶，每次開新 session 都要重新探路，探路品質決定後面一切的品質。</div>
+            <div class="summary">model 沒有記憶,每次開新 session 都要重新探路,探路品質決定後面一切的品質。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課把整個系列課提過的「無狀態性」（statelessness）拉到最前面，並宣稱它是所有限制裡最難繞過、影響最大的一個：模型什麼都不記得，所以每次開新 session，agent 都得靠探索（exploration）重新找出它需要的資訊。探索做得好不好，直接決定後面所有事情做得好不好——找不到該找的資訊，agent 大概率就做不出你要的東西。</p>
-        <p>示範還是用 request logger 那套，這次專門看 environment 這個欄位：agent 拿到的資訊其實出乎意料地少。它知道平台（作業系統）、工作目錄、在 Git repo 裡、shell 是 bash、自己的知識截止日期、目前分支、main 分支是什麼、Git user 是誰、Git status，還有最近一次 commit 訊息。但它完全沒有拿到目錄結構——沒有 `ls`，對檔案系統裡實際有什麼東西一無所知。也就是說 agent 一開始的「認知」只有目錄名稱、一個模糊的環境描述、幾筆 commit 名稱，僅此而已。</p>
-        <p>Matt 刻意把這個處境類比到學員自己身上：「你現在對這個專案的了解程度，其實跟 agent 差不多」，所以練習就是清空 context，親自問 agent「這個專案的技術棧是什麼、用途是什麼」，然後觀察它怎麼回應——它是自己一個一個讀檔案，還是會生出 subagent 去做這件事？這個觀察點很重要，因為後面幾堂會反覆用「探索方式消耗多少 context」當判斷依據。</p>
-        <p>這堂是整章從「清理環境」轉向「開始做事」的轉折點：4-01 到 4-03 都在打掃地基，4-04 開始才第一次真的跟 agent 互動、觀察它面對一個陌生 codebase 時怎麼行動。也替 4-05 的 teach skill 鋪路——探索是 agent 自己摸索，teach 則是把這個摸索過程包裝成一套系統化的教學互動。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-04.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
