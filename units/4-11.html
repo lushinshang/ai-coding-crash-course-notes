@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>clear、compact、handoff 還是 subagent － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-4.html">← 回第4章 基本功</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/4-11-hero-portrait.png">
+      <img src="../assets/images/4-11-hero-landscape.png" alt="clear、compact、handoff 還是 subagent 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第4章 基本功 · 4-11</div>
+      <h1>clear、compact、handoff 還是 subagent</h1>
+      <blockquote class="summary">一張決策樹，把清空、壓縮、交接、丟給 subagent 四條路配上判斷條件，收束前面幾堂學到的所有招式。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">30K</div><div class="label">grilling 結束時的 token 量,足以直接接續 implementation</div></div>
+      <div class="statcard"><div class="num">150K</div><div class="label">implementation 完成後的 token 量,改用 subagent 做審查</div></div>
+      <div class="statcard"><div class="num">5</div><div class="label">階段邊界上可選擇的動作:繼續、清除、compact、handoff、subagent</div></div>
+    </div>
+    <article class="body">
+      <p>grilling 結束時,context 才用掉 30K tokens,很自然就直接接著做 implementation——因為 implementation 需要 grilling 過程裡那些探索與決策的原始推理,中途切換只會製造二手資訊的失真。可是 implementation 做完準備進 QA 時,同樣是一個「階段結束」的時間點,這次卻選擇了 compact。<strong>分岔點的關鍵不在於某個階段是否結束,而在於下一個任務用不用得到這段 context,以及手上還剩多少 smart zone 額度。</strong>同一種情境「階段邊界」,可以導出完全不同的動作,這正是這件事沒有標準答案、需要一套判斷框架的原因。</p>
+      <p>在每個階段邊界上,實際能做的事只有五種:直接繼續、清空 context 重開一個 session、compact 之後把摘要餵進新 session、handoff(把目前 session 寫成一份 markdown 檔案往外傳)、或是丟給 subagent 去處理再回報結果。判斷的第一關是「能不能繼續」——如果下一階段需要這一階段的第一手推理(例如 grilling 接 implementation),或是 token 用量還在低檔、任務也不大,那就沒有理由中斷。真正要中斷時,下一個問題是「這段 context 對下一個任務還有沒有用」:如果完全用不到,<strong>清除 context 是所有選項裡代價最低的一個——它不花時間,單純刪除資訊,換來的是最大的 smart zone 額度,但前提是這個 session 裡的探索與決策必須是完全可拋棄的。</strong>一旦清掉的是有用的資訊,例如拿掉 implementation 前的 QA 卻連帶清掉了 grilling 階段做決策的理由,QA 就會失去判斷依據,這時候清除就不是選項。</p>
+      <p>如果 context 是相關的、不能清掉,決策樹接著問「需不需要 handoff」。handoff 的用途相對窄:只有當你要把工作真的交到另一個 agent、另一個目錄、或另一位協作者手上時才需要寫這份摘要檔案,也適合用在階段進行到一半、臨時發現另一個需要處理的支線任務、想暫時分身去處理但不想打斷主線的場合。排除掉 handoff 之後,下一題是「這個任務能不能 AFK(away from keyboard)完成」——也就是人完全不用介入,任務範圍夠明確,agent 自己就能跑完。<strong>只要人類不需要在場介入,把任務丟給 subagent 去跑,就能讓它在自己的 context window 裡工作,完全不動到 main session。</strong>具體的例子是 implementation 做完、token 已經到 150K 時的自動化審查:可以選擇 compact 後在 main session 裡做審查,但因為這個審查階段不需要人在場,更合理的做法是直接開一個 subagent 去跑,審查結果回報回來就好。</p>
+      <p>把「繼續」「context 不相關」「需要 handoff」「能 AFK」這四個問題都問過一輪,剩下的情況就是決策樹的預設出口:compact。也就是 context 相關、不能直接繼續、不需要 handoff、任務又得要人在場處理的時候,compact 就是答案。<strong>這些判斷準則本質上帶著主觀成分與品味,答案會隨經驗慢慢長出來</strong>,不是一套可以死記硬套的規則,而是一種需要在實戰裡反覆校準的直覺——也直接為下一堂「自動 compaction 好不好」鋪路:既然人可以在階段邊界上做出這麼細緻的判斷,那把這個判斷丟給 harness 自動處理,會發生什麼事?</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-4.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
