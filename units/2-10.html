@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>怎麼選模型 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-2.html">← 回第2章 核心概念</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/2-10-hero-portrait.png">
+      <img src="../assets/images/2-10-hero-landscape.png" alt="怎麼選模型 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第2章 核心概念 · 2-10</div>
+      <h1>怎麼選模型</h1>
+      <blockquote class="summary">模型只佔整個系統的一半分量——具體的 50/50 判斷，並教你怎麼建立自己的模型直覺。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">50 / 50</div><div class="label">模型 vs harness+環境 的重要性佔比</div></div>
+    </div>
+    <article class="body">
+      <p>「這個新模型完爆所有對手，你不用就等著被淘汰」——這種風氣值得被潑一盆冷水。這堂課要做的事，是把模型、harness、環境那張架構圖量化成一個具體的比例：<strong>模型大概佔整個系統重要性的一半，不多不少，50/50，跟 harness 加環境那一側打平</strong>。這句話同時否定了兩種極端：既不是「模型不重要，隨便選都行」，也不是「模型就是一切，其他都是細節」。換成一個很爛的模型，系統照樣廢掉；但如果模型本身已經夠好，接下來能榨出的改善空間，往往在 harness 和環境裡。</p>
+      <p>判斷該選哪個模型，有兩個維度。第一個是效率：不能只看 token 花了多少，要看這些 token 換到了什麼。排行榜圖表上，Gemini 3.5 Flash 花了很多 token 卻沒換到太多產出，但因為它每個 token 的單價便宜，換算下來反而落在效率不錯的區域——<strong>便宜模型可能靠走量打平品質差距，貴模型如果每個 token 都算得精準，也可能比較划算</strong>。而且選的不只是模型，還連帶選了一套計價結構——API 逐 token 計費，跟訂閱制的每月吃到飽，實際成本可以差很多。第二個維度是任務需要的品質等級不同：探索、研究、摘要這類工作，低 effort 可能就夠用；但詳細規劃、程式碼審查這種需要深度推理的任務，拉高 effort 帶來的分數提升才是真的有感——這時候值得考慮用不同模型分工，比如規劃階段用 Fable medium，落地實作階段用 GPT 5.6 Sol medium。</p>
+      <p>任何排行榜、任何 benchmark 圖表，終究只是別人任務集合上的分數，跟每天實際在做的工作不見得對得上。真正的建議是把模型當成員工來理解：員工會來來去去，真正能長期發揮價值的，是有沒有投資公司的基礎建設——也就是 harness 和環境，讓任何一個新進員工都能上手發揮。要摸清楚一個模型的脾氣，唯一辦法是實際用過、盯著帳單看、憑經驗建立自己的模型排序，而不是照抄別人的圖表。後面課程會教一套更 empirical（更貼近經驗值）的評估方法——<strong>拿同樣的輸入，換兩套不同的模型或 effort 設定，實測比較哪個表現更好，這比看排行榜可靠得多</strong>。整堂課收在同一個立場：選定一個順手的模型和 effort，好好把它摸熟，別把時間耗在不斷 min-max 切換上——這正是上一堂丟出的判斷，在這裡被講得更完整。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-2.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
