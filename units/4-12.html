@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自動 compaction － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-4.html">← 回第4章 基本功</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/4-12-hero-portrait.png">
+      <img src="../assets/images/4-12-hero-landscape.png" alt="自動 compaction 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第4章 基本功 · 4-12</div>
+      <h1>自動 compaction</h1>
+      <blockquote class="summary">Harness 內建的自動壓縮能保底不爆 context，但在階段中途硬壓縮，往往換來風格跑掉、忘記需求的代價。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">250,000</div><div class="label">settings.json 可自訂的 auto-compact 觸發門檻範例</div></div>
+    </div>
+    <article class="body">
+      <p>當一個 request 送到模型供應商,裡面塞了超過上限的 token,結果不是模型努力擠出回應,而是直接報錯——<strong>模型本身完全沒有能力處理超出 context window 的內容</strong>,這是個硬限制,不是軟性建議。正因為每一家 harness 都會撞到這個牆,所以每一家 harness 都內建了同一種保護機制:當 session 逼近上限時,自動幫你 compact。在 Claude Code 裡,這個開關就在 `/config` 裡的 auto-compact,預設是開啟;想自己調整也可以,進到 `.claude` 目錄下的 `settings.json`,把觸發門檻改成任何想要的數字,例如 250,000 個 token。</p>
+      <p>自動 compaction 聽起來像是解方——如果它真的完美,就再也不用管 phase boundary、不用管 smart zone,那整套「什麼時候該收斂、什麼時候該交接」的決策樹根本不需要存在,系統會自己在對的時間點幫你壓縮。但事實是,<strong>自動 compaction 是一個極難解決的問題,而且一旦做錯,代價非常慘痛</strong>。想像把 grilling 階段和 implementation 階段之間畫一條 phase boundary,如果系統硬性規定你必須在 session 裡的某處塞入一次 compact,最安全的位置顯然就是這條分界線——因為如果 compact 發生在 grilling 進行到一半,後半段面對的就只是前面討論內容的摘要,而不是完整脈絡。</p>
+      <p><strong>在 implementation 階段,這個問題只會更嚴重。</strong>一旦 compact 發生在實作進行到一半,agent 常常會徹底迷失方向,後半段程式碼會突然換一套完全不同的風格,甚至整個忘記原本該實作的功能。在 phase 中段隨機觸發的 compact,幾乎必然導向更差的程式碼結果——這正是自動 compaction 最大的陷阱:它沒有時機的概念,只認 token 數字,不認工作到哪個階段。另一個常被忽略的細節是,自動觸發的 compact 完全沒有給你機會說明「這次該保留什麼、下一段 session 的意圖是什麼」,而那段手動寫給 handoff 或 compact 的摘要說明,恰恰是決定壓縮結果好壞的關鍵。</p>
+      <p>所以與其把「什麼時候該收斂」這個決策權交給 harness,更好的做法是人類自己掌握它:自己決定要繼續、要清空、要 handoff、要丟給 subagent,還是要手動 compact,而且永遠選在 phase boundary 上做,而不是任由系統在 phase 中段隨機出手。這是一次性的學習曲線,一旦練成,session 會更常落在 smart zone 裡,結果也會越來越穩定——<strong>如果常常撞到 auto-compact 的門檻,那通常代表某個環節已經出了問題,而不是代表系統正在幫你</strong>。這也是整個第 4 章一路鋪陳下來的骨幹收尾:context 清理打地基、探索與理解建立能力、對齊而非急就章確立心法、compaction/handoff/決策樹提供具體工具,最後提醒的是,即使 harness 提供了看似省事的自動化,身為操盤手的人,還是得繼續握著方向盤。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-4.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
