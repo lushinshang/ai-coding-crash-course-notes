@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>執行 bash 指令 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-3.html">← 回第3章 認識 Claude Code</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/3-06-hero-portrait.png">
+      <img src="../assets/images/3-06-hero-landscape.png" alt="執行 bash 指令 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第3章 認識 Claude Code · 3-06</div>
+      <h1>執行 bash 指令</h1>
+      <blockquote class="summary">三條路線分別對應共享資訊、持續監控、完全隔離——決定 Claude 能不能看見指令結果。</blockquote>
+    </div>
+
+    <article class="body">
+      <p><strong>能不能執行 bash 指令,是「被動寫程式碼的工具」跟「真正能自己找回饋迴圈、跟專案互動的 agent」之間的分界線</strong>。沒有這個能力,Claude 只能憑猜測生成程式碼,寫完就結束;有了它,Claude 能自己讀 `package.json` 找出 dev server 指令、自己執行、自己看結果修正,一整輪「寫→跑→看錯誤→改」的迴圈不需要你插手傳話。</p>
+      <p>操作上很簡單:在輸入框打一個驚嘆號 `!` 就進入 bash 模式,接下來打的任何東西都會被當成 shell 指令直接執行,結果直接放進 Claude 的 context。跑一次 `npm run type check`,如果環境沒先裝好依賴,會冒出一堆錯誤——但這些錯誤同樣進到 Claude 的視野裡,不需要你複製貼上,它自己就能看出某個套件雖然寫在 `package.json` 裡卻沒真的安裝,直接建議跑 `npm install` 解決。這是 bash 模式最實用的場景:手動跑一個會出錯的指令,把錯誤直接餵給 Claude,省掉中間傳話這一步。</p>
+      <p>但 bash 模式處理不了「跑起來不會結束」的指令,比如 dev server。這時候要先在 bash 模式裡跑起來,趁它還在跑的時候按 Ctrl+B 把它丟到背景執行——畫面上會出現一則背景化的提示,輸出內容寫進本機檔案,狀態列多一個背景任務的入口。用方向鍵移到那個任務按 enter,就能檢視這個背景 shell 實際在做什麼、按 X 直接停掉它、或按左鍵退回主畫面。<strong>這對除錯 dev server 問題特別好用:Claude 能自己看 log、自己送 curl 請求驗證、自己讀懂輸出,整個除錯迴圈完全不需要你在中間傳話</strong>。</p>
+      <p>最後一個工具方向完全相反——如果想跑一個指令但完全不想讓 Claude 看到結果,又要保留它目前的對話狀態不被打斷,就按 Ctrl+Z 把 Claude Code 整個掛起。終端機回到普通 shell,可以做任何事,Claude 完全看不到;做完之後打 `fg` 就能把它原封不動叫回來。三條路線各自對應一種協作意圖:<strong>想讓 Claude 看到結果就用 `!` 進 bash 模式,要長駐執行就 Ctrl+B 丟背景,完全不想讓它看見就 Ctrl+Z 掛起</strong>——分別是共享資訊、持續監控、完全隔離。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-3.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

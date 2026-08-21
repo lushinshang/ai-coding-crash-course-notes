@@ -293,16 +293,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">3-06</span>
           <span class="head-text">
             <span class="title">執行 bash 指令</span>
-            <div class="summary">用驚嘆號進入 bash 模式、Ctrl+B 背景執行、Ctrl+Z 暫時隱藏,決定哪些指令結果要不要讓 Claude 看見。</div>
+            <div class="summary">三條路線分別對應共享資訊、持續監控、完全隔離——決定 Claude 能不能看見指令結果。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 這堂課把話講得很重:能執行 bash 指令,才是把 agent 從「被動寫程式碼的工具」變成「真正能自己找回饋迴圈、跟專案互動」的關鍵能力。沒有這個能力,Claude 頂多是憑猜測生成程式碼;有了它,Claude 能自己讀 `package.json` 找出 dev server 指令、自己執行、自己看結果修正——這也是為什麼他把這件事放在權限設定(3-07)前面先講,理解執行指令的機制,才有資格談要不要放行。</p>
-        <p>操作上很簡單:在輸入框打一個驚嘆號 `!` 就進入 bash 模式,這時候打的任何東西都會被當成 shell 指令直接執行,而且結果會被放進 Claude 的 context。Matt 示範跑 `npm run type check`,因為他示範環境沒先跑過 `npm install`,冒出一堆錯誤——但這些錯誤同樣會進到 Claude 的視野裡,於是他接著請 Claude 幫忙處理,Claude 立刻看出 Zod 雖然寫在 `package.json` 裡但沒真的安裝,建議跑 `npm install` 解決。這個小插曲其實示範了 bash 模式最實用的場景:你手動跑一個會出錯的指令,把錯誤直接餵給 Claude,省掉自己複製貼上錯誤訊息的步驟。</p>
-        <p>但 bash 模式處理不了「跑起來不會結束」的指令,比如 dev server。這時候要在 bash 模式裡先跑 `npm run dev`,趁它還在跑的時候按 Ctrl+B 把它丟到背景執行,畫面上會出現一則「command was manually backgrounded」的訊息,輸出內容則寫進本機檔案,底下狀態列會多出一個背景任務的提示。用方向鍵往下移到這個任務再按 enter,就能檢視這個背景 shell 實際在做什麼——他示範看到 dev server 跑在 localhost:5175,還能按 X 直接停掉它,或按左鍵退回主畫面。這對除錯 dev server 問題特別好用:Claude 能自己看 log、自己送 curl 請求驗證、自己讀懂輸出,不用你在中間傳話。</p>
-        <p>最後一個工具是完全相反的方向——如果你想跑一個指令但完全不想讓 Claude 看到結果,又想保留 Claude 目前的對話狀態不被打斷,就按 Ctrl+Z 把 Claude Code 整個「掛起(suspend)」。這時候終端機回到普通 shell,你可以做任何事,像他示範的 `echo foo`,Claude 完全看不到;做完之後打 `fg` 就能把 Claude Code 原封不動叫回來。Matt 把整套邏輯收成一句判斷準則:想讓 Claude 看到結果就用 `!` 進 bash 模式,要長駐執行就 Ctrl+B 丟背景,完全不想讓它看見就 Ctrl+Z 掛起——這三條路線,分別對應「共享資訊」「持續監控」「完全隔離」三種不同的協作意圖。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/3-06.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
