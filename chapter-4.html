@@ -280,16 +280,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">4-05</span>
           <span class="head-text">
             <span class="title">／teach skill</span>
-            <div class="summary">用 teach skill 把陌生 codebase 變成一堂為你量身打造的導覽課，而不是自己土法煉鋼亂逛。</div>
+            <div class="summary">用 teach skill 把陌生 codebase 變成一堂為你量身打造的導覽課,而不是自己土法煉鋼亂逛。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>上一堂只是讓 agent 隨便探索、隨便回答問題，這堂課要解決一個更根本的問題：換新工作、換新專案、在組織內部調來調去，每個人都經歷過「要搞懂一個陌生 codebase」的痛苦。Matt 認為 agent 在這件事上有明顯優勢，而 teach 這個 skill 就是他拿來放大這個優勢的工具，也是他自己最得意的 skill 之一。</p>
-        <p>安裝過程需要一點設定：先跳出目前的 agent session，在上層目錄用 `mkdir` 建一個新的 `ai-coding-learning` 資料夾，在裡面跑 `npx skills add mattpocock/skills`，跳出的介面讓你勾選要裝哪個 skill（這裡只選 teach）、要裝在哪個 agent（Claude Code）、要裝在專案層級還是全域（選當前目錄），安裝方式選 symlink。裝完之後在 `.claude/skills` 底下就能看到 teach。</p>
-        <p>實際用法是 `/teach`，接一句「教我這個 repo」，並且指向你想了解的專案。這裡有個關鍵細節：Matt 特別要求在 prompt 裡加一句「說明你自己的經驗程度」——是資深工程師、剛入門的新手、還是完全沒碰過程式碼的門外漢，因為 teach skill 會根據這個自我定位調整講解深度。他自己示範時設定成一個中間程度的人設：做過一點 vibe coding、懂 TypeScript 基礎、沒碰過 React、對 client/server 和資料庫都還不太清楚。</p>
-        <p>這堂課緊接在探索之後，等於是把「探索」從一次性的問答，升級成一套結構化、可重複使用、還會依照你的程度自動調整的學習流程。它跟後面 4-08 的 grill-execute-clear 循環也有精神上的呼應：teach 讓 agent 先充分理解環境再開口講解，grill 則是讓 agent 先充分理解需求再動手實作，兩者都是在對抗 agent「急著給出東西」的衝動。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-05.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
