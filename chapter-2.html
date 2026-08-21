@@ -233,10 +233,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 開場就丟出一張圖：環境、模型、harness、agent，四個詞疊在一起。多數人學 AI coding 是從「模型」開始認識的——Opus、Sonnet、GLM、Fable，這些名字先進場。但這堂課刻意把模型放到最小的角色：它只是「引擎」，一個接收文字、吐出文字的無狀態機器，自己什麼都做不了。真正讓它能寫檔案、跑指令、查網路的,是包在外面的 harness，而 harness 又必須綁定一個具體的環境才有意義——Claude Code、Codex 綁的是檔案系統，ChatGPT、claude.ai 綁的是它們自己那套虛擬環境（存文件、搜網頁）。model 加上 harness，在某個環境裡運作，這整組合起來才叫做 agent。Matt 特別用虛線畫 agent 的邊界，暗示它不是一個獨立實體，只是「harness 包著 model」這件事的代稱。</p>
-        <p>這個拆解看似基礎，但它是整章、甚至整門課的座標系。後面十堂課要講的 context window、聰明區笨蛋區、無狀態、幻覺、subagent，全部都是在講「harness 和環境可以怎麼被設計，好讓同一顆引擎跑得更好」。換句話說，2-01 先把讀者的注意力從「哪個模型最強」移開，因為訓練新模型是絕大多數人碰不到的門檻，但調整 harness 和環境——你今天下午就能動手。</p>
-        <p>值得記住的一個細節是 Matt 承認這個比喻不完美：像 npm script 算 harness 的一部分還是環境的一部分，見仁見智，harness 跟環境之間本來就有模糊地帶。但這不影響核心結論——他真正想打的靶是「唯模型論」。當有人喊著「只要換成某某新模型，一切都會變好」，Matt 的立場是：模型只是系統裡的一個零件，性能瓶頸更常出在你怎麼設計 harness 跟環境。這句話會在後面第 10 堂「怎麼選模型」再次被呼應成「50/50」的具體比例，值得先記下來對照。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-01.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
