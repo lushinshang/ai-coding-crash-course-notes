@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>聰明區與笨蛋區 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-2.html">← 回第2章 核心概念</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/2-05-hero-portrait.png">
+      <img src="../assets/images/2-05-hero-landscape.png" alt="聰明區與笨蛋區 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第2章 核心概念 · 2-05</div>
+      <h1>聰明區與笨蛋區</h1>
+      <blockquote class="summary">token 數量越多，關係數量呈平方成長，這是整章最硬核也最實用的一堂——你的 agent 有保鮮期。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">18K</div><div class="label">上一堂那份 log 的實際 token 數</div></div>
+      <div class="statcard"><div class="num">10億+</div><div class="label">10萬 token 要追蹤的關係數</div></div>
+      <div class="statcard"><div class="num">15萬 token</div><div class="label">目前公認的笨蛋區警戒線</div></div>
+    </div>
+    <article class="body">
+      <p>上一堂看到的那份 log，攤開來一大片，看起來嚇人，但實際上只佔了 18K token——模型的上限是一百萬，等於你手上這份「已經覺得很多」的東西，連容量的百分之二都不到。這個對比本身就很說明問題：容量從來不是瓶頸，會出問題的地方，是容量被用滿之後模型還能不能好好想事情。</p>
+      <p>答案是不能，而且原因不是玄學，是算術。丟一個字給模型，它輕鬆，沒有任何東西要對照；丟第二個字，情況變了——它得記住兩個字各自是什麼，還得判斷這兩個字之間有多相關，於是兩個字背後其實是三件事在被追蹤：第一個字、第二個字、還有它們的關係。加到第三個字，關係數不是加一，是跳到三組；四個字，六組；五個字，十組。<strong>每多一個字，要追蹤的關係是用平方的速度在漲，不是跟字數同步往上爬</strong>。換算到真實的量級更明顯：一千個 token，背後對應大約一百萬組要顧的關係；一萬個 token，一億組；十萬個 token，逼近一百億組。這套負責追蹤字與字之間關聯的機制，就是 attention——而當要顧的關係多到一個地步，它沒辦法每一組都認真看。</p>
+      <p>一支球隊加進聯盟，聽起來只是多一個名字，但賽程表要排的場次瞬間暴增——這正是關係數字爆炸的樣子，也正是 attention 在大量 token 湧入時面對的處境：所有字都在搶著被注意到，模型分不出誰才是真正重要的那幾個，這就是注意力退化。</p>
+      <p>於是 context window 裡分成兩個區——不是切得整整齊齊的兩塊，是一條緩慢下滑的坡度。前段是聰明區，模型還撐得住複雜的規劃、寫得出結構完整的東西；往後滑，進入笨蛋區，它還能做，但只剩下寫檔案、關 issue 這種粗活，你不會再從這裡拿到它的最佳表現。<strong>目前公認的警戒線大概落在十五萬 token</strong>——這數字前一版課程錄的時候還在十到十二萬，隨模型變強持續往後挪，但笨蛋區這個現象本身不會消失，它是這套機制的數學本質，不是某一版模型的暫時缺陷。</p>
+      <p>那一百萬 token 的規格數字，到底是講給誰聽的？一部分確實是好看的行銷語言，但另一部分是誠實的：有些任務，例如在大量文本裡撈一段特定內容，本來就不需要聰明區，只要撈得到就好。真正要規劃、要寫扎實軟體的人，一百萬這個數字幾乎沒有意義，該盯著的只有那條十五萬的警戒線——而且最好在真的滑進笨蛋區之前就開始緊張，開始想怎麼收尾、怎麼交接，而不是等到症狀已經很明顯才反應。<strong>這條警戒線之後會反覆出現：幻覺變嚴重、需要靠 subagent 分工，追根究柢都是同一件事——想辦法把工作盡量留在聰明區裡完成。</strong></p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-2.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
