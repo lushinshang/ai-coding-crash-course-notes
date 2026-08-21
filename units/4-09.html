@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>compaction 壓縮 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-4.html">← 回第4章 基本功</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/4-09-hero-portrait.png">
+      <img src="../assets/images/4-09-hero-landscape.png" alt="compaction 壓縮 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第4章 基本功 · 4-09</div>
+      <h1>compaction 壓縮</h1>
+      <blockquote class="summary">快滿的 context 不是硬撐也不是全清,而是把整個 session 壓成摘要、開新局繼續打。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">150K → 28.3K</div><div class="label">compaction 後 token 用量大幅下降</div></div>
+    </div>
+    <article class="body">
+      <p>一段對話開太久,通常會走到兩條死路的其中一條。繼續下去,context 塞滿了不相干的檔案讀寫痕跡,agent 開始在「dumb zone」裡運作——回應變慢、變笨,而且因為每次 request 都要把之前所有 token 原封不動送出去,就算已經是 cached 價格,還是持續燒錢。另一條路是直接清空 context,重新開始,但這其實更浪費:agent 得從零重建對前一輪工作的理解,你得重新解釋「這段程式碼為什麼存在」,而那些在初始對話裡被你盤問出來的關鍵決策脈絡,很可能就這樣消失了。</p>
+      <p><strong>真正該做的不是保留全部,也不是全部丟掉,而是把舊 session 壓縮成摘要,拿去開一個新的 session。</strong>這個動作可以想成「反過來的 subagent」——不是派一個 subagent 出去做事再回報,而是在你自己掌控的兩個 session 之間做交接,一個把歷史記下來,另一個接手繼續做。這個技巧就叫 compaction:下指令的方式很單純,在 Claude Code 打 `compact`,還可以附上一句話告訴它要摘要哪些重點——例如「我們接下來要對這段剛做完的東西做 QA」。這句提示不需要多詳細,但很有用,因為執行摘要的本質仍是一個語言模型在讀完整段對話後做取捨,你給的方向愈明確,它就愈知道哪些細節該留下來。</p>
+      <p>壓縮出來的結果相當驚人:一段原本 150K token 的對話,壓完只剩 28.3K token,直接把你送回 smart zone 裡有大量餘裕可以動用的狀態。而且它不是無腦砍字——摘要裡除了會保留主要需求與意圖、關鍵技術概念這類敘述性重點,還會挑出幾個它判斷對下一階段仍然重要的檔案,以接近逐字的方式原封不動留在 context 裡,而不只是提一句檔名了事。</p>
+      <p>不過<strong>這個效率是有代價的,而且代價的性質可以用歷史學的方式理解</strong>:原始 session 是第一手史料,是當時所有人親身經歷、留下的完整記錄;compaction 產生的摘要則是第二手史料,是一段有損壓縮。任何形式的交接機制都逃不掉這個取捨——只要創造出一份摘要,就一定在丟資訊,換來的是效率:繼續留在第一手來源裡,擁有全部細節但夾雜大量噪音;換到第二手摘要,多出大量可操作空間,卻可能漏掉某些原始對話裡的細微語氣或未明說的判斷依據。也因此 compaction 不是萬用解——但像「對一段剛完成的工作做 QA」這種場景,原始探索過程本身沒有太大留存價值,是壓縮技巧派上用場最理所當然的時機。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-4.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
