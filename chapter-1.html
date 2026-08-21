@@ -293,16 +293,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">1-06</span>
           <span class="head-text">
             <span class="title">資料庫 migration</span>
-            <div class="summary">schema.ts 定義資料庫該長什麼樣,但改了它不會自動生效,要手動跑 migrate 才會同步。</div>
+            <div class="summary">schema.ts 定義資料庫該長什麼樣，但改了它不會自動生效，要手動跑 migrate 才會同步。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 開場就講明白這堂課為什麼非上不可——不是因為概念多難,而是因為過去帶課時很多人卡在這個地方。他把專案拆成兩個獨立的單位:一個是原始碼,也就是你會編輯、決定應用行為的檔案;另一個是資料庫,在這門課裡具體來說就是專案根目錄下一個叫 data.db 的檔案。這個區分聽起來理所當然,但恰恰是新手最容易混淆的地方——改了程式碼,以為資料庫會自動跟上,結果沒有。</p>
-        <p>關鍵在於 app/db/schema.ts 這支檔案,裡面定義了資料庫應該有哪些資料表、長什麼樣子。這裡有一個明確的方向性:原始碼定義資料庫「應該」是什麼樣子,但資料庫實際的樣子不會自動變成那樣,中間需要一道手動程序,叫做 migration。Matt 解釋這個手動步驟存在的原因很實際——資料庫裡裝的是真正的資料,使用者的資料,神聖不可隨便覆寫的東西,所以在真實應用裡,原始碼和資料庫必須被當成兩個要「對版本」的東西同步管理,只要其中一個超前,另一個沒跟上,系統就會出錯。</p>
-        <p>他現場製造了一次真實的錯誤示範:用 reset 切換到一個改了 schema 的 commit,courses 資料表被加了一個 notes 欄位,對應的 migration 檔案也自動生成在 drizzle 資料夾下——裡面存放著資料庫變更的完整歷史記錄。但光是切換原始碼版本並沒有真的執行 migration,於是打開課程頁面直接壞掉,終端機丟出「no such column notes」的 SQLite 錯誤。修法很簡單,跑 npm run db:migrate,問題就消失。這裡藏著一個容易忽略的重點:npm run reset 只碰原始碼,不會幫你跑 migration,所以只要你用 reset 切換過版本,幾乎可以確定接下來要手動 migrate 一次。</p>
-        <p>最後他補充了 seed 腳本的角色——這是個可以隨便重來的沙盒資料庫,不是正式環境,seed script 會清空所有表再重新灌入假資料,比如管理員 Alex Rivera、講師 Sarah Chen 和 Marcus Johnson。這句話某種程度上是在替你壯膽:資料庫壞了大不了重 seed,不用怕手滑。整堂課要你記住的心法很單純——只要 agent 動了 schema.ts,你就得意識到資料庫可能跟不上了,要嘛讓 agent 自己跑 migrate,要嘛自己動手,尤其在跑完 reset 之後幾乎是必然要做的事。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/1-06.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
