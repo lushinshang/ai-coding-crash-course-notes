@@ -363,11 +363,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課是整個第二章十堂鋪陳之後，第一次給出一個具體、可操作的解法。問題在 2-05 已經講得很清楚：context 塞得越滿，模型越笨，而且越貴。理想狀況下，每個階段（系統提示、探索、實作）都應該盡量精簡，但如果探索階段做得太省，蒐集到的資訊不夠完整，接下來的實作階段就會因為資訊品質不好而跟著出錯。這變成一個死結：你想省 token，卻又不敢省，因為省下來的代價會轉嫁到後面。</p>
-        <p>Matt 給出的解法是：把探索這件事外包給另一個 agent。主 agent 不必自己在 context 裡塞滿探索過程中翻閱的每一個檔案、每一段程式碼，而是叫另一個（子）agent 去做這件深度探索的工作,那個 subagent 可以在自己獨立的 context 裡盡情花費 token 去深挖程式碼庫,最後只把整理過的結論、摘要傳回主 agent。Matt 的比喻很貼切：這就像資深工程師交辦一個junior 工程師「幫我研究一下這個，回報結果給我就好」——junior 花的力氣（token）不會佔用資深工程師（主 agent）自己的 context 額度。</p>
-        <p>這個機制還能再往下延伸：主 agent（也就是 orchestrator，協調者）可以同時並行派出多個 subagent，各自負責不同的研究任務，就像兩個 junior 工程師同時分頭調查，最後各自回報。更進一步，subagent 甚至可以被指定用不同的系統提示、不同的模型、不同的 effort 等級去執行，而且部分 harness 還允許 subagent 再往下衍生出自己的 subagent（雖然不是每個 harness 都支援多層，有些只允許往下一層）。這意味著 subagent 不是「打折版」的助手，它可以跟主 agent 一樣強大，差別只在於它被賦予的任務範圍和它產出的資訊最終要怎麼被摘要、被送回主線。</p>
-        <p>Matt 在這堂課刻意停在理論層次，把實作留到後面的「基礎篇」章節去大量練習,但這個收尾其實巧妙地把整個第二章串成一條線:從認識 agent 的四個零件開始,中間拆解了非決定性、context、聰明區笨蛋區、無狀態、成本、幻覺、effort、選模型,最後停在 subagent——一個把前面所有限制條件(token 有限、注意力會退化、笨蛋區有代價)都納入考量後,自然浮現出來的架構性解法。理解了這條推導鏈,你會發現 subagent 不是一個炫技功能,而是這整套系統設計邏輯下,幾乎必然會出現的答案。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-11.html">閱讀完整導讀 →</a>
         </div>
       </details></div>
 <div class="chapter-footer-nav"><a href="chapter-1.html">← 第 1 章　開課前準備</a><a href="chapter-3.html">第 3 章　認識 Claude Code →</a></div>
