@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>建立練習專案 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-1.html">← 回第1章 開課前準備</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/1-03-hero-portrait.png">
+      <img src="../assets/images/1-03-hero-landscape.png" alt="建立練習專案 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第1章 開課前準備 · 1-03</div>
+      <h1>建立練習專案</h1>
+      <blockquote class="summary">git clone、npm install、資料庫 migrate 與 seed，一路把 Cadence 跑起來的完整儀式。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">10.5萬/週</div><div class="label">Sancastle 套件下載量</div></div>
+      <div class="statcard"><div class="num">5 步驟</div><div class="label">clone → install → migrate → seed → run</div></div>
+    </div>
+    <article class="body">
+      <p>選編輯器這件事，答案出乎意料地無趣——不是因為哪一套最強，是因為免費、跨平台、夠親民，而且內建終端機。這個內建終端機的條件才是真正的關鍵：<strong>這門課大部分時間都在終端機裡跟 agent 對話，編輯器本身反而是配角</strong>。如果手上已經有慣用的工具，只要能開終端機、能看程式碼，直接繼續用也沒問題——這種不執著品牌的態度，貫穿了整堂課挑工具的邏輯。</p>
+      <p>真正的儀式從終端機開始：先確認 git 裝好，把課程的 repo clone 下來，再確認 Node.js 裝的是 LTS（長期支援版），不是 Current 那個號稱最新最潮但穩定性沒保證的版本。裝好之後跑 `npm install`，把一整批套件拉進 `node_modules` 資料夾。這一步經常被當成無聊的等待畫面直接跳過，但值得多看一眼——裡面裝的是別人發布到 npm 上的套件，其中一個叫 Sancastle 的套件，一週的下載次數是十萬五千次。這個數字不是拿來炫耀的花絮，是在建立一個之後會用到的概念：專案依賴的每一個套件，背後都是一個被廣泛使用、有真實下載量的獨立作品，不是憑空冒出來的黑盒子。</p>
+      <p>裝完套件，下一步是把資料庫生出來——先跑 migrate 建立空的資料表結構，再跑 seed 灌進假資料。跑起來之後看到的 Cadence，就是接下來整門課要動刀的對象：一個功能齊全、有賣課程、上課、測驗的真實應用。畫面下方藏著一個容易被忽略但後面會一直用到的功能——切換登入身份的 dev UI。切到 Emma Wilson，就能看到她已經買了 TypeScript 和 Node.js 兩門課；這不是順手帶過的小玩具，是接下來所有「這個角色看到的畫面對不對」測試的入口，沒有它，每次驗證都得手動改資料庫，效率會差一大截。</p>
+      <p>這堂課沒有太多概念要消化，但它是後面所有動手練習的地基。看到假資料成功顯示在畫面上，就代表環境完全就緒——可以正式開始跟 agent 打交道了。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-1.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

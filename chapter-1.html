@@ -254,16 +254,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">1-03</span>
           <span class="head-text">
             <span class="title">建立練習專案</span>
-            <div class="summary">VS Code、Node、npm install、資料庫 migration 與 seed,一路把 Cadence 跑起來的完整儀式。</div>
+            <div class="summary">git clone、npm install、資料庫 migrate 與 seed，一路把 Cadence 跑起來的完整儀式。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課本質上是一份把開發環境從零組起來的操作手冊,但值得留意 Matt 選工具的邏輯——他推薦 VS Code 不是因為它最強,而是因為它免費、跨平台、夠親民,而且內建終端機,恰好貼合這門課「大部分時間都在終端機裡跟 agent 對話」的工作模式。如果你已經有慣用的編輯器,他也直接說「只要能開終端機、能看程式碼,那就沒問題」,這種務實態度貫穿了整堂課的工具選擇,不執著於特定品牌。</p>
-        <p>安裝流程是標準的 Node 生態系三部曲:裝 Node(推薦 LTS 版本而非 Current,因為穩定優先)、跑 npm install 把套件裝進 node_modules、跑 npm run db:migrate 建資料庫、npm run db:seed 灌入假資料。Matt 特別花時間解釋 node_modules 裡裝的是什麼——別人發布在 npm 上的套件,他自己維護的 AI Hero、Sancastle 也在裡面,像 Sancastle 一週就有 10.5 萬次下載。這段看似離題的介紹其實在替後面鋪路:當你之後要理解專案架構、要讓 agent 讀懂依賴關係時,「套件從哪裡來」這個基本認知會派上用場。</p>
-        <p>跑起來之後看到的 Cadence,就是整門課接下來要動刀的對象——一個賣課程、上課、測驗功能齊全的應用。Matt 特別點出一個功能:畫面下方有個 dev UI 可以切換登入身份,比如切到 Emma Wilson 就能看到她已經買了 TypeScript 和 Node.js 兩門課。這不是隨手帶過的小功能,而是接下來所有練習測試不同使用者情境的入口——沒有這個切換工具,你每次要驗證「某個角色看到的畫面對不對」都得手動改資料庫,效率會差很多。</p>
-        <p>這堂課本身沒有太多概念性的東西要消化,但它是後面所有動手練習的地基——資料庫種子資料裡的人名、課程結構,會在後面章節反覆出現。看到假資料成功顯示在畫面上,就代表環境完全就緒,可以正式開始跟 agent 打交道了。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/1-03.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
