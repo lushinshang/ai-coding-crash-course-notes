@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用指標來引導 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-02-hero-portrait.png">
+      <img src="../assets/images/5-02-hero-landscape.png" alt="用指標來引導 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 · 5-02</div>
+      <h1>用指標來引導</h1>
+      <blockquote class="summary">用資料庫遷移的真實坑,示範把該塞進 push 的規則改造成 doc + pointer。</blockquote>
+    </div>
+
+    <article class="body">
+      <p>延續上一集的理論，這集直接進到一個真實案例：這門課的專案裡,每次改資料庫 schema（新增或修改表）都必須連動修改 seed.ts,否則重新產生資料庫時會留下跟實際 schema 對不上的髒資料。這種「兩件事必須綁在一起做，卻在程式碼裡完全看不出關聯」的知識，正是新人第一天要靠人口耳相傳教的那種東西，agent 也一樣沒辦法從程式碼本身推匯出來，所以是典型「值得塞進去」的資訊。</p>
+      <p>Matt 先示範最直覺但錯誤的做法：把整套遷移步驟直接寫進 agents.md（push），然後用 request logger 實際抓封包給你看——你會看到這段文字被包在一段 system reminder 裡送進每一次 request，前面寫著「important, these instructions override any default behavior」，但底下 Claude Code 自己又加了一句「this context may or may not be relevant to your task, you should not respond to this context unless it is highly relevant」。<strong>這個細節很值得注意：Anthropic 自己也知道大家把 agents.md 塞爆的問題,才加了這句免責宣告,這也解釋了為什麼很多人抱怨 claude.md 裡寫的規則不一定會被遵守。</strong></p>
+      <p>問題是：這套遷移步驟不是每次工作都用得到。很多功能改動根本不碰資料庫，QA session 也用不到，硬把它 push 進去等於每個 turn 都在燒不必要的 context load。<strong>所以他的解法是把這段詳細步驟搬出 agents.md，放進 repo 根目錄新建的 docs 資料夾裡，agents.md 裡只留一行 context pointer（「當你要動 schema 的時候，去讀這份檔案」），這就是這章會反覆出現的「doc + pointer」模式。</strong></p>
+      <p>這集也第一次帶出「writing for agents」這個 skill——一個專門用來寫 agents.md、寫 skill、寫給 agent 看的檔案的工具，Matt 說自己寫檔案、寫 steering 規則時都靠它。這集本身是練習題（作業嚮導讀），要你自己動手把大段規則搬到指標背後，再用一次實際的 schema 改動去驗證 agent 真的會去把那份檔案拉進來——這個驗證動作直接對應鐵律裡「驗證後才能說完成」的精神，也是為 5-03 引入 Agent Skills 鋪路：doc + pointer 做得再好，也還有一個致命限制沒解決，那就是下一集要談的「不能打包帶走」。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-5.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
