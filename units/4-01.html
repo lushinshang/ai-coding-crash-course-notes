@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的起始 context － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-4.html">← 回第4章 基本功</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/4-01-hero-portrait.png">
+      <img src="../assets/images/4-01-hero-landscape.png" alt="你的起始 context 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第4章 基本功 · 4-01</div>
+      <h1>你的起始 context</h1>
+      <blockquote class="summary">打第一個字之前,harness 可能已經替你塞了 23K token 的雜訊,而你完全沒發現。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">23K</div><div class="label">什麼都還沒做,harness 預設就佔用的 token 數</div></div>
+      <div class="statcard"><div class="num">6.6K</div><div class="label">清掉不必要設定後的 token 數</div></div>
+      <div class="statcard"><div class="num">17K</div><div class="label">純靠設定檔取捨省下的 token 數</div></div>
+    </div>
+    <article class="body">
+      <p>打開一個全新對話,還沒送出任何訊息,context window 就已經不是空的了——系統提示、內建 skills、專案資訊、甚至遠端載入的 MCP 工具,全部在你打字之前就佔好位置。多數人從來不會去檢查這個起跑點乾不乾淨,預設它就是零,但<strong>這個假設本身就是問題</strong>:如果起點就帶著一堆不必要的 token,後面再怎麼精算對話節奏、再怎麼抓 compaction 時機,都只是在一個已經髒掉的底子上修修補補。</p>
+      <p>做法很直接:把 `.claude` 資料夾裡的 `settings.json` 和 skills 都先改名備份,等於把設定重置成預設值,再跑 `/context` 看一眼。結果通常會讓人意外——什麼都還沒做,只打了八個字元的 `/context` 指令,畫面上就已經有 23K token,來源是內建 skills、內建 project 資訊,還有一大票從外部載入的 MCP 工具。<strong>把備份的個人設定加回去再跑一次,數字掉到只剩 6.6K——單純靠設定檔的取捨,就砍掉了 17K token,而這 17K 從頭到尾都不是你需要的東西</strong>。</p>
+      <p>這裡刻意把「效率」和「品質」分開講:清掉這些雜訊不是為了省幾毛錢的 API 費用,而是為了把 context window 裡還能維持高品質輸出的那段空間——也就是前面章節提過的「smart zone」——留給真正有用的內容。塞得越滿,能拿到的智慧就越稀釋,這是接下來整章的第一塊地基:後面所有談 context 管理、grill-execute-clear、compaction 的內容,前提都是你已經先把起跑點清乾淨了。<strong>檢查一次自己實際在用的 harness 帶了什麼,通常會比想像中更讓人吃驚,尤其是從來沒去看過的人</strong>。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-4.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

@@ -228,16 +228,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">4-01</span>
           <span class="head-text">
             <span class="title">你的起始 context</span>
-            <div class="summary">開工前先清空 harness 預設垃圾，同樣的 repo 少了 17K token 的雜訊。</div>
+            <div class="summary">打第一個字之前,harness 可能已經替你塞了 23K token 的雜訊,而你完全沒發現。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 一開場就承認自己對 context window 有種「偏執」，這個偏執是從他之前教人做 AI 應用帶過來的職業病：做應用時，每個進 context 的 token 都要斤斤計較，因為那直接影響 eval 過不過。他把這套習慣原封不動搬進 AI coding，理由很單純——你在還沒打第一個字之前，harness 本身就可能已經替你塞了一堆你不需要的東西。</p>
-        <p>示範很直接：打開 `.claude` 資料夾，把 `settings.json` 和 skills 都先改名備份掉，等於把設定重置成預設值，然後跑 `/context` 看一眼。結果嚇人：什麼都還沒做，只打了八個字元的 `/context` 指令，畫面上就已經有 23K token，來源是內建 skills、內建 project 資訊，還有一大票從 claude.ai 載進來的 MCP 工具。把之前備份的個人設定（各種客製 MCP、skills）加回去再跑一次，數字掉到只剩 6.6K——單純靠設定檔的取捨，就砍掉了 17K token。</p>
-        <p>這堂課刻意把「效率」和「品質」分開講：清 context 肥肉不是為了省錢、少花幾毛美金的 API 費用，而是為了把 context window 裡「smart zone」（模型還維持高品質輸出的那段空間）留給真正有用的東西。 tokens 塞得越滿，你能拿到的智慧就越稀釋，這是整章的第一塊地基。</p>
-        <p>這堂課同時也是整個 4 章的起手式：後面所有講 context 管理、grill-execute-clear、compaction 的內容，前提都是你已經先把起跑點清乾淨了。如果你的 harness 一開始就帶著沒必要的 23K token 上路，後面再怎麼精算 compaction 時機都是在幫倒忙。所以他要求所有跟課的人都要重做一次這個「裸機測試」，並且提醒：照著教學走的人，做完示範後記得把設定改回來，因為接下來整堂課用的是刻意清空過的乾淨環境，不是你原本的個人化設定。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/4-01.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
