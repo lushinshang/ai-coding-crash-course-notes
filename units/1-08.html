@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>安裝 request logger － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-1.html">← 回第1章 開課前準備</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/1-08-hero-portrait.png">
+      <img src="../assets/images/1-08-hero-landscape.png" alt="安裝 request logger 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第1章 開課前準備 · 1-08</div>
+      <h1>安裝 request logger</h1>
+      <blockquote class="summary">把 agent 送去 Anthropic 的每一筆請求攔下來存成檔案，系統提示詞、工具清單全都看得到。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">localhost:8787</div><div class="label">本機 request logger 監聽位址</div></div>
+    </div>
+    <article class="body">
+      <p>跟 agent 互動的體驗，本質上是一個黑盒子：文字打進去，答案跑出來，中間發生了什麼，完全看不見。<strong>這堂課要做的事，就是在這個黑盒子上撬開一條縫</strong>，而撬開的工具很簡單，是一個叫 request logger 的小程式，跑起來之後會在本機開一個網頁伺服器。</p>
+      <p>原理比想像中聰明，但操作起來只有一行設定：把一個環境變數指向這個本地伺服器，原本要直接送去 Anthropic 官方伺服器的每一筆請求，現在會先經過這個本地中繼站。中繼站做兩件事——正常轉送出去，讓 agent 照常運作，同時把整包內容留一份存到本機的資料夾裡。從使用者的角度看，什麼都沒變，打個招呼一樣得到「hello, what can I help you with」；但背地裡，<strong>每一次往返都被完整記錄下來了</strong>，黑盒子的內容第一次被攤在陽光下。</p>
+      <p>存下來的檔案裡，原始的 request 和 response 格式並不好讀，真正該看的是另外一份 markdown 版本——裡面完整攤開了送給模型的系統提示詞、工具定義，全部用 XML 標籤分隔開來，想看系統提示詞就直接跳到對應標籤，想知道工具清單有多長也是同一套邏輯，再往下就是完整的訊息歷史，一路對照到最後 assistant 回覆的那句「hello」。這不是要你現在就一頭栽進細節裡分析，後面的章節會花大量時間泡在這些 log 裡；這堂課的作用，是先把工具裝好、把原理搞懂。</p>
+      <p>真正的價值要到後面才會顯現：<strong>當你想知道「為什麼 agent 這樣做決定」，不用再靠猜，直接翻 log 就看得到系統到底跟模型說了什麼</strong>。這個工具目前只支援 Claude 和 Codex，但持續在擴充支援更多 agent——重點從來不是這個工具本身，是它打開的那扇窗，一旦你看過一次完整的 request 長什麼樣子，agent 的行為就再也不是玄學。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-1.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

@@ -319,16 +319,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">1-08</span>
           <span class="head-text">
             <span class="title">安裝 request logger</span>
-            <div class="summary">把 agent 送去 anthropic 的每一筆請求攔下來存成檔案,系統提示詞、工具清單全都看得到。</div>
+            <div class="summary">把 agent 送去 Anthropic 的每一筆請求攔下來存成檔案，系統提示詞、工具清單全都看得到。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 用「黑盒子」形容一般人跟 agent 互動的感受——你打字進去,答案跑出來,中間發生什麼事完全看不見。這堂課要做的事,就是想辦法把這個黑盒子撬開一條縫。他的做法不是靠猜,而是裝一個叫 request logger 的小工具,跑起來之後會在 localhost:8787 開一個本地網頁伺服器。</p>
-        <p>操作原理其實很簡單但很聰明:把環境變數 ANTHROPIC_BASE_URL 指向這個本地伺服器,Claude 原本要送去 Anthropic 官方伺服器的每一筆請求,現在會先經過這個本地中繼站。中繼站做兩件事——正常轉送到 Anthropic,讓 Claude 照常運作,同時把整包內容留一份存到本機的 log 資料夾裡。所以從使用者的角度看,Claude 用起來完全沒差,打個招呼一樣得到「hello, what can I help you with」,但背地裡每一次往返都被完整記錄下來了。</p>
-        <p>打開存下來的 log,會看到用日期時間命名的一批檔案,Matt 特別提醒這個時間是 UTC,跟他本地時間差一小時。其中 request 和 response 的原始檔案格式較難讀,但有個 markdown 版本的檔案才是真正該看的東西——裡面完整攤開了送給模型的系統提示詞、工具定義,全部用 XML 標籤分隔,可以直接跳到 system prompt 標籤看完整內容,或跳到 tools 標籤看工具清單有多長,再往下看訊息歷史,一路對照到最後 assistant 回覆的那句「hello」。</p>
-        <p>這堂課本身沒有要你馬上鑽進 log 細節裡分析,Matt 明講後面章節會花大量時間泡在這些 log 裡。它的作用更像是先把工具裝好、原理搞懂,為後面拆解 agent 行為做準備——當你之後想知道「為什麼 agent 這樣做決定」,不用再靠猜,直接翻 log 就看得到系統到底跟模型說了什麼。他也補了一句實務提醒:這個工具目前只支援 Claude 和 Codex,未來會擴充支援更多 agent,細節請看下方文章連結。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/1-08.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
