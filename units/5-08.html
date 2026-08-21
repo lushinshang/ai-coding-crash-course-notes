@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>實際試一次 pruning － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-5.html">← 回第5章 引導技巧</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/5-08-hero-portrait.png">
+      <img src="../assets/images/5-08-hero-landscape.png" alt="實際試一次 pruning 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第5章 引導技巧 · 5-08</div>
+      <h1>實際試一次 pruning</h1>
+      <blockquote class="summary">用 claude init 生成的 172 行巨型 CLAUDE.md 當活教材，實戰演練上一集的三種剪枝手法。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">172</div><div class="label">claude init 自動生成的 CLAUDE.md 行數</div></div>
+      <div class="statcard"><div class="num">~4,000</div><div class="label">這份檔案在 /context 中佔用的 token 數</div></div>
+    </div>
+    <article class="body">
+      <p>Matt 開場就自嘲這是「示範怎麼生出一份爛 steering 檔案的最佳方法之一」：在 Claude Code 裡跑 /init，它會自動掃描整個 repo，把它覺得值得記錄的東西全部塞進一份新的 CLAUDE.md——<strong>換句話說，是讓 agent 自己引導自己。</strong>結果不出意外，產出一份長達 172 行的巨大檔案，他開啟一個全新 terminal 跑 /context 確認，光是這個檔案就吃掉大約 4000 個 token。這個練習刻意選了個「反面教材」當起點，正好拿來實戰上一集教的三個剪枝工具。</p>
+      <p>他把任務拆成清楚的步驟：先自己動眼睛通讀一遍，憑直覺抓出哪些段落像 no-op、哪些地方重複了（他特別提醒重複不只發生在檔案內部，也可能是這份檔案講的東西其實 agent 很容易自己從別的地方讀到，那也算一種重複）；因為這份檔案是剛生成的、沒有經過時間累積,他推斷這次不太可能出現沉積物問題（沉積物需要時間才會形成）。讀完一遍有概念之後，才叫 writing for agents skill 出馬幫忙實際瘦身——<strong>這個順序值得留意：人先建立判斷,才把動手的部分交給 agent,而不是一開始就整份丟給 agent 處理。</strong></p>
+      <p>他也重申，處理這些該刪的內容時有三個選項：整條刪掉、放到指標背後（doc + pointer）、或乾脆包成一個 skill——分別對應不同的資訊重要程度和使用頻率。這集本質上是把 5-06、5-07 教的診斷工具和裁剪手法，在一個具體、混亂、有代表性的樣本上走一遍完整流程，目標是讓這份 172 行的檔案最後瘦成一份幾乎只剩指標、token 數大幅下降的精簡版本——也是檢驗讀者是否真的內化了「push vs point」這條主線的實戰關卡。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-5.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
