@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>權限設定 － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-3.html">← 回第3章 認識 Claude Code</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/3-07-hero-portrait.png">
+      <img src="../assets/images/3-07-hero-landscape.png" alt="權限設定 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第3章 認識 Claude Code · 3-07</div>
+      <h1>權限設定</h1>
+      <blockquote class="summary">從逐次核准、settings.json 到 auto mode 的 LLM 分類器,是把「風險換效率」調到自己舒服刻度的機制。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">3</div><div class="label">核准選項:這次允許、永遠允許、拒絕</div></div>
+      <div class="statcard"><div class="num">4</div><div class="label">權限模式:manual / accept edits / plan / auto</div></div>
+    </div>
+    <article class="body">
+      <p>把 Claude 的權限開到無限大,像不少人做的那樣,等於是在賭它不會手滑把整個檔案系統刪掉——<strong>跟 agent 合作永遠要衡量風險與報酬,尤其是你願意放給它多少權力</strong>。Claude Code 的解法是一套很細緻的權限模型,預設狀態非常保守:跑 `echo hello` 這種絕對安全的指令會直接放行,但換成跑 type check,系統立刻跳出確認框,列出確切要執行的指令、想這麼做的理由,並給出三個選項——這次允許、以後在這個專案裡看到同樣指令都自動允許、或拒絕。拒絕的時候還能按 Tab 補充理由,比如改口要求換一個指令,系統會拿著新指令再問一次。</p>
+      <p><strong>這些「以後都允許」的選擇不是隨口說說,會被實際寫進 `.claude/settings.local.json` 底下的 `permissions.allow` 陣列</strong>,而且這份設定可以直接手動編輯——提前把知道會反覆用到的指令列進去,或者用萬用字元讓某一類指令全部自動放行。反過來,`deny` 陣列能明確擋掉危險動作,像用萬用字元直接封殺所有 `git push`,不用每次手動攔。這套機制不只管 bash 指令,web 搜尋跟網頁抓取同樣要走這個核准流程,答應之後規則一樣會被寫進去。</p>
+      <p>`settings.local.json` 這個檔名裡的「local」不是隨便取的——它預設被 `.gitignore` 排除,只對你個人生效。<strong>想把這組規則變成整個團隊共用的預設值,做法很簡單:把檔名改成 `settings.json`,這樣就能進版本控制、跟著 repo 一起分享</strong>,任何人第一次在這個專案跑 `claude`,都會自動套用同一套權限規則,不必每個人重新手動核准一輪,對新加入專案的人特別省事。</p>
+      <p>再往上一層是 auto mode。用 Shift+Tab 可以在 manual(逐次核准)、accept edits(自動接受編輯)、plan mode、auto mode 之間切換,auto mode 用一個 LLM 分類器(推測是 Haiku 量級)在動作執行前先評估指令安不安全,安全就直接放行不用你介入。代價是會多花一點 token 跟時間讓分類器判斷,而且分類器不是完美的——有時候資料庫遷移這種危險動作被放行,建立 GitHub issue 這種正常動作反而偶爾被卡住。即便如此,<strong>整體抓得剛好在可接受的那一側:真正危險的操作幾乎都會被擋下,又不太會把使用額度衝高太多</strong>。更重要的是 `settings.json` 跟 auto mode 不是互斥的,harness 會先檢查 settings 裡有沒有現成規則,沒有才丟給分類器判斷——把常用指令寫進 settings.json,等於幫 auto mode 分流減負。這個預設值可以到 `/config` 裡的「default permission mode」設定起來,固定用 auto mode 之後,權限彈窗自然就很少打斷你的節奏。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-3.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>

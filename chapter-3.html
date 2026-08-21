@@ -306,16 +306,12 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="code">3-07</span>
           <span class="head-text">
             <span class="title">權限設定</span>
-            <div class="summary">從逐次核准、settings.local.json 到 auto mode 的 LLM 分類器,是把「風險換效率」這件事調到自己舒服刻度的機制。</div>
+            <div class="summary">從逐次核准、settings.json 到 auto mode 的 LLM 分類器,是把「風險換效率」調到自己舒服刻度的機制。</div>
           </span>
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>Matt 用一句話點出這堂課的立場:跟 agent 合作永遠要衡量風險與報酬,尤其是你願意放給它多少權力。他直接舉了一個嚇人的例子——如果把 Claude 的權限開到無限大,像很多人做的那樣,你等於是在賭它不會手滑把整個檔案系統刪掉。Claude Code 的解法是一套很細緻的權限模型,預設狀態非常保守:他示範叫它跑 `echo hello`,因為這個指令絕對安全,直接放行;但換成跑 type check(`pnpm type check`),系統立刻跳出確認框,列出確切要執行的指令、它想這麼做的理由(這裡用了 React Router Type Gen 加 TSC),並給出三個選項——這次允許、以後在這個專案裡看到同樣指令都自動允許、或拒絕。拒絕的時候還可以按 Tab 補充理由,比如他示範改口要求改用 `npx tsc`,系統會拿著新指令再問一次。</p>
-        <p>這些「以後都允許」的選擇不是隨口說說,它們會被實際寫進 `.claude/settings.local.json` 底下的 `permissions.allow` 陣列。這個語法值得花時間搞懂,因為你可以直接手動編輯這份設定,提前把你知道會反覆用到的指令列進去——比如寫死 `pnpm type check` 這一條規則,或者換成萬用字元讓所有 `pnpm` 開頭的指令都自動放行。反過來,`deny` 陣列可以用來明確擋掉危險動作,像他示範的 `git push` 搭配萬用字元,直接封殺所有推送指令,不用每次都手動攔。這套機制不只管 bash 指令,web 搜尋跟網頁抓取一樣要走這個核准流程——他示範叫 Claude 去查 React Router Type Gen 的文件,同樣會跳出核准框,答應之後同一條規則也會寫進 `settings.local.json`。</p>
-        <p>值得留意的是,`settings.local.json` 在他的專案裡是被 `.gitignore` 排除的,只對他個人生效。如果想把這組規則變成整個團隊共用的預設值,做法很簡單——把檔名從 `settings.local.json` 改成 `settings.json`,這樣就能進版本控制、跟著 repo 一起分享,任何人第一次在這個專案跑 `claude`,都會自動套用同一套權限規則,不必每個人重新手動核准一輪,這對新加入專案的人特別省事。</p>
-        <p>最後 Matt 介紹了他個人現在的預設模式:auto mode。用 Shift+Tab 可以在 manual(逐次核准)、accept edits(自動接受編輯)、plan mode、auto mode 之間切換。Auto mode 的機制是用一個 LLM 分類器(他猜是 Haiku)在動作執行前先評估這個指令安不安全,安全就直接放行不用你介入——他示範跑 `npm run type check`,不用任何手動核准就直接執行了。這個機制的代價是會多花一點 token 跟一點時間讓分類器判斷,而且分類器不是完美的:他坦承有時候資料庫遷移這種危險動作被放行,反而建立 GitHub issue 這種正常動作偶爾被卡住。即便如此,他認為整體抓得「剛好在可接受的那一側」——真正危險的操作(像不小心 `rm -rf` 整個檔案系統)幾乎都會被擋下,而且不太會把使用額度衝高太多。更重要的是 `settings.json` 跟 auto mode 不是互斥的,harness 會先檢查 settings 裡有沒有現成規則,沒有才會丟給分類器判斷,所以把常用指令寫進 settings.json,等於幫 auto mode 分流減負。這個預設值可以到 `/config` 裡找到「default permission mode」設定起來,Matt 自己就是把它固定在 auto mode——這也解釋了為什麼你之後在課程示範裡很少看到他被權限彈窗打斷。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/3-07.html">閱讀完整導讀 →</a>
         </div>
       </details></div>
 <div class="chapter-footer-nav"><a href="chapter-2.html">← 第 2 章　核心概念</a><a href="chapter-4.html">第 4 章　基本功 →</a></div>
