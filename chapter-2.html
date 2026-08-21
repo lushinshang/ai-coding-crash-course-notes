@@ -259,10 +259,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>前兩堂課都是概念鋪陳，這堂課終於動手：Matt 跑起 request logger，把 Claude Code 的 base URL 指向本地的紀錄伺服器，這樣每一次跟模型的往來都會被完整記錄下來，而不是消失在黑盒子裡。他打了一句「hello」，然後翻開 log 檔——結果是一份巨大的請求內容，裡面塞滿了系統提示、工具定義、對話歷史，最後才是那一句簡單的「hello, what would you like to work on today?」回覆。這個對比本身就是這堂課想讓你感受到的東西：使用者眼中極簡的一問一答，背後其實是一次沉重的網路請求。</p>
-        <p>這個「本地 harness 打包一切送到雲端模型、拿回一小段文字」的往返，Matt 給它一個明確名字：model provider request（模型供應商請求）。即使你用的是 Ollama 這種本地跑模型的方案，這個概念依然成立，只是供應商剛好跟你的 agent 擠在同一台機器上而已。接著他示範了更關鍵的一段：叫 agent 寫一個檔案，這時候 log 裡出現了 tool use——模型不是直接回文字,而是回一段 JSON,說「我要呼叫 write 工具,參數是這個檔案路徑跟這些內容」。harness 收到這段 JSON 後自己去執行寫檔案的動作,再把「檔案建立成功」這個結果包成新的請求送回模型,模型才據此產生「完成了,我在根目錄建立了 compliments.md」這句回覆。</p>
-        <p>這一來一回——訊息、工具呼叫、工具結果、新訊息——被稱為一個 turn(輪)。Matt 特別強調一個容易被忽略的規模感:一個 turn 可以拖上好幾個小時,內含成百上千次的 model provider request。你在畫面上看到的「agent 正在思考」,其實往往是無數次雲端往返疊出來的。這堂課建立的詞彙表——model provider request、tool call、tool result、turn——不是為了掉書袋,而是後面所有討論 context、成本、效能優化時，你需要拿來精確描述問題的最小單位。沒有這套語言，你很難跟別人討論「為什麼這次對話變貴了」或「為什麼模型突然變笨」。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-03.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
