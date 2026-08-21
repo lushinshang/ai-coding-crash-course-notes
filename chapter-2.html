@@ -298,10 +298,7 @@ footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px
           <span class="chev">▸</span>
         </summary>
         <div class="unit-body">
-        <p>這堂課把前面幾堂的架構圖再往下挖一層。Matt 重新描述一次 session 累積 context 的過程，然後點出一個容易被忽略的事實：整個 session 的狀態，其實是存在 harness 這條線裡，模型本身完全是無狀態的（stateless）。每一次 model provider request，harness 都要把之前發生過的一切重新打包、完整送過去，因為模型自己什麼都不記得——它不是「讀取記憶」，而是每次都被重新告知一切。這跟 2-02 談的非決定性放在一起看會更清楚：模型不只每次答案可能不同，它連上一秒鐘發生過什麼都不知道，全部要靠外部餵給它。</p>
-        <p>很多人把這種無狀態視為缺陷，於是拼命想幫 agent 裝上「記憶系統」，讓它記得你、隨時間變聰明。但 Matt 把這個問題拆成三層說清楚：模型完全無狀態；harness 是有狀態的，但只在同一個 session 內有效，一旦你清空 session，harness 這層記憶也跟著歸零；只有環境（也就是檔案系統）是真正持久的——你把東西寫進檔案，就算 session 清空了，那個檔案還在。所以真正能撐起長期記憶的，從來不是模型，也不完全是 harness，而是環境本身。</p>
-        <p>這裡他引用了 Pi 的創辦人 Mario Zechner 的一句話：「我常被問用什麼記憶系統，我的答案一直是——我的程式碼庫就是我的記憶系統。」Matt 表態自己認同這個立場：預設情況下盡量保持無狀態，把重要的東西存進程式碼庫裡，理由很單純——這樣做比較簡單，而且他實測下來效果更好。他對那些試圖把記憶系統直接掛在 agent 本體上的做法抱持懷疑態度。這個判斷其實延續了 2-01 定下的原則：與其把資源花在讓模型本身變得更聰明、更有記憶，不如把力氣投資在環境設計上——這件事你完全掌握得住，而且好處會一直留著，不會隨模型換代而消失。</p>
-          <div class="resource-row"><span class="note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</span></div>
+          <a class="read-more" href="units/2-06.html">閱讀完整導讀 →</a>
         </div>
       </details>
       <details class="unit">
