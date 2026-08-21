@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>交接 handoff － AI Coding Crash Course 課程導讀</title>
+<style>
+:root {
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --text: #2b2620;
+  --text-dim: #6b6255;
+  --accent: #b5502e;
+  --accent-soft: #f1e3d8;
+  --border: #e6ddd0;
+  --code-bg: #efe8dc;
+  --shadow: 0 1px 2px rgba(43, 38, 32, 0.06), 0 8px 24px rgba(43, 38, 32, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+    --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1a17; --bg-elevated: #262320; --text: #ece6da; --text-dim: #a89e8c;
+  --accent: #e08a5f; --accent-soft: #3a2c22; --border: #3a352c; --code-bg: #2f2b24;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.8;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+header.top {
+  border-bottom: 1px solid var(--border); padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+header.top a.home { color: var(--text); text-decoration: none; font-weight: 700; }
+header.top a.home span { color: var(--accent); }
+header.top a.back { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+header.top a.back:hover { color: var(--accent); }
+
+.hero-picture { width: 100%; margin: 24px 0 0; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.hero-picture img { display: block; width: 100%; height: auto; }
+
+.hero-text { padding: 28px 0 8px; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+.hero-text h1 { font-size: 28px; line-height: 1.35; margin: 0 0 16px; }
+blockquote.summary {
+  margin: 0; padding: 14px 18px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; font-size: 15px; color: var(--text);
+}
+blockquote.summary strong { color: var(--accent); }
+
+.statgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 28px 0; }
+.statcard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); text-align: center; }
+.statcard .num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.statcard .label { font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+
+article.body { margin-top: 8px; font-size: 16px; }
+article.body p { margin: 0 0 18px; }
+article.body strong {
+  color: var(--text); font-weight: 700;
+  background-image: linear-gradient(transparent 62%, var(--accent-soft) 62%);
+  padding: 0 1px;
+}
+:root:not([data-theme="light"]) article.body strong,
+:root[data-theme="dark"] article.body strong {
+  background-image: linear-gradient(transparent 55%, rgba(224,138,95,0.35) 55%);
+}
+
+.content-picture { width: 100%; margin: 24px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.content-picture img { display: block; width: 100%; height: auto; }
+
+.resource-note {
+  margin-top: 32px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--code-bg); font-size: 13px; color: var(--text-dim);
+}
+.resource-note a { color: var(--accent); }
+.resource-links { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+.resource-links a {
+  font-size: 13px; color: var(--text); background: var(--code-bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none;
+}
+.resource-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.unit-nav { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+.unit-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.unit-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+footer.site-footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 40px 20px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../index.html">AI Coding Crash Course <span>課程導讀</span></a>
+</header>
+<div class="wrap">
+  <a class="back" href="../chapter-4.html">← 回第4章 基本功</a>
+    <picture class="hero-picture">
+      <source media="(max-width: 640px)" srcset="../assets/images/4-10-hero-portrait.png">
+      <img src="../assets/images/4-10-hero-landscape.png" alt="交接 handoff 全覽圖">
+    </picture>
+    <div class="hero-text">
+      <div class="kicker">第4章 基本功 · 4-10</div>
+      <h1>交接 handoff</h1>
+      <blockquote class="summary">compaction 出不了同一個 agent、同一個資料夾，這時候把 session 寫成一份可攜的 handoff.md，什麼人什麼工具都能接手。</blockquote>
+    </div>
+    <div class="statgrid">
+      <div class="statcard"><div class="num">89K</div><div class="label">觸發 handoff 前的 token 使用量</div></div>
+    </div>
+    <article class="body">
+      <p>compaction 有一個沒講出來的前提:新 session 必須跟舊 session 待在同一個 agent、同一個目錄裡。這個限制平常不會有感覺,直到你想做一件很自然的事——用一個 agent 寫完一個功能,想換另一個工具來做 review,結果發現 compaction 完全用不上,因為它是在 harness 記憶體裡運作的內部機制,換了 agent 就等於換了記憶體。</p>
+      <p><strong>與其把摘要壓縮在 harness 內部的記憶裡,handoff 把同樣的摘要動作寫成一份 handoff.md,一份完全可攜的 markdown 檔</strong>。這份檔案不綁定任何 agent、任何目錄,可以餵給另一個工具、傳給另一個目錄裡的 agent,甚至直接寄給同事——它本質上已經脫離了對話本身,變成一份獨立文件。實際操作時,在舊 session 打 `/handoff`,後面接一句交接理由(就像 compact 也需要理由一樣),skill 會要求寫入使用者作業系統的暫存目錄,產生一份細節豐富、附帶大量檔案參照的文件,內容形態跟 compaction 產出的摘要相當接近。新 session 這邊只要打開一個全新視窗、清空對話,用 `@` 符號找到 temp 目錄下那份 handoff 檔案,一引用進來,內容就立刻讀進 context window,可以馬上接著審查或動工。</p>
+      <p><strong>這些 handoff 文件被刻意設計成閱後即焚</strong>——存在暫存目錄,不會留在專案裡,不會進任何記憶系統,電腦下次重開機或作業系統清暫存目錄時就會消失。這個設計選擇很說明 handoff 的定位:它不是要取代 compaction 的長期記憶功能,而是解決一次性的跨 agent、跨目錄傳遞問題。一個很實際的情境是:在改一個功能,途中撞見一個完全無關的 bug,不想現在處理也不想忘記,直接生一份 handoff 檔,晚點開新 session 接手處理就好——不用中斷手上的工作,也不用把無關的上下文硬塞進同一個對話。</p>
+      <p>所以兩者不是替代關係,而是分工。<strong>留在同一個目錄、只是想保留前一段對話的脈絡、還打算接著排隊丟訊息,compaction 依然是更好的選擇</strong>;一旦要跨 agent、跨目錄,或者這份摘要根本是要給另一個人類看,才輪到 handoff 上場。代價是 handoff 銜接下一段對話的動作比較繁瑣——得自己去暫存目錄把檔案找出來、手動引用進新 session,不像 compaction 那樣在同一條對話線裡無縫接軌。</p>
+    </article>
+    <div class="resource-note">🎬📄 完整雙語影片與逐字稿是官方付費課程內容，請到 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course">官方課程頁</a> 購買觀看，這裡只放改寫過的深度導讀。</div>
+    <div class="unit-nav">
+      <a href="../chapter-4.html">← 回章節列表</a>
+    </div>
+</div>
+<footer class="site-footer">非官方課程導讀 · 內容整理自 <a href="https://www.aihero.dev/workshops/ai-coding-crash-course" style="color:inherit">aihero.dev 官方課程頁</a></footer>
+</body>
+</html>
